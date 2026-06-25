@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 interface FloatingBubbleProps {
@@ -30,5 +31,33 @@ export function FloatingBubble({ src, label, x, y, delay, size = 72 }: FloatingB
         <span className="text-[10px] font-semibold text-foreground mt-0.5 leading-tight text-center">{label}</span>
       </motion.div>
     </motion.div>
+  );
+}
+
+export function AssessmentFooter() {
+  return (
+    <footer className="py-8 bg-foreground text-center">
+      <div className="max-w-7xl mx-auto px-4">
+        <img
+          src="/assets/Retaind_Logo_with_strapline_1769251859256.png"
+          alt="Retaind.ai"
+          className="h-6 mx-auto mb-4 brightness-200"
+        />
+        <div className="flex items-center justify-center gap-6 text-sm text-background/50">
+          <Link href="/privacy" className="hover:text-background transition-colors">
+            Privacy
+          </Link>
+          <Link href="/terms" className="hover:text-background transition-colors">
+            Terms
+          </Link>
+          <a href="mailto:support@retaind.ai" className="hover:text-background transition-colors">
+            Contact
+          </a>
+        </div>
+        <p className="text-xs text-background/30 mt-4">
+          © {new Date().getFullYear()} Retaind.ai Ltd. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 }
