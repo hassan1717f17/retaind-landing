@@ -17,7 +17,7 @@ export function AssessmentCta({ selectedAudience }: { selectedAudience: Audience
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm font-medium text-background/70 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background/10 border border-background/20 text-sm font-medium text-background/70 mb-6">
                 <ClipboardCheck className="w-4 h-4" />
                 Recruiter Readiness Assessment Scorecard
               </div>
@@ -64,7 +64,7 @@ export function AssessmentCta({ selectedAudience }: { selectedAudience: Audience
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm font-medium text-background/70 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background/10 border border-background/20 text-sm font-medium text-background/70 mb-6">
                 <ClipboardCheck className="w-4 h-4" />
                 Recruiting For Retention Assessment Tool
               </div>

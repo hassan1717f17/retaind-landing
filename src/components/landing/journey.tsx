@@ -11,6 +11,7 @@ export function Journey({ selectedAudience }: { selectedAudience: Audience }) {
       <AnimatePresence mode="wait">
         {(selectedAudience === "agency" || selectedAudience === null) && (
           <motion.div
+            key="journey-agency"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -81,6 +82,7 @@ export function Journey({ selectedAudience }: { selectedAudience: Audience }) {
       <AnimatePresence mode="wait">
         {selectedAudience === "inhouse" && (
           <motion.div
+            key="journey-inhouse"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -26,11 +26,11 @@ export default function Home() {
         onSelectAudience={setSelectedAudience}
       />
       <FreeAccess selectedAudience={selectedAudience} />
+      <Journey selectedAudience={selectedAudience} />
       {selectedAudience && (
         <>
           <FeaturesGrid selectedAudience={selectedAudience} />
           <AssessmentCta selectedAudience={selectedAudience} />
-          <Journey selectedAudience={selectedAudience} />
         </>
       )}
     </main>
