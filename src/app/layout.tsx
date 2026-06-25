@@ -18,8 +18,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-dvh bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
+          <Toaster position="top-right" closeButton />
         </ThemeProvider>
-        <Toaster position="top-right" closeButton />
       </body>
     </html>
   );
