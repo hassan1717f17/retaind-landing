@@ -27,12 +27,24 @@ describe("calculateScores", () => {
 });
 
 describe("calculateRevenue", () => {
-  it("returns positive monotonic estimates (current ≤ scaled)", () => {
+  it("returns positive revenue estimates", () => {
     const s = calculateScores(top);
     const r = calculateRevenue(top, s);
     expect(r.currentRevenueEstimate).toBeGreaterThan(0);
     expect(r.scaledRevenueEstimate).toBeGreaterThan(0);
     expect(r.avgRetainedFee).toBeGreaterThan(0);
+  });
+  it("scaled exceeds current for a low-performing recruiter", () => {
+    const low = [
+      ["q1","Less than 1 year"],["q2","Other"],["q3","Solo recruiter / independent"],
+      ["q4","Just me"],["q5","£20k–£40k"],["q6","10–15%"],["q7","0–25%"],["q8","Less than 20%"],
+      ["q9","Under £100k"],["q10","Maintain current"],["q11","Under 5"],["q12","Minimal time"],
+      ["q13","1"],["q14","No"],["q15","1"],["q16","No, I wing it"],
+      ["q17","Cost, Time, Confidence, Skills"],["q18","contingency"],["q19","standard"],["q20","flexible"],
+    ].map(([questionId, responseValue]) => ({ questionId, responseValue }));
+    const s = calculateScores(low);
+    const r = calculateRevenue(low, s);
+    expect(r.currentRevenueEstimate).toBeLessThan(r.scaledRevenueEstimate);
   });
 });
 
@@ -49,6 +61,6 @@ describe("calculateInhouseScores", () => {
     const s = calculateInhouseScores(resp);
     expect(s.totalScore).toBeLessThanOrEqual(100);
     expect(s.category).toBe("Hiring Leader");
-    expect(s.topWeaknesses.length).toBeLessThanOrEqual(5);
+    expect(s.topWeaknesses).toEqual([]);
   });
 });
