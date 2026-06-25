@@ -44,6 +44,7 @@ export function SalesMarketing({ selectedAudience }: { selectedAudience: Audienc
                 </div>
               </div>
               <div className="relative">
+                <div className="absolute inset-0 bg-muted rounded-3xl transform rotate-3 scale-95 opacity-50" />
                 <img
                   src="/assets/Email_campaign_management_dashboard_1770377471614.jpg"
                   alt="Campaign management dashboard"
