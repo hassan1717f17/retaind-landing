@@ -7,6 +7,10 @@ import { FreeAccess } from "@/components/landing/free-access";
 import { FeaturesGrid } from "@/components/landing/features-grid";
 import { AssessmentCta } from "@/components/landing/assessment-cta";
 import { Journey } from "@/components/landing/journey";
+import { Pricing } from "@/components/landing/pricing";
+import { Faq } from "@/components/landing/faq";
+import { Portals } from "@/components/landing/portals";
+import { Footer } from "@/components/landing/footer";
 import type { Audience } from "@/components/landing/types";
 
 export default function Home() {
@@ -33,6 +37,10 @@ export default function Home() {
           <AssessmentCta selectedAudience={selectedAudience} />
         </>
       )}
+      <Pricing selectedAudience={selectedAudience} />
+      <Faq selectedAudience={selectedAudience} />
+      <Portals />
+      <Footer selectedAudience={selectedAudience} />
     </main>
   );
 }
