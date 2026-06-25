@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { Navbar } from "@/components/landing/navbar";
 import { Hero } from "@/components/landing/hero";
+import { FreeAccess } from "@/components/landing/free-access";
+import { FeaturesGrid } from "@/components/landing/features-grid";
+import { AssessmentCta } from "@/components/landing/assessment-cta";
+import { Journey } from "@/components/landing/journey";
 import type { Audience } from "@/components/landing/types";
 
 export default function Home() {
@@ -21,6 +25,14 @@ export default function Home() {
         selectedAudience={selectedAudience}
         onSelectAudience={setSelectedAudience}
       />
+      <FreeAccess selectedAudience={selectedAudience} />
+      {selectedAudience && (
+        <>
+          <FeaturesGrid selectedAudience={selectedAudience} />
+          <AssessmentCta selectedAudience={selectedAudience} />
+          <Journey selectedAudience={selectedAudience} />
+        </>
+      )}
     </main>
   );
 }
