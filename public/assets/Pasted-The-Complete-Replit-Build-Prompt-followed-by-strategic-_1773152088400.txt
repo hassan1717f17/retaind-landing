@@ -1,0 +1,1955 @@
+The Complete Replit Build Prompt, followed by strategic implementation notes and recommended complementary assets that can significantly improve the quality, intelligence, and conversion power of the tool when uploaded alongside the prompt.
+The goal is to ensure Replit builds a robust, scalable, AI-assisted scorecard system rather than just a simple quiz.
+________________________________________
+Replit Build Prompt
+Retaind Recruiter Readiness Scorecard Platform
+This prompt should be pasted into Replit AI to generate the full system.
+________________________________________
+SYSTEM OBJECTIVE
+Build a web-based Recruiter Readiness Assessment Platform for Retaind.ai.
+The system must:
+1.	Present a landing page introducing the assessment
+2.	Deliver a 22-question recruiter readiness questionnaire
+3.	Capture lead information
+4.	Calculate a readiness score out of 100
+5.	Categorise the recruiter into one of four segments
+6.	Generate a personalised strategy report
+7.	Store responses for analytics
+8.	Encourage recruiters to register for a free Retaind recruiter account
+The experience should feel like a professional strategy assessment tool, not a basic quiz.
+________________________________________
+TECH STACK REQUIREMENTS
+Build using:
+Frontend
+React + Tailwind
+Backend
+Node.js + Express
+Database
+PostgreSQL
+AI report generation
+OpenAI API integration
+Charts
+Recharts (for spider diagrams and scoring visuals)
+Authentication
+Email capture only (no password required)
+________________________________________
+SYSTEM ARCHITECTURE
+The platform should include:
+Landing Page
+Assessment Engine
+Scoring Engine
+AI Report Generator
+Admin Analytics Dashboard
+________________________________________
+LANDING PAGE DESIGN
+Purpose:
+Encourage recruiters to complete the readiness assessment.
+________________________________________
+Hero Section
+Headline:
+Are You Ready To Transition From Contingency Recruiter To High-Earning Retained Search Specialist?
+Sub headline:
+Take the 2-minute Retaind Recruiter Readiness Assessment and discover how your recruitment business could generate £250k–£750k per year using structured retained campaigns.
+CTA Button
+Start Assessment
+________________________________________
+Section: The Recruitment Industry Is Changing
+Explain briefly:
+•	AI replacing CV matching
+•	increasing agency competition
+•	falling recruiter differentiation
+________________________________________
+Section: The Opportunity
+Explain benefits of retained recruitment:
+•	exclusivity
+•	predictable revenue
+•	stronger client relationships
+•	higher average fees
+________________________________________
+Section: What You’ll Discover
+Bullet points
+Your recruiter profile
+Your revenue potential
+Your readiness for retained recruitment
+Your next strategic steps
+________________________________________
+QUESTIONNAIRE ENGINE
+Present questions one at a time.
+Include:
+Progress bar
+Completion time indicator
+Next/Back buttons
+Estimated completion:
+2–3 minutes
+________________________________________
+QUESTION TYPES
+Use these formats:
+Single choice
+Multi choice
+Ranking
+Scale (1–10)
+Scenario selection
+________________________________________
+LEAD CAPTURE SCREEN
+After final question:
+Collect
+Full Name
+Company Name
+Email Address
+Make this mandatory before results are shown.
+________________________________________
+SCORING ENGINE
+Calculate a score out of 100 points.
+Each of these dimensions contributes 20 points.
+Experience
+Commercial Position
+Growth Ambition
+Retained Readiness
+Transition Barriers
+________________________________________
+SCORE SEGMENTS
+Segment the user into four categories.
+________________________________________
+Early Stage Recruiter
+Score 0–35
+Growth Recruiter
+Score 36–60
+Retained Ready Recruiter
+Score 61–80
+Retained Leader
+Score 81–100
+________________________________________
+REPORT GENERATION
+After scoring, generate a personalised recruiter strategy report.
+The report should follow this structure:
+Introduction
+Your Recruiter Profile
+Your Revenue Opportunity
+Your Transition Pathway
+Barriers You May Face
+How Retaind.ai Supports Your Growth
+Recommended Next Steps
+Recommended Reading
+Call To Action
+________________________________________
+AI REPORT GENERATION
+Use the OpenAI API to generate the report.
+Inputs should include:
+Recruiter sector
+Experience level
+Revenue band
+Exclusive assignments percentage
+Confidence scores
+Barrier selections
+Scenario responses
+Score category
+The AI must use the Retaind Knowledge Base provided.
+________________________________________
+
+Personalised Revenue Opportunity Calculator Module
+Add the following section into the build:
+________________________________________
+PERSONALILISED REVENUE OPPORTUNITY CALCULATOR
+Build an additional module inside the assessment results experience called:
+Your Revenue Opportunity
+This module must calculate and visually present the recruiter’s:
+1.	Estimated current annual revenue
+2.	Estimated retained revenue potential
+3.	Estimated scaled retained revenue potential
+4.	Optional agency-level revenue projection for owners / directors
+This module should appear immediately after:
+Your Recruiter Profile
+and before:
+Your Transition Pathway
+The purpose of this module is to help recruiters visualise the financial upside of transitioning from contingency recruitment to retained search.
+This feature must feel like a business opportunity simulator, not a generic calculator.
+________________________________________
+DATA INPUTS FOR THE CALCULATOR
+Use questionnaire responses to estimate the recruiter’s current model and future opportunity.
+Use these data points where available:
+•	Role within business
+•	Number of recruiters in business
+•	Typical salary range of roles recruited
+•	Percentage of exclusive assignments
+•	Typical recruitment fee as a percentage of salary
+•	Campaign-to-placement success rate
+•	Revenue generated in the last 12 months
+•	Number of active assignments managed
+•	Ambition / growth inputs
+•	Retained confidence / readiness inputs
+•	Scenario question responses
+If the user provides actual revenue data in the questionnaire, use that as the primary baseline.
+If exact revenue cannot be determined, estimate current revenue using the following logic:
+Estimated Annual Revenue =
+Estimated Placements Per Year × Estimated Average Fee
+Where:
+Estimated Placements Per Year can be inferred from:
+•	campaign-to-placement success rate
+•	active assignment volume
+•	current exclusivity level
+Estimated Average Fee can be inferred from:
+•	typical salary band
+•	typical fee percentage
+________________________________________
+DEFAULT REVENUE ASSUMPTIONS
+Use the following default assumptions unless more specific user data is available:
+Contingency Recruiter Baseline
+Typical annual placements: 10–20
+Typical average fee: £8,000
+Typical annual revenue range: £80,000–£160,000
+Retained Recruiter Baseline
+Typical annual retained campaigns: 15–25
+Typical average retained fee: £15,000–£25,000
+Typical annual revenue range: £250,000–£750,000
+Salary Band Assumptions For Estimation
+£20k–£40k roles → estimate avg salary £35,000
+£40k–£70k roles → estimate avg salary £55,000
+£70k–£120k roles → estimate avg salary £90,000
+£120k–£200k roles → estimate avg salary £150,000
+£200k+ roles → estimate avg salary £225,000
+Average Retained Fee Estimation Logic
+Retained Fee = estimated average salary × retained fee %
+Use retained fee assumptions of 20%–30%
+Default midpoint assumption: 22.5% unless questionnaire data suggests otherwise
+________________________________________
+REVENUE SCENARIOS TO GENERATE
+Generate three recruiter-level revenue views:
+1. Current Model
+Show estimated current annual revenue based on questionnaire responses.
+Label:
+Your Current Recruitment Model
+2. Transitional / Hybrid Model
+Show a realistic scenario where the recruiter wins a modest number of retained campaigns per year.
+Label:
+If You Introduced Retained Campaigns
+Suggested assumptions:
+6–12 retained campaigns annually
+Average retained fee based on salary range and fee logic
+3. Scaled Retained Model
+Show a stronger scenario where the recruiter becomes an established retained recruiter.
+Label:
+If You Scaled Your Retained Search Model
+Suggested assumptions:
+12–20 retained campaigns annually for individual recruiters
+Use score category and confidence responses to determine whether to show lower or higher range
+________________________________________
+OWNER / DIRECTOR REVENUE MULTIPLIER
+If the user selected:
+•	Agency owner / founder
+•	Director / leadership team
+then also generate an additional agency projection section:
+Label:
+What This Could Mean For Your Business
+Estimate team-level revenue using:
+Number of recruiters × estimated retained campaigns per recruiter × average retained fee
+Use a conservative default where appropriate.
+Example output:
+If 5 recruiters each delivered 10 retained campaigns per year at an average fee of £18,000,
+potential annual agency revenue could exceed £900,000.
+Only show this section for owners / directors.
+________________________________________
+INTERACTIVE CALCULATOR UI
+On the results page, create an interactive calculator section with:
+Revenue Comparison Chart
+Display a clear visual comparison between:
+•	Current model
+•	Hybrid retained model
+•	Scaled retained model
+Use a vertical bar chart or horizontal comparison chart.
+Adjustable Retained Campaign Slider
+Allow the user to adjust:
+How many retained campaigns could you realistically run per year?
+Recommended slider range:
+1–50
+When the slider moves, update:
+•	projected retained revenue
+•	comparison chart
+•	short explanatory text
+Optional Average Fee Slider
+If practical, also include a second slider for:
+Average retained campaign fee
+Range:
+£10,000 to £40,000
+This allows the user to simulate their own retained revenue model.
+________________________________________
+OUTPUT COPY REQUIREMENTS
+The copy in this section must feel personalised and commercially insightful.
+Use language such as:
+•	Based on your current recruitment model...
+•	If you introduced a small number of retained campaigns...
+•	If you scaled toward a retained search model...
+•	This suggests a meaningful revenue opportunity...
+•	The key commercial advantage is not just higher fees, but getting paid for work completed rather than only at placement.
+Do not overpromise.
+Do not imply guaranteed earnings.
+Frame all projections as:
+•	estimates
+•	scenarios
+•	opportunity models
+Use qualifiers such as:
+•	based on your responses
+•	estimated
+•	realistic scenario
+•	potential revenue range
+________________________________________
+AI REPORT INTEGRATION
+Pass all revenue calculation outputs into the AI report generator.
+The AI report must include a section called:
+Your Revenue Opportunity
+This section should explain:
+•	estimated current revenue position
+•	potential upside from retained recruitment
+•	what would need to change to reach the higher revenue scenario
+For owners / directors, the report should also explain:
+•	the business-level scaling opportunity of transitioning multiple recruiters toward retained search
+________________________________________
+ADMIN ANALYTICS
+Store calculator outputs in the database for analytics.
+Add fields for:
+•	current_revenue_estimate
+•	hybrid_revenue_estimate
+•	scaled_revenue_estimate
+•	owner_team_revenue_estimate
+•	slider_campaigns_selected
+•	slider_avg_fee_selected
+This data should be visible in admin analytics for:
+•	average current recruiter revenue
+•	average retained opportunity
+•	total projected uplift
+________________________________________
+UX / DESIGN RULES
+This section must feel premium, strategic, and easy to understand.
+Requirements:
+•	clear headings
+•	simple financial visuals
+•	concise explanations
+•	no clutter
+•	mobile responsive layout
+This section should feel like a mini business case, not a spreadsheet.
+________________________________________
+COMPLIANCE / SAFETY RULES
+Do not present projections as guaranteed outcomes.
+Always present as:
+•	estimate
+•	model
+•	scenario
+•	opportunity
+Include a short disclaimer below the chart:
+“These projections are illustrative estimates based on your responses and typical retained recruitment models. Actual results will vary depending on sector, fees, client conversion, and campaign delivery.”
+________________________________________
+Add one short line above the calculator:
+“Based on your answers, here is a realistic view of what your retained recruitment model could look like.”
+
+CTA BELOW CALCULATOR
+Immediately below the revenue calculator section include a CTA block:
+Headline:
+Ready to Build Toward This Model?
+CTA Button:
+Register for Your Free Retaind Recruiter Account
+Secondary CTA:
+Watch Short Explainer Video
+
+Note to AI - Do not make the assumptions too aggressive
+If the revenue uplift looks unrealistic, trust drops quickly.
+Use:
+•	conservative assumptions
+•	ranges
+•	explanatory notes
+It should feel:
+•	commercially exciting
+•	but believable
+Anchor the opportunity to their own data
+This feature works best when it feels personal.
+That means:
+•	use their selected salary band
+•	use their fee percentage
+•	use their role type
+•	use their owner / recruiter status
+Not just generic examples.
+Owner logic should be clearly separate
+Agency owners and recruiters think differently.
+Recruiters care about:
+•	personal income
+•	manageable campaigns
+•	working smarter
+Owners care about:
+•	total agency revenue
+•	team adoption
+•	scalable process
+Show different commercial upside accordingly.
+
+Add a disclaimer
+This is important commercially and legally.
+Keep it visible but light.
+
+Make the chart visually simple
+Do not overcomplicate the graph.
+A 3-bar comparison is enough:
+•	Current
+•	Hybrid
+•	Scaled
+That will outperform a complex dashboard.
+Immediately after the calculator, the CTA should feel like the logical next step:
+Register for a Free Retaind Recruiter Account
+not a soft or vague message.
+Save the user’s slider interaction
+This is useful for:
+•	sales follow-up
+•	lead scoring
+•	understanding intent
+If someone moves the slider to 20 retained campaigns and £25k average fee, that’s a strong buying signal.
+
+________________________________________
+VISUAL REPORT COMPONENTS
+Include visual elements to increase engagement.
+Score Gauge
+Spider Diagram showing readiness dimensions
+Revenue Potential Chart
+________________________________________
+ANALYTICS DASHBOARD
+Admin dashboard should show:
+Total assessments completed
+Average score
+Score distribution
+Top recruiter sectors
+Most common barriers
+Conversion to registration
+________________________________________
+DATABASE SCHEMA
+Users
+users
+id
+name
+company
+email
+created_at
+________________________________________
+Responses
+responses
+user_id
+question_id
+response_value
+score
+________________________________________
+Scores
+scores
+user_id
+experience_score
+commercial_score
+ambition_score
+readiness_score
+barrier_score
+total_score
+category
+________________________________________
+Reports
+reports
+user_id
+report_text
+generated_at
+________________________________________
+REPORT OUTPUT PAGE
+The results page must include:
+Headline
+Your Recruiter Readiness Score
+Score visualisation
+Summary insight
+Full strategy report
+CTA
+Register For Your Free Retaind Recruiter Account
+Secondary CTA
+Watch Short Explainer Video
+________________________________________
+USER EXPERIENCE PRINCIPLES
+Follow these UX rules:
+One question per screen
+Clear progress indicator
+Minimal cognitive load
+Clean professional design
+The system must feel like a consulting assessment tool, not a marketing quiz.
+________________________________________
+PERFORMANCE REQUIREMENTS
+Assessment must load quickly.
+Report generation time should be under 5 seconds.
+________________________________________
+SECURITY
+Ensure GDPR compliance.
+Store only:
+Name
+Company
+Email
+Responses
+________________________________________
+ADMIN SETTINGS
+Admin users should be able to:
+Download responses
+View analytics dashboard
+Export recruiter leads
+________________________________________
+END OF BUILD PROMPT
+________________________________________
+SUMMARY FOR YOU
+Recommended Complementary Assets To Upload Into Replit
+Uploading these alongside the prompt will significantly improve the intelligence and quality of the generated reports.
+________________________________________
+1. AI Knowledge Base Document
+Upload the Stage 2 knowledge base as:
+retaind_ai_knowledge_base.md
+This ensures the AI generates reports aligned with your methodology.
+________________________________________
+2. Personalised Report Templates
+Upload Stage 3 templates as:
+retaind_report_templates.md
+This ensures consistency of tone.
+________________________________________
+3. Questionnaire Logic File
+Provide the scoring logic as structured JSON.
+Example:
+questionnaire_scoring.json
+This improves scoring consistency.
+________________________________________
+4. Retaind Sales Methodology Document
+Upload your retained sales framework.
+File name suggestion:
+retaind_sales_methodology.md
+This improves AI coaching within reports.
+________________________________________
+5. Revenue Model Calculator Logic
+Provide example revenue scenarios.
+Example file:
+retaind_revenue_models.json
+This allows the system to dynamically show revenue projections.
+________________________________________
+6. Retaind Platform Feature Descriptions
+Provide a document explaining:
+benchmarking
+campaign builder
+candidate assessments
+interview AI
+File:
+retaind_platform_features.md
+This improves report explanation sections.
+________________________________________
+7. Example Retained Recruitment Proposals
+Providing example proposals will allow the AI to reference real sales positioning language.
+File:
+retaind_proposal_examples.md
+________________________________________
+8. Recruiter Persona Library (Highly Recommended)
+Create a small dataset of recruiter archetypes.
+Example:
+rookie recruiter  
+experienced biller  
+agency owner  
+executive search consultant
+File:
+retaind_recruiter_personas.md
+This dramatically improves personalisation.
+________________________________________
+9. Retained Sales Objection Framework
+Upload:
+retaind_objection_framework.md
+This allows the AI to recommend relevant learning resources in reports.
+________________________________________
+10. Retaind Playbook Summary
+Upload a condensed version of your Agency Recruiter Playbook.
+File:
+retaind_recruiter_playbook.md
+This gives the AI a rich knowledge source for coaching insights.
+________________________________________
+Important Recommendation
+When building this system in Replit, configure the AI report engine to:
+Use RAG (Retrieval Augmented Generation).
+This means the AI retrieves relevant sections of the knowledge base before generating the report.
+This dramatically improves report accuracy.
+
+Additional information to help Replit AI 
+Use the below information to support this brief and help with the outputs
+
+Below is the Knowledge Base brief - 
+•	Retained sales psychology
+•	Pricing strategy guidance
+•	Recruiter positioning strategy
+•	Replacement policy vs rebate structures
+•	Alternative instalment payment models
+•	Proposal construction guidance
+•	Retained pitch structure
+This version is now designed to function as the “brain” behind the assessment tool and guide report generation, sales recommendations, and recruiter education.
+________________________________________
+STAGE 2
+Retaind.ai Recruiter Readiness Assessment
+AI Knowledge Base for Personalised Report Generation
+Version 2.0
+Expanded strategic framework
+________________________________________
+1. Purpose of This Knowledge Base
+This knowledge base provides the structured context required for the AI system generating personalised recruiter reports.
+The AI must use this knowledge base to:
+1.	Interpret recruiter questionnaire responses
+2.	Diagnose the recruiter's current recruitment model
+3.	Identify opportunities to transition to retained recruitment
+4.	Provide practical guidance on implementing retained search
+5.	Explain how Retaind.ai supports this transition
+The AI must operate within a professional advisory tone, presenting insights supported by structured hiring principles and industry best practices.
+The AI must not provide speculative claims or unsupported statistics.
+________________________________________
+2. The Recruitment Industry Landscape
+Recruitment agencies primarily operate under two models:
+Contingency recruitment
+Retained recruitment
+________________________________________
+Contingency Recruitment
+In the contingency model:
+•	Recruiters only get paid when a placement is made
+•	Clients typically brief multiple agencies
+•	Agencies compete against each other
+This creates a transactional process centred around CV submission speed.
+Industry characteristics:
+•	High agency competition
+•	Low client commitment
+•	High volumes of unpaid work
+•	Speed prioritised over quality
+Industry averages:
+•	4 out of 5 assignments produce no revenue
+•	Average fill rate ~20%
+•	Recruiters often compete against 3–5 agencies
+The contingency model is also increasingly threatened by AI-driven candidate matching, which automates the primary function of sourcing CVs.
+________________________________________
+3. Retained Recruitment Model
+Retained recruitment restructures the commercial relationship.
+Instead of competing with other agencies, the recruiter becomes an exclusive hiring partner.
+Key features:
+•	Exclusive engagement
+•	Structured search methodology
+•	Retainer payment upfront
+•	Strategic hiring support
+The recruiter’s role shifts from:
+CV supplier → trusted hiring advisor
+This change increases:
+•	recruiter influence
+•	client commitment
+•	process quality
+•	hiring success rates
+________________________________________
+4. Retained Recruitment Fee Structures
+Typical retained fees range between 20% and 30% of base salary.
+However the structure of payments varies depending on role salary.
+________________________________________
+Roles below £40k
+Typical structure:
+£1,500 retainer
+Remaining fee payable on completion
+This allows retained recruitment to work for roles where:
+•	hiring risk is meaningful
+•	hiring mistakes create operational disruption
+________________________________________
+Roles £40k–£60k
+Typical structures:
+£2,500–£5,000 retainer
+Possible payment models:
+Retainer + completion payment
+OR
+Retainer + shortlist milestone + completion payment
+________________________________________
+Roles above £75k
+Typical structure:
+Minimum £5,000 retainer
+Common payment model:
+⅓ retainer
+⅓ upon shortlist presentation
+⅓ upon offer or start date
+However Retaind.ai allows recruiters to define their own campaign payment structures per role.
+________________________________________
+5. Alternative Payment Models
+In addition to traditional retained structures, recruiters may offer alternative commercial structures to increase client adoption.
+________________________________________
+Monthly Payment Model
+Example:
+£2,500 retainer
+Remaining fee paid monthly over 5–12 months
+Under this structure:
+•	there is no free replacement
+•	payments stop if the candidate leaves
+This model functions similarly to a performance guarantee.
+It can be easier for clients to accept because it reduces upfront cost.
+________________________________________
+6. Replacement Policies vs Rebates
+Traditional contingency recruitment often uses rebate structures.
+Example:
+Candidate leaves within 3 months → partial fee refund.
+However rebates reduce recruiter income and create administrative complexity.
+A preferred alternative is a replacement policy.
+________________________________________
+Replacement Policy
+Instead of refunding fees, the recruiter agrees to replace the candidate.
+Typical options:
+6 month replacement guarantee
+or
+12 month replacement guarantee
+Replacement guarantees reinforce the value of the recruiter’s search methodology.
+Importantly:
+The retainer fee is never refunded.
+This ensures the recruiter is compensated for the search work already performed.
+________________________________________
+7. Recruitment Roles Suitable for Retained Search
+Historically retained recruitment focused on senior roles above £75k.
+However the Retaind model broadens this.
+The key decision factor becomes:
+How important is it to get this hire right?
+Retained recruitment is appropriate when hiring mistakes create:
+•	financial risk
+•	operational disruption
+•	lost revenue
+•	leadership instability
+Examples:
+Leadership roles
+Revenue generating roles
+Specialist technical roles
+Critical operational roles
+Professional roles
+Using structured methodology, retained search can be applied to roles from approximately £30k upwards.
+________________________________________
+8. Core Differentiators of Retaind.ai
+Retaind.ai enables recruiters to deliver structured, evidence-based recruitment campaigns.
+Key platform features include:
+________________________________________
+Team Behavioural Benchmarking
+Stakeholders collaborate to define success factors before the campaign begins.
+Benchmark categories:
+Job characteristics
+Personal characteristics
+Motivational characteristics
+This reduces internal disagreement during hiring decisions.
+________________________________________
+Job Specification to Job Advert Generator
+Transforms job specifications into high quality job advertisements.
+Benefits:
+•	improved clarity
+•	stronger candidate attraction
+•	more consistent messaging
+________________________________________
+Campaign Brochure Builder
+Combines the job advert with company information into a professional campaign brochure.
+This elevates the role from a job vacancy to a career opportunity.
+________________________________________
+Candidate Behavioural Questionnaire
+Candidates complete a structured questionnaire measuring behavioural preferences.
+This allows recruiters to evaluate behavioural alignment with the benchmark.
+________________________________________
+Spider Chart Visual Comparison
+Candidate responses are visually compared against the benchmark.
+These visualisations help hiring teams understand:
+alignment zones
+potential tension areas
+________________________________________
+AI-Assisted Interview Analysis
+Video interviews can be analysed to extract behavioural evidence.
+This supports evidence-based evaluation.
+________________________________________
+Evidence-Based Shortlisting
+Recruiters present candidates supported by structured evidence rather than CVs alone.
+This strengthens recruiter credibility.
+________________________________________
+9. Retained Sales Psychology
+Selling retained recruitment requires a different sales approach from contingency recruitment.
+Contingency sales focus on:
+speed
+candidate availability
+CV submissions
+Retained sales focus on:
+risk mitigation
+process quality
+hiring success
+Effective retained sales conversations focus on:
+1.	Cost of hiring mistakes
+2.	Time lost during failed hiring processes
+3.	Internal team disruption
+4.	Lost revenue due to delayed hiring
+When recruiters position their service as risk reduction, clients become more open to retainers.
+________________________________________
+10. Recruiter Positioning Strategy
+Recruiters must position themselves differently when selling retained search.
+Instead of presenting themselves as candidate suppliers, they should position themselves as:
+•	hiring advisors
+•	search specialists
+•	process designers
+Key positioning messages include:
+structured hiring methodology
+evidence-based candidate evaluation
+exclusive search process
+reduced hiring risk
+This repositioning increases perceived value.
+________________________________________
+11. Retained Pitch Structure
+A typical retained recruitment pitch follows a structured conversation:
+________________________________________
+Step 1 — Understand the hiring problem
+Discuss:
+•	role importance
+•	impact of hiring failure
+•	timeline pressures
+________________________________________
+Step 2 — Explain limitations of contingency recruitment
+Discuss:
+•	agency competition
+•	rushed candidate submissions
+•	low fill rates
+________________________________________
+Step 3 — Introduce retained search
+Explain:
+exclusive engagement
+structured search campaign
+evidence-based evaluation
+________________________________________
+Step 4 — Explain the campaign process
+Describe:
+benchmarking
+candidate attraction
+assessment
+structured shortlisting
+________________________________________
+Step 5 — Present the commercial model
+Explain:
+retainer structure
+milestone payments
+replacement policy
+________________________________________
+12. Constructing a Retained Proposal
+A retained recruitment proposal typically includes:
+1.	Role overview
+2.	Benchmarking summary
+3.	Campaign methodology
+4.	Candidate assessment process
+5.	Shortlist delivery structure
+6.	Fee structure
+7.	Replacement policy
+The Retaind platform provides assets to help recruiters construct these proposals.
+________________________________________
+13. Revenue Potential Comparison
+Typical contingency recruiter:
+10–20 placements per year
+£8k average fee
+Revenue:
+£80k–£160k
+________________________________________
+Typical retained recruiter:
+15–25 retained campaigns per year
+£15k–£25k average fee
+Revenue:
+£250k–£750k per year
+________________________________________
+14. Recruiter Growth Pathways
+The AI must recognise three stages of recruiter evolution.
+________________________________________
+Stage 1 — Transition
+Recruiter currently works mainly contingency recruitment.
+Goal:
+win retained campaigns.
+________________________________________
+Stage 2 — Scale
+Recruiter already wins retained work.
+Goal:
+increase number of campaigns delivered simultaneously.
+________________________________________
+Stage 3 — Brand
+Recruiter builds reputation as a specialist retained search partner.
+Goal:
+attract higher quality clients.
+________________________________________
+15. Messaging Rules for AI Reports
+Reports should:
+educate
+diagnose
+encourage
+provide actionable guidance
+Tone should be:
+professional
+supportive
+insightful
+The AI must not criticise the recruiter’s current model.
+Instead it should highlight opportunities for improvement.
+________________________________________
+16. Call to Action
+Every personalised report must end with:
+Register for a Free Retaind Recruiter Account
+After registering recruiters gain access to:
+Retaind recruiter playbook
+sales and marketing assets
+training resources
+partner programme
+platform tools
+Recruiters pay nothing until they win their first retainer campaign.
+
+Additional Learning Resources for Recruiters
+The AI report may recommend further learning resources depending on the recruiter’s assessment results.
+These resources will be accessible within the Retaind Sales & Marketing Library.
+These documents help recruiters strengthen their ability to win and deliver retained campaigns.
+________________________________________
+Recommended Reading Resources
+The report may recommend the following materials when relevant.
+________________________________________
+1. Retained Objection Handling Framework
+This guide helps recruiters address the most common objections raised by hiring managers when proposing retained recruitment.
+Typical objections include:
+•	“We don’t pay retainers”
+•	“We want to brief multiple agencies”
+•	“We only pay on success”
+•	“We’ve never used retained recruitment before”
+The framework teaches recruiters to reposition the conversation around:
+•	hiring risk
+•	process control
+•	quality of hire
+•	time to hire
+This resource helps recruiters move the discussion away from price and towards value.
+________________________________________
+2. Retained Recruitment Sales Scripts
+This resource provides structured conversation frameworks for selling retained recruitment.
+Topics include:
+•	opening a retained conversation
+•	transitioning from contingency to retained
+•	discussing hiring risk
+•	positioning exclusivity
+•	explaining the campaign methodology
+These scripts help recruiters structure sales conversations in a consultative and advisory style.
+________________________________________
+3. Pricing Strategy Guidance
+This document helps recruiters determine the most appropriate fee structure for each search campaign.
+Topics include:
+•	fee percentage guidance
+•	salary band pricing models
+•	retainer size recommendations
+•	milestone payment structures
+•	alternative payment models
+Recruiters learn how to structure pricing in a way that balances:
+client affordability
+recruiter risk
+campaign quality
+________________________________________
+4. Pricing Negotiation Guidance
+This resource provides guidance on managing pricing conversations with clients.
+Topics include:
+•	handling requests for reduced fees
+•	negotiating retainers
+•	explaining value rather than defending price
+•	maintaining professional positioning
+Recruiters learn how to avoid competing purely on price.
+________________________________________
+5. Retained Proposal Templates
+Recruiters will have access to structured proposal templates used when presenting retained recruitment campaigns to clients.
+However, the Retaind platform will also include a dedicated proposal builder feature.
+________________________________________
+New Platform Feature
+Retained Proposal Builder
+This feature will allow recruiters to generate a professional retained recruitment proposal document.
+The document will summarise:
+•	role overview
+•	campaign methodology
+•	candidate evaluation process
+•	fee structure
+•	replacement or rebate policy
+•	terms of service
+•	client value proposition
+The proposal document will be used as a follow-up document after client meetings or calls.
+It will function as both:
+•	a sales document
+•	a campaign agreement summary
+________________________________________
+Key Characteristics of the Proposal Builder
+The proposal must be:
+•	concise
+•	professional
+•	easy for clients to understand
+•	visually polished
+•	co-branded with recruiter and client logos
+The document should feel similar to a consulting engagement proposal rather than a traditional recruitment agreement.
+________________________________________
+Information Collected to Generate Proposal
+The recruiter will answer structured questions within the platform.
+These will include:
+Client Information
+Client company name
+Client contact
+Industry
+Location
+________________________________________
+Role Information
+Job title
+Salary range
+Key responsibilities
+Hiring timeline
+________________________________________
+Campaign Structure
+Exclusive retained search
+Campaign timeline
+Candidate sourcing strategy
+________________________________________
+Assessment Process
+Behavioural benchmarking
+Candidate questionnaire
+Video interview evaluation
+Evidence-based shortlisting
+________________________________________
+Fee Structure
+Recruiters select from:
+•	retainer + completion
+•	retainer + shortlist milestone + completion
+•	retainer + monthly instalments
+________________________________________
+Replacement Policy
+Recruiters select:
+6-month replacement guarantee
+12-month replacement guarantee
+________________________________________
+Optional Rebate Structure
+Recruiters may optionally include:
+partial fee rebate schedule
+Note:
+Retainer fee is never refundable.
+________________________________________
+Terms of Service Summary
+Short summary of engagement terms.
+________________________________________
+Output Document Structure
+The generated proposal should contain the following sections:
+1.	Campaign Overview
+2.	The Hiring Challenge
+3.	Retaind Search Methodology
+4.	Candidate Assessment Framework
+5.	Campaign Timeline
+6.	Fee Structure
+7.	Replacement Policy
+8.	Terms of Engagement
+9.	Next Steps
+________________________________________
+Branding
+The document must include:
+Recruiter agency logo
+Client company logo
+This creates the perception of a joint hiring initiative.
+________________________________________
+Why This Feature Matters
+Most recruiters struggle to convert retained conversations because they lack a professional follow-up document.
+The proposal builder solves this by allowing recruiters to send a structured retained campaign proposal immediately after client discussions.
+This significantly improves retained conversion rates.
+________________________________________
+Proposal Builder Stage
+Because this feature is significant, we will develop it as:
+STAGE 5
+Retaind Proposal Builder Design Brief
+This will include:
+•	UI flow
+•	document structure
+•	database schema
+•	automation logic
+•	Replit development instructions
+________________________________________
+Next Step
+Stage 3 – Personalised Recruiter Report Templates
+We will now create four powerful personalised report templates:
+1️⃣ Early Stage Recruiter
+2️⃣ Growth Recruiter
+3️⃣ Retained Ready Recruiter
+4️⃣ Retained Leader
+Each report will:
+•	interpret the recruiter’s score
+•	diagnose their current model
+•	identify revenue opportunity
+•	recommend actions
+•	guide them toward registering for Retaind
+These reports will be the core conversion engine of the scorecard.
+This is a Personalised Strategy Brief (more motivational and growth-focused)
+
+
+
+
+Below is Stage 3: Personalised Recruiter Report Templates.
+These are structured so the AI can easily personalise sections using questionnaire responses.
+Each report follows the same structure to maintain clarity, cognitive simplicity, and credibility, while allowing the AI to customise tone, advice, and recommendations.
+________________________________________
+STAGE 3
+Personalised Recruiter Report Templates
+Retaind Recruiter Readiness Assessment
+These templates are used by the AI to generate the final personalised report delivered to recruiters after completing the assessment.
+Each report must feel like a professional strategic briefing, offering insight into:
+•	the recruiter's current position
+•	their growth potential
+•	their readiness for retained recruitment
+•	the next steps in their evolution
+________________________________________
+Standard Report Structure (All Categories)
+Every report follows the same format:
+1️⃣ Introduction
+2️⃣ Your Recruiter Profile
+3️⃣ Your Revenue Opportunity
+4️⃣ Your Transition Pathway
+5️⃣ Barriers You May Face
+6️⃣ How Retaind.ai Supports Your Growth
+7️⃣ Recommended Next Steps
+8️⃣ Recommended Reading
+9️⃣ Call to Action
+________________________________________
+REPORT TYPE 1
+Early Stage Recruiter
+Score Range: 0–35
+________________________________________
+Introduction
+Thank you for completing the Retaind Recruiter Readiness Assessment.
+Your results indicate that you are currently operating primarily within the traditional contingency recruitment model.
+This is the model used by most recruiters early in their careers. It focuses on submitting candidates to multiple opportunities and earning fees only when a placement occurs.
+While this model can produce results, it often involves:
+•	high competition
+•	significant unpaid work
+•	limited control over hiring processes
+Many successful recruiters eventually transition toward retained recruitment, where they work exclusively with clients on structured hiring campaigns.
+Your assessment suggests that you may be at the beginning of this transition journey.
+________________________________________
+Your Recruiter Profile
+Based on your responses, your current profile most closely resembles:
+Developing Contingency Recruiter
+You likely spend much of your time:
+•	sourcing candidates
+•	responding to client job briefs
+•	competing against other agencies
+This approach often creates:
+•	inconsistent revenue
+•	limited client loyalty
+•	high workload
+However, many recruiters begin their careers this way before evolving into trusted hiring partners.
+________________________________________
+Your Revenue Opportunity
+Contingency recruitment typically generates:
+10–20 placements per year
+Average fee: ~£8k
+Typical annual recruiter revenue:
+£80k – £160k
+Recruiters who transition into retained search often operate differently.
+Instead of competing for many roles, they run structured recruitment campaigns.
+Typical retained recruiters deliver:
+15–25 retained searches per year
+Average fee: £15k–£25k
+Potential revenue:
+£250k – £750k per year
+Your assessment indicates that there may be a significant opportunity to increase your earnings by evolving your recruitment model.
+________________________________________
+Your Transition Pathway
+The first step toward retained recruitment is usually winning exclusive assignments.
+This requires recruiters to reposition themselves from:
+candidate supplier → hiring advisor
+This involves:
+•	structuring recruitment campaigns
+•	helping clients define hiring success
+•	evaluating candidates using structured evidence
+Many recruiters find that this transition becomes much easier once they have:
+•	a clear methodology
+•	structured campaign tools
+•	professional client materials
+________________________________________
+Barriers You May Face
+Recruiters early in their retained journey often experience concerns such as:
+•	uncertainty about asking for retainers
+•	lack of a structured recruitment methodology
+•	limited tools for behavioural assessment
+•	difficulty differentiating their service
+These barriers are extremely common.
+They are not a reflection of recruiter capability — they are simply a result of the industry’s historical reliance on contingency recruitment.
+________________________________________
+How Retaind.ai Supports Your Growth
+Retaind.ai was designed specifically to help recruiters transition from contingency recruitment into structured retained campaigns.
+The platform provides:
+Behavioural benchmarking tools
+Job advert generation tools
+Campaign brochure builder
+Candidate behavioural questionnaires
+AI-assisted interview analysis
+Evidence-based shortlisting tools
+These tools help recruiters deliver professional retained recruitment campaigns without needing to build the infrastructure themselves.
+________________________________________
+Recommended Next Steps
+Based on your results, the most valuable next steps may include:
+Learning how to position retained recruitment with clients
+Understanding the Retaind campaign methodology
+Developing confidence presenting structured recruitment campaigns
+These capabilities can significantly increase both revenue potential and client relationships.
+________________________________________
+Recommended Reading
+You may benefit from exploring the following resources inside the Retaind Sales & Marketing Library:
+Retained Recruitment Sales Scripts
+Retained Objection Handling Framework
+Pricing Strategy Guidance
+Retained Recruitment Playbook
+________________________________________
+Call to Action
+Your next step is to create a free Retaind Recruiter account.
+Once registered, you will gain access to:
+Sales and marketing assets
+The Retaind recruiter playbook
+Training videos
+Campaign tools
+Partner programme opportunities
+You pay nothing until you win your first retained campaign.
+👉 Register for your free Retaind Recruiter account today
+________________________________________
+REPORT TYPE 2
+Growth Recruiter
+Score Range: 36–60
+Tone is more ambitious and strategic.
+________________________________________
+Introduction
+Your assessment results suggest that you are an established recruiter operating primarily in the contingency model, but with strong potential to evolve toward retained recruitment.
+Many recruiters at this stage have already built:
+•	strong client relationships
+•	sector expertise
+•	consistent billing performance
+The next stage of growth often comes from increasing the value of each recruitment assignment, rather than simply increasing activity.
+________________________________________
+Your Recruiter Profile
+You appear to be a Growth Stage Recruiter.
+Recruiters at this stage often:
+•	generate consistent billing
+•	manage multiple assignments simultaneously
+•	have developed a strong candidate network
+However the contingency model can still limit:
+revenue predictability
+client commitment
+process control
+Transitioning to retained recruitment often allows recruiters to scale both revenue and influence.
+________________________________________
+Your Revenue Opportunity
+Most recruiters operating contingency recruitment achieve:
+£80k – £200k annual billing
+Recruiters operating retained campaigns often generate:
+£250k – £750k annually
+This is typically achieved by:
+running fewer but higher-value assignments
+working exclusively with clients
+delivering structured recruitment campaigns
+________________________________________
+Your Transition Pathway
+Your next stage of growth may involve:
+winning exclusive recruitment campaigns
+introducing retained search to selected clients
+building a structured hiring methodology
+Many recruiters successfully transition to retained recruitment by starting with their strongest client relationships.
+________________________________________
+Barriers You May Face
+Recruiters at this stage often experience:
+uncertainty about asking for retainers
+concerns about client acceptance
+lack of structured tools to support retained campaigns
+These barriers often disappear once recruiters can demonstrate a clear methodology and professional campaign structure.
+________________________________________
+How Retaind.ai Supports Your Growth
+Retaind.ai helps recruiters transition into retained search by providing:
+structured campaign workflows
+behavioural benchmarking tools
+candidate assessment frameworks
+campaign brochures and client materials
+This allows recruiters to present retained recruitment as a professional hiring solution.
+________________________________________
+Recommended Next Steps
+You may benefit from focusing on:
+identifying clients suitable for retained campaigns
+structuring your retained sales conversations
+developing your campaign methodology
+________________________________________
+Recommended Reading
+Retained Sales Scripts
+Pricing Strategy Guidance
+Objection Handling Framework
+Retained Proposal Templates
+________________________________________
+Call to Action
+👉 Register for your Free Retaind Recruiter Account
+Access the tools, training, and sales materials needed to start winning retained campaigns.
+________________________________________
+REPORT TYPE 3
+Retained Ready Recruiter
+Score Range: 61–80
+Tone: highly encouraging
+________________________________________
+These recruiters already show strong readiness.
+Sections emphasise:
+•	scaling capacity
+•	improving workflow
+•	increasing revenue
+________________________________________
+REPORT TYPE 4
+Retained Leader
+Score Range: 81–100
+Tone: elite peer positioning
+These recruiters are already operating near the retained model.
+The report focuses on:
+•	scaling campaigns
+•	increasing efficiency
+•	transitioning teams
+
+
+
+
+
+The Complete Replit Build Prompt, followed by strategic implementation notes and recommended complementary assets that can significantly improve the quality, intelligence, and conversion power of the tool when uploaded alongside the prompt.
+The goal is to ensure Replit builds a robust, scalable, AI-assisted scorecard system rather than just a simple quiz.
+________________________________________
+Replit Build Prompt
+Retaind Recruiter Readiness Scorecard Platform
+This prompt should be pasted into Replit AI to generate the full system.
+________________________________________
+SYSTEM OBJECTIVE
+Build a web-based Recruiter Readiness Assessment Platform for Retaind.ai.
+The system must:
+9.	Present a landing page introducing the assessment
+10.	Deliver a 22-question recruiter readiness questionnaire
+11.	Capture lead information
+12.	Calculate a readiness score out of 100
+13.	Categorise the recruiter into one of four segments
+14.	Generate a personalised strategy report
+15.	Store responses for analytics
+16.	Encourage recruiters to register for a free Retaind recruiter account
+The experience should feel like a professional strategy assessment tool, not a basic quiz.
+________________________________________
+TECH STACK REQUIREMENTS
+Build using:
+Frontend
+React + Tailwind
+Backend
+Node.js + Express
+Database
+PostgreSQL
+AI report generation
+OpenAI API integration
+Charts
+Recharts (for spider diagrams and scoring visuals)
+Authentication
+Email capture only (no password required)
+________________________________________
+SYSTEM ARCHITECTURE
+The platform should include:
+Landing Page
+Assessment Engine
+Scoring Engine
+AI Report Generator
+Admin Analytics Dashboard
+________________________________________
+LANDING PAGE DESIGN
+Purpose:
+Encourage recruiters to complete the readiness assessment.
+________________________________________
+Hero Section
+Headline:
+Are You Ready To Transition From Contingency Recruiter To High-Earning Retained Search Specialist?
+Sub headline:
+Take the 2-minute Retaind Recruiter Readiness Assessment and discover how your recruitment business could generate £250k–£750k per year using structured retained campaigns.
+CTA Button
+Start Assessment
+________________________________________
+Section: The Recruitment Industry Is Changing
+Explain briefly:
+•	AI replacing CV matching
+•	increasing agency competition
+•	falling recruiter differentiation
+________________________________________
+Section: The Opportunity
+Explain benefits of retained recruitment:
+•	exclusivity
+•	predictable revenue
+•	stronger client relationships
+•	higher average fees
+________________________________________
+Section: What You’ll Discover
+Bullet points
+Your recruiter profile
+Your revenue potential
+Your readiness for retained recruitment
+Your next strategic steps
+A personalised estimate of your retained revenue opportunity
+________________________________________
+QUESTIONNAIRE ENGINE
+Present questions one at a time.
+Include:
+Progress bar
+Completion time indicator
+Next/Back buttons
+Estimated completion:
+2–3 minutes
+________________________________________
+QUESTION TYPES
+Use these formats:
+Single choice
+Multi choice
+Ranking
+Scale (1–10)
+Scenario selection
+________________________________________
+LEAD CAPTURE SCREEN
+After final question:
+Collect
+Full Name
+Company Name
+Email Address
+Make this mandatory before results are shown.
+________________________________________
+SCORING ENGINE
+Calculate a score out of 100 points.
+Each of these dimensions contributes 20 points.
+Experience
+Commercial Position
+Growth Ambition
+Retained Readiness
+Transition Barriers
+________________________________________
+SCORE SEGMENTS
+Segment the user into four categories.
+________________________________________
+Early Stage Recruiter
+Score 0–35
+Growth Recruiter
+Score 36–60
+Retained Ready Recruiter
+Score 61–80
+Retained Leader
+Score 81–100
+________________________________________
+REPORT GENERATION
+After scoring, generate a personalised recruiter strategy report.
+The report should follow this structure:
+Introduction
+Your Recruiter Profile
+Your Revenue Opportunity
+Your Transition Pathway
+Barriers You May Face
+How Retaind.ai Supports Your Growth
+Recommended Next Steps
+Recommended Reading
+Call To Action
+________________________________________
+AI REPORT GENERATION
+Use the OpenAI API to generate the report.
+Inputs should include:
+Recruiter sector
+Experience level
+Revenue band
+Exclusive assignments percentage
+Confidence scores
+Barrier selections
+Scenario responses
+Score category
+The AI must use the Retaind Knowledge Base provided.
+________________________________________
+VISUAL REPORT COMPONENTS
+Include visual elements to increase engagement.
+Score Gauge
+Spider Diagram showing readiness dimensions
+Revenue Potential Chart
+________________________________________
+ANALYTICS DASHBOARD
+Admin dashboard should show:
+Total assessments completed
+Average score
+Score distribution
+Top recruiter sectors
+Most common barriers
+Conversion to registration
+________________________________________
+DATABASE SCHEMA
+Users
+users
+id
+name
+company
+email
+created_at
+________________________________________
+Responses
+responses
+user_id
+question_id
+response_value
+score
+________________________________________
+Scores
+scores
+user_id
+experience_score
+commercial_score
+ambition_score
+readiness_score
+barrier_score
+total_score
+category
+________________________________________
+Reports
+reports
+user_id
+report_text
+generated_at
+________________________________________
+REPORT OUTPUT PAGE
+The results page must include:
+Headline
+Your Recruiter Readiness Score
+Score visualisation
+Summary insight
+Full strategy report
+Interactive revenue opportunity calculator
+Revenue comparison chart
+Opportunity disclaimer
+CTA
+Register For Your Free Retaind Recruiter Account
+Secondary CTA
+Watch Short Explainer Video
+________________________________________
+USER EXPERIENCE PRINCIPLES
+Follow these UX rules:
+One question per screen
+Clear progress indicator
+Minimal cognitive load
+Clean professional design
+The system must feel like a consulting assessment tool, not a marketing quiz.
+________________________________________
+PERFORMANCE REQUIREMENTS
+Assessment must load quickly.
+Report generation time should be under 5 seconds.
+________________________________________
+SECURITY
+Ensure GDPR compliance.
+Store only:
+Name
+Company
+Email
+Responses
+________________________________________
+ADMIN SETTINGS
+Admin users should be able to:
+Download responses
+View analytics dashboard
+Export recruiter leads
+________________________________________
+END OF BUILD PROMPT
+________________________________________
+SUMMARY FOR YOU
+Recommended Complementary Assets To Upload Into Replit
+Uploading these alongside the prompt will significantly improve the intelligence and quality of the generated reports.
+________________________________________
+1. AI Knowledge Base Document
+Upload the Stage 2 knowledge base as:
+retaind_ai_knowledge_base.md
+This ensures the AI generates reports aligned with your methodology.
+________________________________________
+2. Personalised Report Templates
+Upload Stage 3 templates as:
+retaind_report_templates.md
+This ensures consistency of tone.
+________________________________________
+3. Questionnaire Logic File
+Provide the scoring logic as structured JSON.
+Example:
+questionnaire_scoring.json
+This improves scoring consistency.
+________________________________________
+4. Retaind Sales Methodology Document
+Upload your retained sales framework.
+File name suggestion:
+retaind_sales_methodology.md
+This improves AI coaching within reports.
+________________________________________
+5. Revenue Model Calculator Logic
+Provide example revenue scenarios.
+Example file:
+retaind_revenue_models.json
+This allows the system to dynamically show revenue projections.
+________________________________________
+6. Retaind Platform Feature Descriptions
+Provide a document explaining:
+benchmarking
+campaign builder
+candidate assessments
+interview AI
+File:
+retaind_platform_features.md
+This improves report explanation sections.
+________________________________________
+7. Example Retained Recruitment Proposals
+Providing example proposals will allow the AI to reference real sales positioning language.
+File:
+retaind_proposal_examples.md
+________________________________________
+8. Recruiter Persona Library (Highly Recommended)
+Create a small dataset of recruiter archetypes.
+Example:
+rookie recruiter  
+experienced biller  
+agency owner  
+executive search consultant
+File:
+retaind_recruiter_personas.md
+This dramatically improves personalisation.
+________________________________________
+9. Retained Sales Objection Framework
+Upload:
+retaind_objection_framework.md
+This allows the AI to recommend relevant learning resources in reports.
+________________________________________
+10. Retaind Playbook Summary
+Upload a condensed version of your Agency Recruiter Playbook.
+File:
+retaind_recruiter_playbook.md
+This gives the AI a rich knowledge source for coaching insights.
+________________________________________
+Important Recommendation
+When building this system in Replit, configure the AI report engine to:
+Use RAG (Retrieval Augmented Generation).
+This means the AI retrieves relevant sections of the knowledge base before generating the report.
+This dramatically improves report accuracy.
+
+
+
+Retaind Ready - Scorecard  AI knowledge base.
+This is a structured AI-ready knowledge base that the scorecard system will use to generate accurate, persuasive, and personalised recruiter reports.
+This document is written so it can be:
+•	uploaded into the report generation engine
+•	referenced by the AI to interpret questionnaire responses
+•	used consistently across all personalised outputs
+It follows structured hiring and assessment principles that emphasise transparent evidence, fairness, and auditable decision logic, which are core to the Retaind methodology.
+
+
+
+This is an AI-friendly knowledge base for an internal benchmarking, candidate questionnaires, and interview assessment solution, grounded in validated practices and industry standards. Below is a concise, structured guide you can use as a foundation. It emphasizes validity, fairness, integration with video-interview data, and clear, auditable decision logic.
+Overview and scope
+•	Purpose: Provide the AI with robust, defensible inputs for interpreting questionnaire results and video interview transcripts to generate accurate summaries, insights, and recommendations for hiring teams.
+•	Boundaries: Rely only on validated psychometric theory, industry guidelines, and documented best practices. Do not invent proprietary facts about tools unless you can cite sources. Ensure data lineage, versioning, and audit trails for all inputs, rules, and outputs.
+•	Core inputs:
+•	Job-analytic data (competencies, role requirements, success profiles)
+•	Psychometric measures (cognitive ability, personality, situational judgment, values/fit, domain-specific skills)
+•	Questionnaire responses (structured scales, item-level responses, validity checks)
+•	Video interview transcripts (utterances, tone cues where reliably detectable, nonverbal proxies if available, response timing)
+•	Behavioral interview prompts and scoring rubrics
+•	Validation evidence (reliability, construct validity, criterion validity, fairness metrics)
+Foundational principles
+•	Validity and reliability: Prioritize validated measures with known reliability coefficients and documented validity evidence for the target population. Maintain ongoing revalidation whenever the tool set or population shifts.
+•	Fairness and bias mitigation: Incorporate bias-detection mechanisms, inclusive item design, demographic parity checks, and plan for regular audits to minimize adverse impact.
+•	Transparency and auditability: Preserve a clear chain from inputs to AI outputs, including scoring rules, rubric mappings, and decision logs. Provide explanation widgets that show which inputs drove a given insight.
+•	Data governance: Ensure consent, privacy, and data minimization. Use role-based access and encryption for sensitive data. Maintain data retention policies aligned with legal and regulatory requirements.
+Knowledge base architecture (AI-friendly)
+•	Entities and attributes:
+•	RoleProfile: job_id, title, competencies, critical thresholds, success factors, culture fit indicators
+•	PsychometricInstrument: instrument_id, type (cognitive, personality, SJTs, etc.), construct, scoring model, normative data
+•	QuestionnaireResponse: respondent_id, item_id, response_value, timestamp, validity_flag
+•	InterviewRecord: interview_id, modality (in-person, video), prompt_id, candidate_response_text, response_time, debrief_notes
+•	BehavioralRubric: rubric_id, competency, scale, anchor descriptions, guidance for rater
+•	ValidationEvidence: instrument_id, study_name, population, reliability, validity coefficients, sample_size
+•	BiasControls: guardrails, thresholding rules, fairness metrics, monitoring schedule
+•	Core relationships:
+•	RoleProfile maps to required competencies and success factors
+•	PsychometricInstrument links to constructs and validity evidence
+•	QuestionnaireResponse and InterviewRecord feed into composite scores via scoring rules
+•	InterviewRecord and BehavioralRubric feed into qualitative and quantitative summaries
+•	ValidationEvidence and BiasControls inform interpretation boundaries and confidence levels
+•	Scoring and interpretation rules:
+•	Raw-to-scale transformations: document item formats (Likert, forced-choice, semantic differential), reverse-scoring rules, and calibration to normative benchmarks
+•	Composite scores: weighted combination of constructs aligned to RoleProfile; include alternative models (e.g., additive vs. Bayesian) with justification
+•	Thresholds: clearly defined cutoffs for progression vs. development, with confidence intervals and caveats
+•	Confidence estimates: attach a model-based confidence level to each insight, based on data quality, sample size, and instrument reliability
+•	Output formats:
+•	Candidate Insight Report: structured sections for cognitive ability, personality, situational judgments, role-fit, collaboration style, leadership potential, learning agility, and culture fit
+•	Interview intelligence: themes, evidence strength, red flags, alignment with RoleProfile, suggested probing questions
+•	Development recommendations: observable actions for onboarding, coaching, or role assignment
+•	Audit trail: data provenance, version of instruments, date/time of scoring, human reviewer notes
+Inputs in detail and guidance for AI processing
+1.	Job Analysis and RoleProfile
+•	Collect: role purpose, core duties, required behaviors, critical incidents, success metrics
+•	Translate into observable behaviors and constructs (e.g., teamwork, adaptability, problem-solving under pressure)
+•	Document evidence base: why each competency is critical, how it predicts performance, and any known trade-offs
+•	Include culture/values anchors (e.g., customer-centricity, integrity) with observable behaviors
+2.	Psychometric Instruments and Validity
+•	Cognitive ability tests: define constructs (e.g., verbal, numerical reasoning), typical scoring models, time constraints, and predictive validity evidence
+•	Personality assessments: map to trait domains (e.g., Big Five or alternative models), with emphasis on job-relevant facets and contextualized interpretation
+•	Situational Judgment Tests (SJTs): scenario-based scoring rubrics, key competencies tested, scoring method (expert vs. empirical keys)
+•	Skills/knowledge tests: domain-specific benchmarks, difficulty levels, and reliability data
+•	Instrument metadata: administration mode, normative sample, certification requirements, and debriefing structure
+3.	Questionnaire design and responses
+•	Item-level guidance: ensure items are job-relevant, non-biasing, and variance-rich
+•	Response formats: standardized scales, anchored descriptors, and response validity checks (e.g., attention checks)
+•	Scoring: document per-item scoring rules, handling of missing data, and imputation strategies
+•	Quality assurance: ongoing review cycles, translation/back-translation, and cultural adaptation notes
+4.	Video interviews and transcripts
+•	Transcript processing: normalize for speech-to-text accuracy, timestamp alignment, and speaker identification
+•	Behavioral cues: extract intent, coherence, structure, and consistency with stated answers
+•	Probing and follow-ups: preserve transcript segments for auditability; capture interviewer prompts and candidate responses
+•	Nonverbal proxies: clearly labeled, with caveats about cultural and individual variability; rely primarily on verbal content unless validated
+5.	Interview rubrics and scoring
+•	Define anchors for each competency with observable behaviors at multiple proficiency levels
+•	Train raters to apply rubrics consistently; include calibration exercises and inter-rater reliability checks
+•	Document decision rules for aggregating rubric scores into overall interview score
+6.	Integration and modeling approaches
+•	Weighting strategy: justify fixed vs. adaptive weights based on role and data quality
+•	Evidence synthesis: specify whether decisions rely on single instrument, composite score, or multi-method integration
+•	Conflict management: identify scenarios where results diverge (e.g., high cognitive score but low SJTs) and predefine escalation paths
+•	Explainability: generate concise rationale for each decision, including key inputs and how they influenced the result
+7.	Validation and continuous improvement
+•	Establish ongoing validation plans: revalidate instruments with current applicant pools, track performance outcomes, update models
+•	Monitor fairness: track adverse impact metrics (e.g., 4/5th rule or alternative fairness criteria) and adjust tests or thresholds as needed
+•	Version control: maintain instrument versions, data schemas, and scoring rules with change logs
+Ethics, governance, and compliance
+•	Data privacy: obtain consent for recording and analysis; restrict access to PII; implement data minimization
+•	Consent and transparency: inform candidates about the use of AI in decision-making and provide recourse mechanisms
+•	Legal compliance: align with applicable employment and anti-discrimination laws in relevant regions
+•	Human-in-the-loop: define the role of human decision-makers; AI outputs should support, not replace, human judgment
+Quality assurance and operational guidelines
+•	Standardization: uniform administration conditions, instructions, and debrief procedures
+•	Debriefing quality: ensure debrief sessions are structured, time-bound, and focus on evidence-based insights
+•	Debiasing training: regular training for interviewers and evaluators to recognize bias cues and apply fair criteria
+•	Documentation: maintain templates for role profiles, scoring rubrics, interview prompts, and report formats
+Risk management and limitations
+•	Instrument limitations: clearly document what each measure can and cannot infer about performance
+•	Data quality risks: guard against transcription errors, missing responses, and inconsistent labeling
+•	Model drift: schedule periodic reviews to detect shifts in candidate populations or role requirements
+•	Overinterpretation risk: provide confidence intervals and caveats with each insight to avoid overclaiming
+Deliverables and artefacts
+•	Knowledge base repository:
+•	RoleProfiles: standardized templates with completions for each role
+•	Instrument catalog: validated instruments with metadata and evidence
+•	Item banks: item-level data, calibration notes, and scoring keys
+•	Interview rubrics: competency-by-level anchors
+•	Transcript processing pipeline: steps, quality checks, and error handling
+•	Validation and drift logs: tracking validation studies, fairness metrics, and model updates
+•	Candidate reports:
+•	Summary view: high-level fit, strengths, development areas
+•	Deep-dive sections: construct scores, reliability evidence, and rationale
+•	Interview insights: evidence lines, corroborating data, and recommendations
+•	Development plan: targeted actions for onboarding and growth
+•	Audit and governance artefacts:
+•	Data lineage diagrams
+•	versioned instrument schemas
+•	change logs and rationale for model updates
+Implementation considerations for scale
+•	Modularity: separate data ingests, scoring engine, interpretation layer, and reporting to ease updates and audits
+•	Interoperability: use standard data formats (JSON/CSV/PRD), consistent field naming, and APIs for integration with ATS/HRIS
+•	Performance and latency: optimize transcript-to-insight pipelines without sacrificing explainability
+•	Security: enforce encryption in transit and at rest; log access events for compliance
+Illustrative example (conceptual)
+•	RoleProfile for a team lead:
+•	Core competencies: collaboration, decision quality, ambiguity tolerance, coaching
+•	Critical incidents: leading a cross-functional project, resolving a conflict, delivering under tight deadlines
+•	Success factors: high situational awareness, strong communication, timely decision-making
+•	Assessment plan:
+•	Cognitive ability: Verbal and logical reasoning
+•	SJTs: Scenarios on delegation, conflict resolution, stakeholder management
+•	Personality: Extraversion, conscientiousness, adaptability (with caution to avoid misinterpretation)
+•	Interview rubric: structured prompts for teamwork, leadership style, and feedback receptiveness
+•	AI interpretation:
+•	Integrates construct scores with interview evidence, flags any inconsistencies, and offers targeted follow-up questions for ambiguous cases
+•	Exits with a confidence score, development suggestions, and an ethics note about bias monitoring
+Validation-ready checklist
+•	Does each instrument have documented reliability and validity for the target population? Yes/No
+•	Are item prompts clearly aligned to defined competencies? Yes/No
+•	Is there an audit trail from input data to final recommendation? Yes/No
+•	Are bias-mitigation controls in place and actively monitored? Yes/No
+•	Is candidate privacy and consent managed and documented? Yes/No
+Next steps
+•	Define a baseline set of RoleProfiles and corresponding validated instruments tailored to your client segments.
+•	Build or adapt item banks and rubrics to align with your success profiles.
+•	Establish governance for ongoing validation, bias monitoring, and auditability.
+•	Create standardized report templates to ensure consistent explainer content for hiring teams.
+•	Pilot with a few roles to calibrate weights, thresholds, and explainability features before broad rollout.
+
+
+
+Retaind Recruiter Readiness Assessment
+20-Question Questionnaire (Psychologically Optimised)
+Estimated completion time: 2–3 minutes
+Sections:
+1️⃣ Recruiter Background
+2️⃣ Commercial Performance
+3️⃣ Growth Ambition
+4️⃣ Retained Recruitment Readiness
+5️⃣ Barriers & Scenario Evaluation
+________________________________________
+SECTION 1
+Recruiter Background & Market Position
+________________________________________
+Q1
+How long have you been working in recruitment?
+•	Less than 1 year
+•	1–3 years
+•	3–7 years
+•	7–15 years
+•	15+ years
+________________________________________
+Q2
+Which sector do you primarily recruit within?
+•	Technology Services / SaaS / Cyber
+•	Professional Business Services (Legal / Finance etc)
+•	Sales / Marketing / Digital / Events / Commercial Growth
+•	Engineering / Manufacturing
+•	Retail / Hospitality / Travel / Leisure
+•	Supply Chain & Logistics / Transport
+•	Healthcare / Life Sciences
+•	People Services / Staffing / HR / Consulting / Training / Leadership / Security
+•	Multi-sector
+•	Other
+________________________________________
+Q3
+What is your role within your recruitment business?
+•	Agency owner / founder
+•	Director / leadership team
+•	Billing manager / team leader
+•	Recruiter / consultant
+•	Solo recruiter / independent
+________________________________________
+Q4
+(Conditional logic – show if Agency Owner / Director)
+How many recruiters work within your business?
+•	Just me
+•	2–5 recruiters
+•	6–15 recruiters
+•	16–50 recruiters
+•	50+
+________________________________________
+SECTION 2
+Commercial Performance
+________________________________________
+Q5
+What is the typical salary range of the roles you recruit?
+•	£20k – £40k
+•	£40k – £70k
+•	£70k – £120k
+•	£120k – £200k
+•	£200k+
+________________________________________
+Q6
+What percentage of your recruitment assignments are currently exclusive?
+•	None
+•	10–25%
+•	25–50%
+•	50–75%
+•	Most of my work is exclusive
+________________________________________
+Q7
+What is your typical recruitment fee as a percentage of salary?
+•	Under 15%
+•	15–20%
+•	20–25%
+•	25–30%
+•	30%+
+________________________________________
+Q8
+What is your typical campaign-to-placement success rate?
+•	Under 20%
+•	20–40%
+•	40–60%
+•	60–80%
+•	Over 80%
+________________________________________
+Q9
+Approximately how much revenue did you personally generate in the last 12 months?
+•	Under £100k
+•	£100k – £250k
+•	£250k – £500k
+•	£500k – £1M
+•	£1M+
+________________________________________
+Q10
+How many active recruitment assignments do you usually manage at one time?
+•	1–5
+•	5–10
+•	10–20
+•	20+
+________________________________________
+SECTION 3
+Growth Ambition
+________________________________________
+Q11
+Which of the following outcomes would most improve your recruitment business?
+(Select up to 3)
+•	Higher quality clients
+•	Higher quality candidate pipelines
+•	Higher fees per assignment
+•	More predictable revenue
+•	Stronger long-term client relationships
+•	Reduced competition from other agencies
+________________________________________
+Q12
+Rank these statements in order of importance to reflect your longer-term ambitions
+(Drag to rank)
+•	Working exclusively with clients
+•	Increasing fees and margins
+•	Building deeper client partnerships
+•	Becoming a recognised specialist in my sector
+•	Significantly increasing revenue and earnings
+________________________________________
+Q13
+How appealing would it be to get paid on every search you work on, rather than only when a placement happens?
+Scale 1–10
+________________________________________
+Q14
+If your recruitment revenue could double without increasing your workload, how interested would you be?
+Scale 1–10
+________________________________________
+SECTION 4
+Retained Recruitment Experience
+________________________________________
+Q15
+How often have you won retained recruitment campaigns?
+•	Never
+•	Occasionally
+•	Several times per year
+•	Retained search is a core part of my business
+________________________________________
+Q16
+How confident are you presenting retained recruitment solutions to clients?
+Scale 1–10
+________________________________________
+Q17
+How confident are you running structured retained recruitment campaigns?
+Scale 1–10
+________________________________________
+Q18
+How confident are you presenting evidence-based candidate shortlists using structured assessments?
+Scale 1–10
+________________________________________
+SECTION 5
+Barriers & Scenario Questions
+These questions are powerful because they simulate real situations recruiters face.
+________________________________________
+Q19
+What do you believe is the biggest barrier to winning more retained recruitment work?
+(Select up to 3)
+•	Clients will not pay retainers
+•	I lack a clear retained sales strategy
+•	I don’t have a structured retained methodology
+•	I lack benchmarking and behavioural assessment tools
+•	I lack confidence presenting retained search
+•	I’m unsure how to differentiate my service
+________________________________________
+Q20
+Which of these capabilities would help you most in winning retained recruitment campaigns?
+(Select up to 3)
+•	Stronger retained sales process
+•	Better job benchmarking methodology
+•	Behavioural candidate assessments
+•	Evidence-based candidate shortlists
+•	Better marketing positioning
+________________________________________
+Scenario Question 1 (Engagement Booster)
+Q21
+A client gives you a £120k leadership role but wants to brief three agencies on contingency.
+Which option best describes how you typically respond?
+•	Accept the contingency search and compete
+•	Try to negotiate exclusivity
+•	Attempt to convert the assignment to retained search
+•	Walk away unless retained
+________________________________________
+Scenario Question 2 (Revenue Insight)
+Q22
+If you could secure £10k–£20k upfront per search, how many retained campaigns could you realistically manage per year?
+•	1–3
+•	4–6
+•	7–10
+•	10+
+________________________________________
+Mandatory Lead Capture Screen (Before Results)
+Users must enter:
+Full Name
+Company Name
+Email Address
+

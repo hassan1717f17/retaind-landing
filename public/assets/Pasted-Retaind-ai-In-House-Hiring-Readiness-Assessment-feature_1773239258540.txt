@@ -1,0 +1,326 @@
+Retaind.ai In-House Hiring Readiness Assessment feature
+Build a web-based In-House Hiring Readiness Assessment feature for Retaind.ai.
+Position this 
+The system must diagnose structural weaknesses across the recruitment lifecycle and show how Retaind.ai enables evidence-led hiring and stronger decision quality.
+The diagnostic must align to The Recruitment Failure Map™ and the 10 lifecycle failure points, including:
+1 Requirement Capture
+2 Job Advert Writing
+3 Employer Branding
+4 Passive Talent Sourcing
+5 Job Advertising Strategy
+6 Employer Value Communication
+7 Behavioural Benchmarking
+8 Candidate Assessment
+9 Interview Strategy
+10 Evidence-Led Hiring Decisions
+The platform must:
+1 Present a landing page
+2 Deliver the hiring readiness questionnaire
+3 Capture lead information
+4 Calculate a Hiring Readiness Score (0-100)
+5 Diagnose hiring maturity category
+6 Identify Top 5 structural weakness areas
+7 Generate a personalised strategy report
+8 Include The Recruitment Failure Map visual
+9 Include Hiring Improvement Opportunity section
+10 Store responses for analytics
+11 Encourage users to book demo / create free Retaind account
+The experience must feel like a consulting-grade hiring diagnostic, not a marketing quiz.
+________________________________________
+TECH STACK
+Frontend
+React + Tailwind
+Backend
+Node.js + Express
+Database
+PostgreSQL
+AI
+OpenAI API
+Charts
+Recharts
+________________________________________
+QUESTIONNAIRE ENGINE
+Display one question per screen
+Include:
+Progress bar
+Next / Back navigation
+Mobile responsive layout
+Estimated completion time:
+3–4 minutes
+________________________________________
+FINAL QUESTIONNAIRE
+________________________________________
+SECTION 1 — ROLE & COMPANY CONTEXT
+Q1
+What best describes your role in hiring?
+• In-house recruiter / talent acquisition
+• HR manager / HR director
+• Hiring manager
+• Business owner / founder
+• Department leader / executive
+________________________________________
+Q2
+How many employees does your organisation have?
+• 1–25
+• 26–100
+• 101–250
+• 251–1000
+• 1000+
+________________________________________
+Q3
+How many hires does your organisation typically make per year?
+• 1–10
+• 11–25
+• 26–50
+• 51–100
+• 100+
+________________________________________
+Q4
+What types of roles do you hire most often?
+• Operational / front-line
+• Professional / specialist
+• Commercial / sales
+• Leadership / management
+• Mixed roles
+________________________________________
+SECTION 2 — REQUIREMENT CAPTURE & ROLE DEFINITION
+This section evaluates how clearly hiring success is defined before recruitment begins.
+________________________________________
+Q5
+How clearly are roles usually defined before recruitment begins?
+Use a 1–10 scale
+Display the following guide to help respondents benchmark themselves:
+1–3 (Low clarity)
+Role requirements are vague. Job descriptions are reused or written quickly with limited stakeholder alignment.
+4–6 (Moderate clarity)
+Role requirements are reasonably clear but often rely mainly on skills and experience rather than defining success in the role.
+7–8 (Strong clarity)
+Role expectations, responsibilities and success measures are clearly discussed with stakeholders before recruitment begins.
+9–10 (Gold standard)
+A structured benchmarking process defines role outcomes, behavioural traits, motivational drivers and success criteria before sourcing begins.
+________________________________________
+Q6
+How often do key stakeholders fully agree on what “good” looks like before recruitment begins?
+• Rarely
+• Sometimes
+• Often
+• Almost always
+________________________________________
+Q7
+Which of the following best describes your current process for defining a role?
+Select up to 2
+• We reuse old job descriptions
+• Hiring manager defines the role alone
+• HR / TA refines the brief
+• Multiple stakeholders align requirements before recruitment begins
+• We create a job specification that clearly defines critical and desirable criteria based mostly on skills and experience
+• We define behavioural success factors and outcomes before recruiting
+________________________________________
+SECTION 3 — JOB ADVERTS & EMPLOYER BRANDING
+________________________________________
+Q8
+How effective are your current job adverts at attracting high-quality aligned candidates?
+Use a 1–10 scale
+Provide this guide:
+1–3
+Job adverts are largely administrative and describe responsibilities rather than selling the opportunity.
+4–6
+Adverts communicate the role reasonably well but may not strongly differentiate the opportunity.
+7–8
+Adverts are written to attract and engage strong candidates.
+9–10 (Gold standard)
+Adverts clearly communicate the opportunity, growth, culture and success expectations while targeting the right candidate profile.
+________________________________________
+Q9
+How would you best describe your current job advert writing style?
+Select up to 2
+• Detailed job specifications
+• Role responsibilities and requirements focused
+• Opportunity-focused adverts designed to attract candidates
+• Culture and growth story focused adverts
+• Highly tailored role marketing campaigns
+________________________________________
+Q10
+How strongly do you feel your employer brand helps you stand out to candidates?
+Use a 1–10 scale
+Guide:
+1–3
+Little differentiation from other employers.
+4–6
+Employer brand is communicated but inconsistently.
+7–8
+Candidates have a reasonably clear understanding of company culture and opportunity.
+9–10 (Gold standard)
+Employer brand consistently attracts candidates aligned to company values and ambitions.
+________________________________________
+SECTION 4 — SOURCING & TALENT PIPELINE
+________________________________________
+Q11
+Which sourcing channels do you rely on most?
+Select up to 3
+• Job boards
+• LinkedIn
+• Internal database
+• Referrals
+• Passive candidate outreach
+• Recruitment agencies
+• Multi-channel campaigns
+________________________________________
+Q12
+How confident are you that your sourcing strategy reaches the best possible candidates, not just the most available ones?
+Scale 1–10
+Guide:
+1–3
+Mostly reliant on inbound applicants.
+4–6
+Mix of inbound applicants and limited outreach.
+7–8
+Proactive sourcing across several channels.
+9–10 (Gold standard)
+Structured attraction campaigns targeting both active and passive candidates.
+________________________________________
+SECTION 5 — ASSESSMENT & EVALUATION
+________________________________________
+Q13
+Which statement best reflects your sourcing model?
+• Mostly inbound applicants
+• Limited sourcing channels
+• Combination of inbound and outreach
+• Targeted multi-channel campaign sourcing
+________________________________________
+Q14
+Before assessing candidates, how often do you define behavioural success factors?
+• Never
+• Occasionally
+• Often
+• Always
+________________________________________
+Q15
+How structured is your candidate assessment process beyond CV review and interviews?
+Scale 1–10
+Guide:
+1–3
+Mostly CV review and interviews.
+4–6
+Some structured evaluation tools.
+7–8
+Structured evaluation and behavioural questions.
+9–10 (Gold standard)
+Benchmark-aligned behavioural assessment, questionnaires and structured evaluation.
+________________________________________
+Q16
+Which of the following applies to the way you currently operate?
+Select up to 3
+• Manual CV screening only
+• Parsing or AI screening tools
+• Structured interview scorecards
+• Behavioural benchmarks & questionnaires
+• Psychometric / assessment tools
+• Behavioural or competency-based interview framework
+• Visual candidate comparison / score reports
+• Final Fit & Risk analysis
+________________________________________
+Q17
+How consistent is candidate evaluation across interviewers and stakeholders?
+Scale 1–10
+Guide:
+1–3
+Evaluations vary widely.
+4–6
+Some structure but still subjective.
+7–8
+Consistent evaluation criteria used.
+9–10 (Gold standard)
+Structured evaluation aligned to benchmark and candidate assessment data.
+________________________________________
+SECTION 6 — INTERVIEW QUALITY & DECISION MAKING
+________________________________________
+Q18
+How structured are your interviews?
+• Mostly conversational and instinctive
+• Partly structured but inconsistent
+• Mostly structured and consistent
+• Fully structured and aligned to the benchmark and early assessment outputs
+________________________________________
+Q19
+How often do you validate interview impressions with structured evidence?
+• Never
+• Occasionally
+• Often
+• Almost always
+________________________________________
+Q20
+What best describes your final hiring decisions?
+• Mostly intuition / chemistry based
+• Shared discussion with limited structure
+• Evidence informed but still partly subjective
+• Always structured and evidence-led
+________________________________________
+SECTION 7 — OUTCOMES & IMPROVEMENT PRIORITIES
+________________________________________
+Q21
+Which hiring problems do you experience most often?
+Select up to 3
+• Weak applicants
+• Stakeholder misalignment
+• Slow hiring process
+• Poor hires despite strong interviews
+• Inconsistent interviewer feedback
+• First year attrition
+• Difficulty comparing candidates
+________________________________________
+Q22
+How important is improving hiring accuracy over the next 12 months?
+Scale 1–10
+Guide:
+1–3
+Not a major focus.
+4–6
+Some improvement interest.
+7–8
+Improving hiring quality is a priority.
+9–10 (Gold standard)
+Improving hiring accuracy and reducing mis-hire risk is a strategic priority.
+________________________________________
+Q23
+If you could improve one part of your hiring process first, what would it be?
+• Improve role definition and stakeholder alignment
+• Better candidate attraction and employer branding
+• Improving the quality of the talent pool
+• Better candidate assessment and evaluation
+• Improve interview quality and evidence validation
+• Make better final hiring decisions and shortlist clarity
+________________________________________
+SCORING ENGINE
+Score across five dimensions (20 points each):
+1 Role Definition
+2 Candidate Attraction
+3 Sourcing Strength
+4 Candidate Evaluation
+5 Decision Quality
+________________________________________
+REPORT OUTPUT
+The report must include:
+• Hiring Readiness Score
+• Hiring maturity category
+• Top 5 structural weakness areas
+• Visual spider chart
+• The Recruitment Failure Map image
+• Personalised strategic insights
+________________________________________
+HIRING IMPROVEMENT OPPORTUNITY SECTION
+Always include a section titled:
+Hiring Improvement Opportunity
+Explain how improving role benchmarking, candidate assessment, and interview structure can improve:
+• candidate alignment
+• shortlist quality
+• decision confidence
+• retention probability
+Include disclaimer:
+"These insights are strategic estimates based on your responses and typical hiring process weaknesses. Actual outcomes will vary depending on implementation quality and organisational context."
+________________________________________
+CALL TO ACTION
+Primary CTA
+Register today and get a 50% discount code on your 1st campaign
+Tertiary CTA
+Watch Short Explainer Video

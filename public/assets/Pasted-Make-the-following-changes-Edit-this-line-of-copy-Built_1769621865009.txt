@@ -1,0 +1,48 @@
+Make the following changes
+
+Edit this line of copy: ‘Built from the ground up using AI in combination with best-in-class tool’, to say ‘Built from the ground up using AI in combination with best-in-class recruitment tools and features
+
+Changes to the Agency recruiter path
+
+AI Video Interviews: Select In-Person or AI avatar, to deliver competency-based interview questions. Let our AI Psychometric Agent analyse responses, and generate detailed assessment reports.
+
+Three phase journey section – 
+Lead Generation: Change ‘Exclusive agreements’ to say ‘Generate proposals within the system’
+
+Make the following changes to the Sales & Marketing Engine section
+
+Email Campaigns: Highly targeted personalised email and LinkedIn nurturing campaigns, designed to deliver a steady flow of inbound enquiries from within your target market
+Social Media - Remove this section
+Content Marketing - Remove this section
+Add these sections
+Video: Play on Demand video Demonstrations that support the sales and marketing process
+Pitch Decks: Ready to present sales deck, designed to maximise conversions of meetings into paying customers
+Landing Pages: High-converting pages with forms and lead capture
+
+Changes to the ‘AI-Generated Campaign Materials’ section
+Compelling Job Adverts: Change ‘AI crafts engaging descriptions that attract top talent’ to ‘Our AI job advert generator tool, uses academic research and behavioural science to generate compelling job opportunity adverts’
+
+In the Behavioral Benchmarking section
+Client Benchmark Questionnaire: Change ‘Employers complete a comprehensive assessment defining ideal candidate traits, values, and behaviors to create a target profile’ to ‘Employers collaborate, to complete a comprehensive benchmarking assessment, defining ideal candidate traits, values, and behaviours’.
+
+AI-Powered Video Interviews section. Change the image back to the previous robot image used.
+Change ‘Deliver competency-based interviews with AI avatars, analyze responses automatically, and generate comprehensive assessment reports’ to ‘Choose how you deliver your competency-based interviews with either text, in-person video calls, or AI avatars. Let our AI  Psychometric Agent analyse responses automatically, and generate comprehensive assessment reports.
+
+Directly underneath the AI-Powered Video Interviews section, add in a new section – copy only.
+Stating ‘The Retaind platform does not inform recruiters who to hire or not to hire. We simply use established assessments and psychology to identify positive correlations and potential areas of conflict within each candidate, for the recruiter to examine further. All candidates are assessed using exactly the same methodology and process, so that a fairer, non-bias evaluation is applied to each and every applicant’. 
+
+Add the following strapline to the bottom of the  Seamless CRM & ATS Integration section.
+Retaind is designed to operate autonomously. Integrations to CRM and ATS is only available to users under subscription.
+
+Changes to Flexible Pricing: There are two sets of pricing required, in the Agency recruiter path. Retaind and Marketing
+Retaind 
+Package 1: PAYG model  - £295 per campaign 
+Package 2: Subscription Model - £295 p/m (run up to 2 retaind campaigns per month
+Package 3:  Subscription Model - £995 p/m (run up to 10 retaind campaigns per month
+
+Marketing
+Package 1: LinkedIn only – From £95 / month 
+Package 2: Email only – From £395 / month 
+Package 3: Email & LinkedIn from £495 / month
+
+Change ‘Start your free 14-day trial. No credit card required’ to ‘Sign up for your free account today. Only pay when you secure a retained campaign’

@@ -1,0 +1,30 @@
+Make the following changes
+
+Changes to the In-House Team recruiter path
+
+AI Video Interviews: Select In-Person or AI avatar, to deliver competency-based interview questions. Let our AI Psychometric Agent analyse responses, and generate detailed assessment reports.
+
+Three phase journey section – 
+Campaign Creation: Change ‘Upload job specs and let AI generate compelling adverts.‘ to ‘Upload job specs and let our AI Agent generate compelling adverts’. 
+
+Changes to the ‘AI-Generated Campaign Materials’ section
+Compelling Job Adverts: Change ‘AI crafts engaging descriptions that attract top talent’ to ‘Our AI job advert generator tool, uses academic research and behavioural science to generate compelling job opportunity adverts’
+
+In the Behavioral Benchmarking section
+Client Benchmark Questionnaire: Change ‘Employers complete a comprehensive assessment defining ideal candidate traits, values, and behaviors to create a target profile’ to ‘Employers collaborate, to complete a comprehensive benchmarking assessment, defining ideal candidate traits, values, and behaviours’.
+
+AI-Powered Video Interviews section. Change the image back to the previous robot image used.
+Change ‘Deliver competency-based interviews with AI avatars, analyze responses automatically, and generate comprehensive assessment reports’ to ‘Choose how you deliver your competency-based interviews with either text, in-person video calls, or AI avatars. Let our AI  Psychometric Agent analyse responses automatically, and generate comprehensive assessment reports.
+
+Directly underneath the AI-Powered Video Interviews section, add in a new section – copy only.
+Stating ‘The Retaind platform does not inform recruiters who to hire or not to hire. We simply use established assessments and psychology to identify positive correlations and potential areas of conflict within each candidate, for the recruiter to examine further. All candidates are assessed using exactly the same methodology and process, so that a fairer, non-bias evaluation is applied to each and every applicant’. 
+
+Add the following strapline to the bottom of the  Seamless CRM & ATS Integration section.
+Retaind is designed to operate autonomously. Integrations to CRM and ATS is only available to users under subscription.
+
+Changes to Simple, Transparent Pricing: 
+Package 1: PAYG model  - £295 per campaign 
+Package 2: Subscription Model - £295 p/m (run up to 2 retaind campaigns per month}
+Package 3:  Subscription Model - £995 p/m (run up to 10 retaind campaigns per month)
+
+Change ‘Start your free 14-day trial. No credit card required’ to ‘Start your free trial. No credit card required’

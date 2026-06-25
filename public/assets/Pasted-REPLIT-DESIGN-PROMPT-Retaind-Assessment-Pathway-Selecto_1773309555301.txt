@@ -1,0 +1,433 @@
+REPLIT DESIGN PROMPT
+Retaind Assessment Pathway Selector Page
+
+Create a new landing page inside the Retaind.ai site that appears after the main homepage and before either assessment begins.
+
+This page should act as a pathway selection page helping visitors choose the most relevant scorecard experience for their situation.
+
+The page must be visually polished, conversion-focused, and aligned to a premium SaaS / consulting-grade design standard.
+
+Do not make this page feel like a basic navigation screen. It should feel like a strategic “choose your path” experience.
+
+PAGE PURPOSE
+
+The page must help visitors immediately self-identify as one of two audience types:
+
+1. Agency Recruiter
+
+For recruiters, agency owners, and retained search businesses who want to:
+
+win more exclusive / retained campaigns
+
+improve recruiter positioning
+
+scale revenues
+
+deliver structured evidence-based shortlists
+
+2. In-House Recruiter / Hiring Team
+
+For internal recruiters, HR leaders, hiring managers, founders, and leadership teams who want to:
+
+improve hiring accuracy
+
+strengthen role definition
+
+attract better candidates
+
+reduce mis-hire risk
+
+create a more evidence-led hiring process
+
+The page should increase relevance and conversion by directing users into the correct assessment funnel.
+
+PAGE DESIGN GOAL
+
+Design a premium intermediate landing page called:
+
+Choose Your Hiring Growth Path
+
+Sub-headline:
+
+Retaind.ai supports both agency recruiters and in-house hiring teams — select the assessment that best fits your role to get the most relevant strategy insights.
+
+The page should visually communicate that the two pathways solve different but related problems.
+
+LAYOUT STRUCTURE
+
+Use a clean modern layout with:
+
+1. Hero section
+2. Two large audience pathway cards
+3. Short “Why this matters” section
+4. Optional reassurance / trust strip
+5. Bottom CTA / guidance section
+
+The layout should feel simple, premium, and highly intuitive.
+
+HERO SECTION
+
+Headline:
+
+Choose Your Assessment Path
+
+Sub-headline:
+
+Whether you’re building retained recruitment revenue as an agency recruiter or improving hiring quality as an in-house team, Retaind.ai will guide you to the right next step.
+
+Short supporting text:
+
+Select the assessment that best matches your role to receive a tailored strategy report, practical recommendations, and the most relevant Retaind.ai pathway.
+
+Optional microcopy:
+
+Estimated completion time: 2–4 minutes
+
+MAIN PATHWAY SECTION
+
+Display two large side-by-side cards on desktop and stacked cards on mobile.
+
+Each card should be highly clickable and act as the main CTA.
+
+CARD 1 — AGENCY RECRUITER PATH
+
+Title:
+
+I’m an Agency Recruiter
+
+Subtitle:
+
+For recruiters, agency owners, and search firms
+
+Icon / visual direction:
+
+Use an icon or illustration suggesting:
+
+growth
+
+commercial performance
+
+retained search
+
+recruiter transformation
+
+Card copy:
+
+Discover how ready you are to transition from contingency to structured retained recruitment, increase your fees, improve client positioning, and unlock higher-value search campaigns.
+
+Include bullet points:
+
+Measure your retained recruitment readiness
+
+Identify growth barriers and commercial opportunities
+
+See your revenue potential through retained campaigns
+
+Get a personalised recruiter strategy brief
+
+Primary CTA button:
+
+Start Agency Recruiter Assessment
+
+Secondary micro-link:
+
+Best for agency recruiters, solo recruiters, team leaders, and agency owners
+
+CARD 2 — IN-HOUSE RECRUITER PATH
+
+Title:
+
+I’m an In-House Hiring Leader
+
+Subtitle:
+
+For internal recruiters, HR leaders, hiring managers, and founders
+
+Icon / visual direction:
+
+Use an icon or illustration suggesting:
+
+structure
+
+hiring process
+
+team alignment
+
+decision quality
+
+evidence-led hiring
+
+Card copy:
+
+Assess the strength of your hiring process, identify structural weaknesses across the recruitment lifecycle, and discover how to improve hiring accuracy, shortlist quality, and decision confidence.
+
+Include bullet points:
+
+Diagnose weak points in your hiring lifecycle
+
+Identify your top structural hiring risks
+
+See your hiring improvement opportunity
+
+Get a personalised hiring strategy brief
+
+Primary CTA button:
+
+Start In-House Hiring Assessment
+
+Secondary micro-link:
+
+Best for talent acquisition teams, HR leaders, hiring managers, and growth-stage businesses
+
+CARD DESIGN REQUIREMENTS
+
+Each card must feel premium and high-conversion.
+
+Design guidance:
+
+rounded corners
+
+subtle shadow
+
+generous padding
+
+clear hierarchy
+
+hover state with lift / border emphasis
+
+large CTA button
+
+entire card clickable
+
+strong contrast between the two options
+
+Use a visual style that feels more like premium SaaS onboarding than a traditional website tile.
+
+WHY THIS MATTERS SECTION
+
+Add a short section below the cards:
+
+Headline:
+
+Two Different Hiring Challenges. One Smarter System.
+
+Body copy:
+
+Agency recruiters and in-house hiring teams face different commercial and operational challenges.
+
+Agency recruiters need stronger positioning, better campaign structure, and tools to win and deliver retained recruitment.
+
+In-house teams need better role definition, stronger candidate attraction, more structured evaluation, and greater confidence in hiring decisions.
+
+Retaind.ai supports both journeys with structured workflows, behavioural benchmarking, evidence-led assessment, and smarter hiring tools.
+
+OPTIONAL TRUST / REASSURANCE STRIP
+
+Add a narrow reassurance band with 3–4 short statements such as:
+
+Tailored assessment results
+
+Strategy-led recommendations
+
+Built for real-world recruitment teams
+
+Takes just a few minutes
+
+If metrics are available later, leave this area easy to update with:
+
+number of assessments completed
+
+average improvement insights
+
+client / recruiter trust signals
+
+BOTTOM GUIDANCE SECTION
+
+Headline:
+
+Not Sure Which Path Fits You?
+
+Body copy:
+
+Choose the path that reflects the role you currently play most often.
+
+If you are an agency recruiter selling and delivering recruitment services to clients, choose the Agency Recruiter Assessment.
+
+If you are responsible for hiring within your own organisation, choose the In-House Hiring Assessment.
+
+Optional support link:
+
+Need help choosing? Contact us
+
+UX REQUIREMENTS
+
+This page must:
+
+sit between homepage and assessment start
+
+clearly route users to the correct assessment
+
+minimise confusion
+
+increase conversion through relevance
+
+work perfectly on mobile and desktop
+
+The card CTA should route to:
+
+/assessment/agency-recruiter
+
+/assessment/in-house-hiring
+
+or equivalent routes used in the app
+
+VISUAL DESIGN DIRECTION
+
+Style the page to match a premium B2B SaaS brand.
+
+Design cues:
+
+modern clean typography
+
+strong whitespace
+
+subtle gradients or soft background sections
+
+restrained use of brand colours
+
+professional iconography
+
+polished CTA buttons
+
+Do not make the page busy or overly corporate.
+It should feel:
+
+strategic
+
+intelligent
+
+premium
+
+frictionless
+
+MOTION / INTERACTION
+
+Add subtle interaction enhancements:
+
+hover animation on cards
+
+CTA button state changes
+
+slight card elevation on hover
+
+smooth transitions
+
+Do not overdo motion.
+Keep it elegant and fast.
+
+MOBILE DESIGN
+
+On mobile:
+
+stack the two cards vertically
+
+keep CTAs large and thumb-friendly
+
+maintain strong spacing
+
+keep all copy concise and readable
+
+ACCESSIBILITY
+
+Ensure:
+
+strong text contrast
+
+clear heading hierarchy
+
+keyboard accessible cards / buttons
+
+semantic HTML
+
+screen reader friendly CTA labels
+
+OPTIONAL ENHANCEMENT
+
+If practical, add a very small selector at the top:
+
+What best describes you today?
+
+Agency recruiter
+
+In-house hiring team
+
+When selected, smoothly scroll / highlight the relevant card.
+
+This is optional but can improve engagement.
+
+COMPONENT STRUCTURE
+
+Suggested React component structure:
+
+AssessmentPathSelectorPage
+
+HeroSection
+
+AudiencePathCard
+
+WhyThisMattersSection
+
+TrustStrip
+
+PathwayHelpSection
+
+CONTENT TONE
+
+The copy should feel:
+
+commercially intelligent
+
+supportive
+
+high-value
+
+clear and concise
+
+Avoid jargon-heavy wording.
+Avoid making either route feel secondary.
+
+Both paths should feel equally important and professionally positioned.
+
+SUCCESS CRITERIA
+
+The page is successful if:
+
+users instantly understand which path is right for them
+
+the two assessments feel distinct and relevant
+
+click-through rate into each assessment increases
+
+the user experience feels polished and premium
+
+the page strengthens trust before the assessment begins
+
+IMPLEMENTATION NOTE
+
+This page must be added as an additional step in the assessment flow:
+
+Homepage → Pathway Selector Page → Chosen Assessment → Lead Capture → Results Report
+
+Do not bypass this page unless a visitor comes directly from a campaign link that is already audience-specific.
+
+OPTIONAL FUTURE UPGRADE
+
+Design the page so a third pathway could be added later if needed, for example:
+
+Recruitment Agency Team Diagnostic
+
+Hiring Partner / Consultant Assessment
+
+Investor / Demo Experience
+
+Keep the layout flexible enough to support this in future.

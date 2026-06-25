@@ -1,0 +1,99 @@
+Make the following changes
+
+Change this line of copy  ‘Built from the ground up using AI in combination with best-in-class tools, process and hiring-for-retention methodology. ‘ to ‘Built from the ground up using purpose-built AI Agents in combination with best-in-class tools, process and hiring-for-retention methodology.’ 
+
+Changes to the Agency recruiter path
+
+Sales Collateral Library: Change ‘Access ready-to-use templates, case studies, and proposals to convert inquiries into retained campaigns.’ To ‘Access ready-to-use templates, case studies, video and proposals to convert inquiries into retained campaigns.
+
+AI Video Interviews: Select In-Person or AI avatar, to deliver competency-based interview questions. Let our AI Psychometric Agent analyse responses, and generate detailed assessment reports.
+
+Three phase journey section – 
+
+Step 1 - Lead Generation: Change ‘Finding clients that require your services and presenting a powerful business case for exclusive placement’ to ‘Generate qualified leads with intelligent marketing automation across Email and Linkedin. Attract clients that require your services and present a powerful business case for working exclusively with you’
+Also change the bulet point - ‘Exclusive agreements’ to ‘Generate proposals that close deals’
+
+Step 2 - Campaign Creation: Change ‘Create compelling copy and a stunning campaign brochure - then post your job adverts and attract talent..‘ to ‘Upload job job-spec and let our AI Agent generate compelling job adverts that attract top talent’. 
+
+Step 3 - Applicant Assessment: Change bullet point -  ‘Detailed reporting’ to ‘Detailed reporting, assessment and analysis’
+
+Sales & Marketing Engine section’ to ‘Deliver powerful marketing campaigns across email and LinkedIn, Present with precision and influence, and close retained deals with confidence’.
+
+Change ‘Email Campaigns - Automated drip campaigns with personalized content and A/B testing’ to ‘Email Campaigns – Deliver email marketing campaigns with personalised ICP Targeted content and A/B testing, to generate inbound enquiries from your ideal audience.’
+
+Change ‘Social Media - Schedule and publish across LinkedIn, Twitter, and Facebook’ to ‘LinkedIn Campaigns - Deliver LinkedIn marketing campaigns with personalised ICP Targeted content and A/B testing, to grow your ICP network and to generate inbound enquiries.’
+
+Change ‘Content Marketing - Blog posts, case studies, and whitepapers to establish authority’ to ‘Video – Use our video content to increase engagement and to improve marketing conversion’.
+
+Change ‘Landing Pages - High-converting pages with forms and lead capture’ to ‘Proposals – Generate proposals that ensure your demonstrations convert into paying customers’
+
+
+Changes to the ‘AI-Generated Campaign Materials’ section
+Compelling Job Adverts: Change ‘AI crafts engaging descriptions that attract top talent’ to ‘Our AI job advert generator tool, uses academic research and behavioural science to generate compelling job opportunity adverts’
+
+Change ‘Employee Testimonials - Authentic insights from existing team members’ to ‘Employee Testimonials – Use Authentic insights from existing team members to describe day-to-day roles and company culture’
+
+AI-Powered Video Interviews section. 
+Change ‘AI-Generated Questions - System creates behavioral and competency questions based on benchmark correlations’ to ‘AI-Generated Questions - System creates behavioural and competency-based questions directly aligned to identified benchmark correlations and potential areas of conflict.
+
+Fair & Unbiased section
+Change the layout of the copy in this section, so that it appears as two separate paragraphs
+‘The Retaind platform does not inform recruiters who to hire or not to hire. We simply use established assessments and psychology to identify positive correlations and potential areas of conflict within each candidate, for the recruiter to examine further. 
+
+All candidates are assessed using exactly the same methodology and process, so that a fairer, non-bias evaluation is applied to each and every applicant’. 
+
+Change the strapline to the bottom of the  Seamless CRM & ATS Integration section from ‘Retaind is designed to operate autonomously. Integrations to CRM and ATS is only available to users under subscription’ to ‘Retaind is designed to operate autonomously. Integrations to CRM and ATS systems are only available to users under subscription’ 
+
+
+Changes to Flexible Pricing Options: 
+For Agency users, there needs to be a toggle to switch between two pricing elements. The primary default being ‘Retaind’ and the secondary pricing for ‘Marketing Options’.
+The pricing display should change when the user toggles between the two.
+
+Retaind: 
+Package 1: PAYG model  - £295 per campaign 
+•	Free account set up
+•	Access to sales & Marketing Assets
+•	AI Job Advert Generation
+•	Multi-Platform Posting tool
+•	Client Behavioural Benchmarking Tool
+•	Candidate Questionnaires & Assessment
+•	Fit Scoring & Analysis
+•	AI Video Interviews
+•	Access to online training and coaching
+
+Package 2: Subscription Model - £295 p/m (run up to 2 retaind campaigns per month}
+•	Up to 2 retaind campaigns per month
+•	All PAYG features included
+•	Priority Support
+•	CRM/ATS Integration
+•	Access to Training and coaching workshops
+
+Package 3:  Subscription Model - £995 p/m (run up to 10 retaind campaigns per month)
+•	Up to 10 retaind campaigns per month
+•	All PAYG features included
+•	Priority Support
+•	CRM/ATS Integration
+•	Access to Training and coaching workshops
+•	Dedicated Account Manager
+
+
+Marketing
+Package 1: LinkedIn Only  - £250 per campaign 
+•	LinkedIn Marketing Automations
+•	Targeted Connection building & Nurturing campaigns
+•	Content creation & Posting Tool 
+•	Full set-up and DWY management
+
+Package 2: Subscription Model - £495 p/m
+•	Email delivery set up and DFY Management
+•	Campaign and asset creation
+•	Data acquisition and ICP targeting
+•	Lead Nurturing
+•	Access to Training and coaching
+
+Package 3:  Subscription Model - £995 p/m (run up to 10 retaind campaigns per month)
+•	All LinkedIn and Email features
+•	Multi-Channel Marketing and Tracking
+•	Run segmented marketing campaigns
+
+Change ‘Start your free 14-day trial. No credit card required’ to ‘Free registration & Set-Up. Only pay when you secure your retained campaign’

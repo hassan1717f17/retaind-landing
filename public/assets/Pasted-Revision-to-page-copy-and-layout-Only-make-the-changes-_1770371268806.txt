@@ -1,0 +1,69 @@
+Revision to page copy and layout: Only make the changes requested
+Homepage Hero Section Rewrite (WHY-Led + Segmented)
+You are updating the top (above-the-fold) section of the retAInd.ai homepage.
+Objective
+Redesign the hero section so it leads with a powerful WHY, immediately communicates value, and clearly segments Agency Recruiters and In-House Recruitment teams into separate journeys.
+The goal is to grab attention within the first 5 seconds, establish relevance, reduce perceived risk, and guide each audience to the most relevant content.
+________________________________________
+Content & Messaging Requirements
+1. Primary Headline (WHY-Led)
+Replace the existing headline with:
+Hiring the wrong person is expensive.
+Hiring the right person changes everything.
+This must be the most visually dominant element on the page.
+________________________________________
+2. Sub-Headline (Outcome-Focused)
+Directly beneath the headline, add:
+retAInd.ai helps Agency Recruiters and In-House teams reduce mis-hire risk, improve early performance, and hire people who stay - not just people who align with skills & experience and interview well.
+Keep this concise, readable, and clearly subordinate to the headline.
+3. Early Audience Segmentation (Mandatory)
+Immediately below the sub-headline, introduce the two clearly differentiated audience paths, displayed side-by-side on desktop and stacked on mobile.
+Agency Recruiters
+Text:
+Win more retained campaigns. Deliver stronger shortlists. Build long-term client trust.
+Button:
+For Agency Recruiters
+In-House Recruitment Teams
+Text:
+Make better hiring decisions with evidence, not instinct - and reduce the risk of costly mis-hires.
+Button:
+For In-House Teams
+Buttons must be visually prominent and act as the primary CTAs in the hero section.
+________________________________________
+4. Supporting Value Statement (Condensed WHAT)
+Below the audience segmentation, add a short supporting paragraph:
+Built around tried and tested hiring-for-retention methodology, retAInd.ai combines purpose-built AI agents, behavioural evaluation, and structured workflows to turn a complex assessment process into a clear, repeatable hiring advantage, that any recruiter can easily adopt.
+This should explain how without introducing technical complexity.
+________________________________________
+5. Adoption & Risk-Reduction Statement
+Add a final reassurance line beneath the supporting statement:
+No system changes required. Works autonomously or seamlessly alongside your existing CRM or ATS as a smart plug-in.
+This must be visually de-emphasised but clearly readable.
+________________________________________
+Layout & Design Guidance
+•	The hero section must follow this hierarchy:
+1.	Headline (WHY)
+2.	Sub-headline (Outcome)
+3.	Audience Segmentation (Agency vs In-House)
+4.	Supporting Value Statement
+5.	Adoption / Risk Reduction
+•	Do not lead with product features, tools, screenshots, or technical descriptions.
+•	Avoid generic stock imagery.
+•	If a visual is used, it should communicate clarity, confidence, and improved hiring outcomes, not UI detail.
+•	Maintain a clean, premium, calm B2B SaaS aesthetic suitable for senior recruitment and hiring stakeholders.
+•	Once the user selects their segmentation path, they should resume their journey on the existing website design. 
+•	Leave the ‘Recruiting for Retention’ header and the ‘end-to-end recruitment workflow’ image – but make the image a placeholder for a video
+•	Beneath the video placeholder repeat the invitation to select their segmentation path with  ‘Agency Recruiter’ and ‘In-House Team’ buttons
+________________________________________
+Constraints
+•	Do not remove the dual-audience positioning. (just reposition it in the hero section)
+•	Do not reintroduce feature-led messaging above the fold.
+•	Do not change the wording unless required for grammar or responsive layout.
+•	Navigation to the full content only occurs after the user has selected their path.
+________________________________________
+Success Criteria
+A first-time visitor should immediately understand:
+•	Why hiring risk matters
+•	Why retAInd.ai exists
+•	Whether the platform is for them
+•	Where to go next

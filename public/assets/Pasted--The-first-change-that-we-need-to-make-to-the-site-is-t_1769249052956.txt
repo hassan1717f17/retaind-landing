@@ -1,0 +1,11 @@
+
+The first change that we need to make to the site, is to ensure that site visitors access only the information that they need. 
+We are offering our services to both Agency Recruiters and also to in-house recruitment teams. 
+We need to split the marketing messages at some point on the page, to reflect each audience, and direct the visitor to the correct part of the site. 
+This could be additional information specifically for Agency recruiters, that includes information and messaging about winning clients and the tools and materials provided to support them.
+It would not need to provide access to the tools, as that would require them signing up.
+The current messaging is good for the Agency recruiter audience, but the in-house recruiter will not be interested in the marketing aspects. 
+The in-house recruiting function will only be interested in the functional aspects within the platform. That includes the Job Advert Generation tool, Job Posting feature, Campaign brochure tool, Benchmarking tool and process, Candidate Questionnaire, behavioural assessments and competency-based interviewing and shortlisting features.  The messaging to in-house teams will be focused on recruiting efficiency and effectiveness - recruiting for top talent, for culture, for faster productivity and for retention - reducing hiring mistakes by up to 90% (against the contingency and in-house models). 
+The Agency recruiters will also have access to the sales and marketing materials and sales collateral library, to help them find and win new customers that they can work with on a retained basis 
+(For your clarity -Retained Recruitment- is an established recruiting model and methodology, that is far more comprehensive than the traditional contingency model, and typical in-house models. Retained recruiting specialists typically deliver better quality applicants and hires from within the top 5% of talent, they recruit key people that can hit the ground running faster (so faster ROI on your recruitment investment) and that stay in the job longer). 
+Use the attached documents to expand your knowledge and to assist in the recreation of this marketing page
