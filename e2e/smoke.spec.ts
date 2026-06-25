@@ -6,6 +6,11 @@ test("landing renders and audience toggle reveals in-house sections", async ({ p
   // Stable hero element present on initial load
   await expect(page.getByTestId("text-recruiting-retention")).toBeVisible();
 
+  // Before the click — the in-house section is hidden in the default (null) state
+  await expect(
+    page.getByRole("heading", { name: "Two-Stage Hiring Process" })
+  ).not.toBeVisible();
+
   // Click the in-house card CTA button ("For In-House Teams")
   await page.getByTestId("button-hero-inhouse").click();
 
@@ -20,6 +25,8 @@ test("newsletter endpoint works without a database", async ({ request }) => {
     data: { email: "smoke@test.co" },
   });
   expect(res.status()).toBe(201);
+  const body = await res.json();
+  expect(body).toHaveProperty("message");
 });
 
 test("agency assessment submit returns a report (fallback)", async ({ request }) => {
