@@ -445,3 +445,14 @@ label[for],
 summary {
   cursor: pointer;
 }
+
+/* Elevate system — subtle monochrome hover/active overlay (ported from the source template). */
+:root { --elevate-1: rgba(0,0,0,.03); --elevate-2: rgba(0,0,0,.08); }
+.dark { --elevate-1: rgba(255,255,255,.04); --elevate-2: rgba(255,255,255,.09); }
+.hover-elevate, .active-elevate, .hover-elevate-2, .active-elevate-2 { position: relative; z-index: 0; }
+.hover-elevate::after, .active-elevate::after, .hover-elevate-2::after, .active-elevate-2::after {
+  content: ""; pointer-events: none; position: absolute; inset: 0; border-radius: inherit; z-index: 50;
+}
+.hover-elevate:hover::after, .active-elevate:active::after { background-color: var(--elevate-1); }
+.hover-elevate-2:hover::after, .active-elevate-2:active::after { background-color: var(--elevate-2); }
+.border.hover-elevate::after, .border.active-elevate::after, .border.hover-elevate-2::after, .border.active-elevate-2::after { inset: -1px; }
