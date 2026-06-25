@@ -15,7 +15,7 @@ export default function Terms() {
           </Button>
         </div>
 
-        <div className="max-w-none">
+        <div className="prose prose-neutral dark:prose-invert max-w-none">
           <h1 className="text-3xl font-bold text-foreground mb-2">Terms of Service</h1>
           <p className="text-sm text-muted-foreground mb-8">Last Updated: March 2026</p>
 

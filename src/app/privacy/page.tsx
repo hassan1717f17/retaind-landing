@@ -15,7 +15,7 @@ export default function Privacy() {
           </Button>
         </div>
 
-        <div className="max-w-none">
+        <div className="prose prose-neutral dark:prose-invert max-w-none">
           <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-privacy-title">Global Privacy Policy</h1>
           <p className="text-lg text-muted-foreground mb-1">(UK GDPR / EU GDPR / US Privacy Laws)</p>
           <p className="text-sm text-muted-foreground mb-8">Retaind.ai Ltd — Last updated: March 2026</p>
