@@ -45,7 +45,14 @@ export const storage = {
   },
 
   async createAssessmentScore(score: InsertAssessmentScore): Promise<AssessmentScore> {
-    if (!db) return { id: 0, ...score } as AssessmentScore;
+    if (!db) return {
+      id: 0,
+      experienceScore: 0, commercialScore: 0, ambitionScore: 0,
+      readinessScore: 0, barrierScore: 0, totalScore: 0,
+      currentRevenueEstimate: null, hybridRevenueEstimate: null,
+      scaledRevenueEstimate: null, ownerTeamRevenueEstimate: null,
+      ...score,
+    } satisfies AssessmentScore;
     const [created] = await db.insert(assessmentScores).values(score).returning();
     return created;
   },
@@ -69,7 +76,7 @@ export const storage = {
   },
 
   async createInhouseAssessmentUser(user: InsertInhouseAssessmentUser): Promise<InhouseAssessmentUser> {
-    if (!db) return { id: 0, ...user, createdAt: new Date() } as InhouseAssessmentUser;
+    if (!db) return { id: 0, ...user, jobTitle: user.jobTitle ?? null, createdAt: new Date() } as InhouseAssessmentUser;
     const [created] = await db.insert(inhouseAssessmentUsers).values(user).returning();
     return created;
   },
@@ -80,7 +87,14 @@ export const storage = {
   },
 
   async createInhouseAssessmentScore(score: InsertInhouseAssessmentScore): Promise<InhouseAssessmentScore> {
-    if (!db) return { id: 0, ...score } as InhouseAssessmentScore;
+    if (!db) return {
+      id: 0,
+      roleDefinitionScore: 0, candidateAttractionScore: 0,
+      sourcingStrengthScore: 0, candidateEvaluationScore: 0,
+      decisionQualityScore: 0, totalScore: 0,
+      topWeaknesses: null,
+      ...score,
+    } satisfies InhouseAssessmentScore;
     const [created] = await db.insert(inhouseAssessmentScores).values(score).returning();
     return created;
   },
