@@ -32,7 +32,7 @@ export function Navbar({
   onSelectAudience,
 }: NavbarProps) {
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         {/* Logo / Wordmark */}
         <Link href="/" data-testid="link-logo" className="flex flex-col items-start">

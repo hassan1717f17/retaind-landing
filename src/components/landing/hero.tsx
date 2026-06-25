@@ -165,7 +165,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <div
-                className="w-16 h-16 rounded-full bg-white/90 shadow-lg flex items-center justify-center"
+                className="w-16 h-16 rounded-full bg-background/90 shadow-lg flex items-center justify-center"
                 data-testid="button-play-video"
               >
                 {/* Play triangle — monochrome (foreground glyph, not red) */}
