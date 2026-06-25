@@ -1,0 +1,362 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  TrendingUp,
+  ArrowRight,
+  Clock,
+  BarChart3,
+  FileText,
+  Lightbulb,
+  Shield,
+  Target,
+  Star,
+  Award,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FloatingBubble } from "@/features/assessment/assessment-landing-shared";
+
+export default function AgencyRecruiterPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/">
+              <img
+                src="/assets/Retaind_Logo_with_strapline_1769251859256.png"
+                alt="Retaind.ai"
+                className="h-8 cursor-pointer"
+                data-testid="img-agency-landing-logo"
+              />
+            </Link>
+            <div className="flex items-center gap-3">
+              <Link href="/choose-assessment">
+                <Button variant="ghost" className="text-sm" data-testid="link-agency-landing-paths">
+                  All Assessments
+                </Button>
+              </Link>
+              <Link href="/assessment">
+                <Button className="text-sm" data-testid="button-agency-landing-nav-cta">
+                  Start Assessment
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="pt-24 pb-16 lg:pb-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-foreground" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-background/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-background/5 rounded-full blur-3xl" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[70vh]">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <span
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-background/10 border border-background/20 rounded-full text-sm text-background mb-6"
+                data-testid="badge-agency-landing"
+              >
+                <TrendingUp className="w-4 h-4" />
+                Agency Recruiter Assessment
+              </span>
+
+              <h1
+                className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-background mb-6 leading-[1.1] tracking-tight"
+                data-testid="text-agency-landing-headline"
+              >
+                Are You Ready To Win
+                <span className="block text-background/70"> Retained Campaigns?</span>
+              </h1>
+
+              <p
+                className="text-lg text-background/70 mb-8 leading-relaxed max-w-lg"
+                data-testid="text-agency-landing-subheadline"
+              >
+                Take our free 5-minute Readiness Assessment Scorecard and discover your retained
+                recruitment potential, revenue opportunity, and personalised growth strategy.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <Link href="/assessment">
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="text-base font-semibold px-8 shadow-xl"
+                    data-testid="button-agency-landing-hero-cta"
+                  >
+                    Start Your Free Assessment
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-6 text-sm text-background/50">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-4 h-4" />
+                  5 minutes to complete
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Award className="w-4 h-4" />
+                  Personalised strategy report
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Shield className="w-4 h-4" />
+                  100% confidential
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="hidden md:flex items-center justify-center"
+            >
+              <div className="relative w-[340px] h-[420px] md:w-[380px] md:h-[450px] lg:w-[420px] lg:h-[480px]">
+                <FloatingBubble
+                  src="/assets/image_1773318908511.png"
+                  label="Readiness"
+                  x="-5%"
+                  y="8%"
+                  delay={0.4}
+                />
+                <FloatingBubble
+                  src="/assets/image_1773318923452.png"
+                  label="Revenue"
+                  x="78%"
+                  y="2%"
+                  delay={0.6}
+                />
+                <FloatingBubble
+                  src="/assets/image_1773318946453.png"
+                  label="Strategy"
+                  x="-8%"
+                  y="65%"
+                  delay={0.8}
+                />
+                <FloatingBubble
+                  src="/assets/image_1773318963939.png"
+                  label="Growth"
+                  x="80%"
+                  y="60%"
+                  delay={1.0}
+                />
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <img
+                    src="/assets/image_1773318816266.png"
+                    alt="Agency recruiter professional"
+                    className="w-[320px] h-auto object-contain drop-shadow-2xl rounded-2xl"
+                    data-testid="img-agency-hero-person"
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* What You'll Discover */}
+      <section className="py-16 lg:py-20">
+        <div className="max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <h2
+              className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+              data-testid="text-agency-landing-what-headline"
+            >
+              What You&apos;ll Discover
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Our assessment analyses five key dimensions of retained recruitment readiness and
+              generates a personalised strategy report.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: Target,
+                title: "Readiness Score",
+                desc: "See where you stand across experience, commercial strength, and transition preparedness",
+              },
+              {
+                icon: BarChart3,
+                title: "Revenue Modelling",
+                desc: "Compare your current earnings against hybrid and fully-retained revenue potential",
+              },
+              {
+                icon: FileText,
+                title: "Strategy Report",
+                desc: "Receive an AI-generated personalised strategy report with actionable recommendations",
+              },
+              {
+                icon: Lightbulb,
+                title: "Growth Pathway",
+                desc: "Get a tailored roadmap for transitioning to higher-value retained recruitment",
+              },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-muted">
+                  <Icon className="w-6 h-6 text-foreground" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 lg:py-20 bg-muted">
+        <div className="max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2
+              className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+              data-testid="text-agency-landing-how-headline"
+            >
+              How It Works
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Answer the Assessment",
+                desc: "Complete a short set of questions about your current recruitment practice, commercial positioning, and growth ambitions.",
+                icon: FileText,
+              },
+              {
+                step: "02",
+                title: "Get Your Scorecard",
+                desc: "Receive an instant scorecard showing your retained recruitment readiness across multiple key dimensions.",
+                icon: BarChart3,
+              },
+              {
+                step: "03",
+                title: "Read Your Strategy Report",
+                desc: "Download a personalised AI-generated strategy report with practical recommendations for your specific situation.",
+                icon: Star,
+              },
+            ].map(({ step, title, desc, icon: Icon }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="relative text-center"
+              >
+                <div className="text-5xl font-bold text-foreground/10 mb-4">{step}</div>
+                <div className="w-14 h-14 rounded-xl bg-card border border-border flex items-center justify-center mx-auto mb-4 shadow-sm">
+                  <Icon className="w-7 h-7 text-foreground" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-16 lg:py-20">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+              data-testid="text-agency-landing-cta-headline"
+            >
+              Ready to Discover Your
+              <span className="font-extrabold"> Retained Potential?</span>
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+              Join hundreds of agency recruiters who&apos;ve already used the Retaind Readiness
+              Assessment to unlock their growth pathway.
+            </p>
+            <Link href="/assessment">
+              <Button
+                size="lg"
+                className="text-base font-semibold px-10 shadow-lg"
+                data-testid="button-agency-landing-bottom-cta"
+              >
+                Start Your Free Assessment
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+            <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground mt-6">
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4" />
+                5 minutes
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Shield className="w-4 h-4" />
+                Free &amp; confidential
+              </span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 bg-foreground text-center">
+        <div className="max-w-7xl mx-auto px-4">
+          <img
+            src="/assets/Retaind_Logo_with_strapline_1769251859256.png"
+            alt="Retaind.ai"
+            className="h-6 mx-auto mb-4 brightness-200"
+          />
+          <div className="flex items-center justify-center gap-6 text-sm text-background/50">
+            <Link href="/privacy" className="hover:text-background transition-colors">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-background transition-colors">
+              Terms
+            </Link>
+            <a href="mailto:support@retaind.ai" className="hover:text-background transition-colors">
+              Contact
+            </a>
+          </div>
+          <p className="text-xs text-background/30 mt-4">
+            © {new Date().getFullYear()} Retaind.ai Ltd. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
