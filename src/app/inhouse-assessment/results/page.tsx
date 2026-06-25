@@ -1,0 +1,399 @@
+"use client";
+
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  Download,
+  Award,
+  TrendingUp,
+  Target,
+  ChevronRight,
+  ArrowLeft,
+  AlertTriangle,
+  Shield,
+} from "lucide-react";
+import type { InhouseAssessmentResult } from "@/lib/client-api";
+import { MarkdownReport } from "@/features/assessment/markdown-report";
+
+function ScoreGauge({ score, maxScore = 100 }: { score: number; maxScore?: number }) {
+  const percentage = (score / maxScore) * 100;
+  const radius = 80;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference * 0.75;
+
+  return (
+    <div className="relative w-52 h-52 mx-auto" data-testid="inhouse-score-gauge">
+      <svg viewBox="0 0 200 200" className="transform -rotate-135 text-foreground">
+        <circle
+          cx="100"
+          cy="100"
+          r={radius}
+          fill="none"
+          stroke="currentColor"
+          className="text-muted"
+          strokeWidth="12"
+          strokeDasharray={`${circumference * 0.75} ${circumference * 0.25}`}
+          strokeLinecap="round"
+        />
+        <motion.circle
+          cx="100"
+          cy="100"
+          r={radius}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="12"
+          strokeDasharray={`${circumference * 0.75} ${circumference * 0.25}`}
+          strokeLinecap="round"
+          initial={{ strokeDashoffset: circumference * 0.75 }}
+          animate={{ strokeDashoffset }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <motion.span
+          className="text-4xl font-bold text-foreground"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          data-testid="text-inhouse-total-score"
+        >
+          {score}
+        </motion.span>
+        <span className="text-sm text-muted-foreground">out of {maxScore}</span>
+      </div>
+    </div>
+  );
+}
+
+function CategoryBadge({ category }: { category: string }) {
+  const icons: Record<string, typeof Award> = {
+    "Early Stage Hiring": AlertTriangle,
+    "Developing Process": TrendingUp,
+    "Structured Hiring": Target,
+    "Hiring Leader": Shield,
+  };
+  const Icon = icons[category] ?? TrendingUp;
+
+  return (
+    <div
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted text-foreground"
+      data-testid="badge-inhouse-category"
+    >
+      <Icon className="w-5 h-5" />
+      <span className="font-semibold text-lg">{category}</span>
+    </div>
+  );
+}
+
+export default function InHouseAssessmentResults() {
+  const [data, setData] = useState<InhouseAssessmentResult | null>(null);
+  const router = useRouter();
+  const reportRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("inhouseAssessmentResults");
+    if (stored) {
+      try {
+        setData(JSON.parse(stored) as InhouseAssessmentResult);
+      } catch {
+        router.push("/inhouse-assessment");
+      }
+    } else {
+      router.push("/inhouse-assessment");
+    }
+  }, [router]);
+
+  const handleDownload = useCallback(() => {
+    if (!data) return;
+
+    const { scores, report } = data;
+
+    let textContent = `RETAIND IN-HOUSE HIRING READINESS REPORT\n`;
+    textContent += `${"=".repeat(50)}\n\n`;
+    textContent += `YOUR HIRING READINESS SCORE: ${scores.totalScore}/100\n`;
+    textContent += `CATEGORY: ${scores.category}\n\n`;
+    textContent += `SCORE BREAKDOWN:\n`;
+    textContent += `  Role Definition: ${scores.roleDefinitionScore}/20\n`;
+    textContent += `  Candidate Attraction: ${scores.candidateAttractionScore}/20\n`;
+    textContent += `  Sourcing Strength: ${scores.sourcingStrengthScore}/20\n`;
+    textContent += `  Candidate Evaluation: ${scores.candidateEvaluationScore}/20\n`;
+    textContent += `  Decision Quality: ${scores.decisionQualityScore}/20\n\n`;
+    textContent += `TOP WEAKNESS AREAS: ${(scores.topWeaknesses ?? []).join(", ")}\n\n`;
+    textContent += `${"=".repeat(50)}\n\n`;
+    textContent += `PERSONALISED HIRING READINESS REPORT\n`;
+    textContent += `${"=".repeat(50)}\n\n`;
+    textContent += report.replace(/[#*]/g, "");
+    textContent += `\n\n${"=".repeat(50)}\n`;
+    textContent += `These insights are strategic estimates based on your responses and typical hiring process weaknesses.\n`;
+    textContent += `Actual outcomes will vary depending on implementation quality and organisational context.\n`;
+    textContent += `\nGenerated by Retaind.ai - www.retaind.ai\n`;
+
+    const blob = new Blob([textContent], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Retaind-Hiring-Readiness-Report.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [data]);
+
+  if (!data) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-muted-foreground">Loading results...</p>
+      </div>
+    );
+  }
+
+  const { scores, report } = data;
+
+  const radarData = [
+    { dimension: "Role Definition", score: scores.roleDefinitionScore, fullMark: 20 },
+    { dimension: "Attraction", score: scores.candidateAttractionScore, fullMark: 20 },
+    { dimension: "Sourcing", score: scores.sourcingStrengthScore, fullMark: 20 },
+    { dimension: "Evaluation", score: scores.candidateEvaluationScore, fullMark: 20 },
+    { dimension: "Decision Quality", score: scores.decisionQualityScore, fullMark: 20 },
+  ];
+
+  return (
+    <div className="min-h-screen bg-muted" ref={reportRef}>
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="mb-6">
+          <Link href="/">
+            <Button
+              variant="ghost"
+              className="gap-2 text-muted-foreground hover:text-foreground"
+              data-testid="link-inhouse-back-home"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Score Card */}
+          <Card className="p-8 md:p-10 mb-8 text-center border-border shadow-lg bg-card">
+            <h1
+              className="text-3xl md:text-4xl font-bold text-foreground mb-2"
+              data-testid="text-inhouse-results-title"
+            >
+              Your Hiring Readiness Score
+            </h1>
+            <p className="text-muted-foreground mb-6">
+              Here&apos;s your personalised hiring diagnostic based on your responses
+            </p>
+
+            <ScoreGauge score={scores.totalScore} />
+
+            <div className="mt-4 mb-6">
+              <CategoryBadge category={scores.category} />
+            </div>
+
+            <div className="flex justify-center gap-3">
+              <Button
+                onClick={handleDownload}
+                variant="outline"
+                className="gap-2"
+                data-testid="button-inhouse-download"
+              >
+                <Download className="w-4 h-4" />
+                Download Report
+              </Button>
+            </div>
+          </Card>
+
+          {/* Radar Chart */}
+          <Card className="p-8 md:p-10 mb-8 border-border shadow-lg bg-card">
+            <h2
+              className="text-2xl font-bold text-foreground mb-6"
+              data-testid="text-inhouse-dimensions-title"
+            >
+              Hiring Readiness Dimensions
+            </h2>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart data={radarData}>
+                  <PolarGrid stroke="var(--border)" />
+                  <PolarAngleAxis
+                    dataKey="dimension"
+                    tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
+                  />
+                  <PolarRadiusAxis
+                    angle={90}
+                    domain={[0, 20]}
+                    tick={{ fontSize: 10, fill: "var(--muted-foreground)" }}
+                  />
+                  <Radar
+                    name="Score"
+                    dataKey="score"
+                    stroke="var(--foreground)"
+                    fill="var(--foreground)"
+                    fillOpacity={0.2}
+                    strokeWidth={2}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4">
+              {radarData.map((d) => (
+                <div
+                  key={d.dimension}
+                  className="text-center p-3 bg-muted rounded-lg"
+                  data-testid={`text-inhouse-dim-${d.dimension.toLowerCase().replace(/\s/g, "-")}`}
+                >
+                  <p className="text-xs text-muted-foreground">{d.dimension}</p>
+                  <p className="text-lg font-bold text-foreground">
+                    {d.score}
+                    <span className="text-sm text-muted-foreground">/20</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Top Weaknesses */}
+          {scores.topWeaknesses && scores.topWeaknesses.length > 0 && (
+            <Card className="p-8 md:p-10 mb-8 border-border shadow-lg bg-card">
+              <h2
+                className="text-2xl font-bold text-foreground mb-4"
+                data-testid="text-inhouse-weaknesses-title"
+              >
+                Top Structural Weakness Areas
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Based on your scores, these areas present the greatest opportunity for improvement in your hiring process.
+              </p>
+              <div className="space-y-3">
+                {scores.topWeaknesses.map((weakness, idx) => (
+                  <div
+                    key={weakness}
+                    className="flex items-center gap-4 p-4 bg-muted border border-border rounded-lg"
+                    data-testid={`weakness-${idx}`}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-foreground flex items-center justify-center text-background font-bold text-sm shrink-0">
+                      {idx + 1}
+                    </div>
+                    <span className="font-medium text-foreground">{weakness}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
+
+          {/* Recruitment Failure Map */}
+          <Card className="p-8 md:p-10 mb-8 border-border shadow-lg bg-card">
+            <h2
+              className="text-2xl font-bold text-foreground mb-4"
+              data-testid="text-inhouse-failure-map-title"
+            >
+              The Recruitment Failure Map™
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              The 10 lifecycle failure points that determine hiring success or failure. Your assessment maps your process against each of these critical stages.
+            </p>
+            <div className="rounded-lg overflow-hidden border border-border">
+              <img
+                src="/assets/The_Recruitment_Failure_Map_1773251284558.png"
+                alt="The Recruitment Failure Map - The 10 Structural Failure Points in the Recruitment Lifecycle"
+                className="w-full h-auto"
+                data-testid="img-inhouse-recruitment-failure-map"
+              />
+            </div>
+          </Card>
+
+          {/* Opportunity Card */}
+          <Card className="p-8 md:p-10 mb-8 border-border shadow-lg bg-card">
+            <h2
+              className="text-2xl font-bold text-foreground mb-4"
+              data-testid="text-inhouse-opportunity-title"
+            >
+              Hiring Improvement Opportunity
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              By improving your role benchmarking, candidate assessment, and interview structure, you can expect measurable improvements across four key areas:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="p-4 bg-muted rounded-lg border border-border">
+                <h4 className="font-semibold text-foreground mb-1">Candidate Alignment</h4>
+                <p className="text-sm text-muted-foreground">Better matches between candidates and role requirements through structured benchmarking</p>
+              </div>
+              <div className="p-4 bg-muted rounded-lg border border-border">
+                <h4 className="font-semibold text-foreground mb-1">Shortlist Quality</h4>
+                <p className="text-sm text-muted-foreground">Stronger, more relevant candidate shortlists driven by evidence-based evaluation</p>
+              </div>
+              <div className="p-4 bg-muted rounded-lg border border-border">
+                <h4 className="font-semibold text-foreground mb-1">Decision Confidence</h4>
+                <p className="text-sm text-muted-foreground">Data-driven hiring decisions that reduce uncertainty and stakeholder disagreement</p>
+              </div>
+              <div className="p-4 bg-muted rounded-lg border border-border">
+                <h4 className="font-semibold text-foreground mb-1">Retention Probability</h4>
+                <p className="text-sm text-muted-foreground">Better hires who stay longer and perform better, reducing first-year attrition</p>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground italic">
+              These insights are strategic estimates based on your responses and typical hiring process weaknesses. Actual outcomes will vary depending on implementation quality and organisational context.
+            </p>
+          </Card>
+
+          {/* Strategy Report */}
+          <Card className="p-8 md:p-10 mb-8 border-border shadow-lg bg-card">
+            <h2
+              className="text-2xl font-bold text-foreground mb-6"
+              data-testid="text-inhouse-strategy-title"
+            >
+              Your Personalised Hiring Readiness Report
+            </h2>
+            <MarkdownReport content={report} />
+          </Card>
+
+          {/* CTA */}
+          <Card className="p-8 md:p-10 mb-8 border-0 shadow-lg text-center bg-foreground">
+            <h2
+              className="text-2xl md:text-3xl font-bold mb-3 text-background"
+              data-testid="text-inhouse-cta-title"
+            >
+              Ready to Transform Your Hiring Process?
+            </h2>
+            <p className="text-background/70 mb-6 max-w-lg mx-auto">
+              Register today and get a 50% discount code on your 1st campaign. Access the full suite of hiring diagnostic tools.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                size="lg"
+                variant="secondary"
+                className="gap-2"
+                data-testid="button-inhouse-register"
+              >
+                Register For Your Free Retaind Account
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+            <p className="text-background/50 text-sm mt-4">
+              Watch Short Explainer Video
+            </p>
+          </Card>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
