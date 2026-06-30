@@ -2,8 +2,10 @@
 
 import { Section, SectionHeader, SectionBadge } from "@/components/landing/section";
 import type { Audience } from "@/components/landing/types";
+import { useReveal } from "@/components/landing/use-reveal";
 
 export function Integrations({ selectedAudience }: { selectedAudience: Audience }) {
+  const scope = useReveal();
   return (
     <Section className="bg-background">
       <SectionHeader>
@@ -14,9 +16,9 @@ export function Integrations({ selectedAudience }: { selectedAudience: Audience 
         </p>
       </SectionHeader>
 
-      <div className="flex flex-wrap justify-center gap-8 mb-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+      <div className="flex flex-wrap justify-center gap-8 mb-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500" ref={scope}>
         {["Bullhorn", "Salesforce", "HubSpot", "Greenhouse", "Workday", "SAP", "Oracle", "Zoho"].map((name) => (
-          <div key={name} className="px-6 py-3 rounded-lg border border-border bg-muted font-bold text-muted-foreground text-lg">
+          <div key={name} className="px-6 py-3 rounded-lg border border-border bg-muted font-bold text-muted-foreground text-lg" data-reveal>
             {name}
           </div>
         ))}

@@ -3,12 +3,14 @@
 import { Section, SectionBadge } from "@/components/landing/section";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import type { Audience } from "@/components/landing/types";
+import { useReveal } from "@/components/landing/use-reveal";
 
 export function VideoInterviews({ selectedAudience }: { selectedAudience: Audience }) {
+  const scope = useReveal();
   return (
     <Section className="bg-muted">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div className="order-2 lg:order-1 relative">
+      <div className="grid lg:grid-cols-2 gap-16 items-center" ref={scope}>
+        <div data-reveal className="order-2 lg:order-1 relative">
           <div className="absolute inset-0 bg-foreground rounded-3xl transform -rotate-2 scale-95 opacity-10" />
           <img
             src="/assets/Robot_avatar_and_interviewee_1769676085920.jpg"
@@ -16,7 +18,7 @@ export function VideoInterviews({ selectedAudience }: { selectedAudience: Audien
             className="relative rounded-2xl shadow-2xl border border-border"
           />
         </div>
-        <div className="order-1 lg:order-2">
+        <div data-reveal className="order-1 lg:order-2">
           <SectionBadge>Interviewing</SectionBadge>
           <h2 className="text-4xl font-bold mb-6">AI-Powered Video Interviews</h2>
           <p className="text-lg text-muted-foreground mb-8">

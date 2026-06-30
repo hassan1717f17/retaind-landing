@@ -8,12 +8,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { Audience } from "@/components/landing/types";
+import { useReveal } from "@/components/landing/use-reveal";
 
 export function Benchmarking({ selectedAudience }: { selectedAudience: Audience }) {
+  const scope = useReveal();
   return (
     <Section className="bg-background">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
+      <div className="grid lg:grid-cols-2 gap-16 items-center" ref={scope}>
+        <div data-reveal>
           <SectionBadge>Analytics</SectionBadge>
           <h2 className="text-4xl font-bold mb-6">Behavioral Benchmarking</h2>
           <p className="text-lg text-muted-foreground mb-8">
@@ -41,7 +43,7 @@ export function Benchmarking({ selectedAudience }: { selectedAudience: Audience 
             </AccordionItem>
           </Accordion>
         </div>
-        <div className="bg-muted p-8 rounded-3xl border border-border">
+        <div data-reveal className="bg-muted p-8 rounded-3xl border border-border">
           <img
             src="https://d64gsuwffb70l.cloudfront.net/68e4c3ad71d0e1de264e09fd_1760089062873_11a311aa.jpg"
             alt="Behavioral Assessment"

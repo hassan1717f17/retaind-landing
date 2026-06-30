@@ -3,19 +3,21 @@
 import { Check } from "lucide-react";
 import { Section } from "@/components/landing/section";
 import type { Audience } from "@/components/landing/types";
+import { useReveal } from "@/components/landing/use-reveal";
 
 export function AiMaterials({ selectedAudience }: { selectedAudience: Audience }) {
+  const scope = useReveal();
   return (
     <Section className="bg-foreground text-background">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div className="order-2 lg:order-1">
+      <div className="grid lg:grid-cols-2 gap-16 items-center" ref={scope}>
+        <div data-reveal className="order-2 lg:order-1">
           <img
             src="/assets/Campaign_brochure_1770200143314-CNwVs677_1770377594220.jpg"
             alt="Campaign Materials"
             className="rounded-md shadow-[8px_12px_24px_rgba(0,0,0,0.4)] border border-background/20 transform -rotate-3 transition-transform"
           />
         </div>
-        <div className="order-1 lg:order-2">
+        <div data-reveal className="order-1 lg:order-2">
           <div className="inline-block px-3 py-1 rounded-full bg-background/10 text-background/80 text-sm font-semibold mb-4 tracking-wide uppercase">
             Content Generation
           </div>
