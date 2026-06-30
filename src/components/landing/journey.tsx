@@ -11,6 +11,9 @@ export function Journey({ selectedAudience }: { selectedAudience: Audience }) {
 
   useGSAP(
     () => {
+      // Agency block isn't mounted in the in-house state (and the ref is null
+      // on the dependency re-run) — bail before touching the scope selector.
+      if (!agencyRoot.current) return;
       const q = gsap.utils.selector(agencyRoot);
       const cards = q("[data-journey-card]");
       const line = q("[data-journey-line]");
