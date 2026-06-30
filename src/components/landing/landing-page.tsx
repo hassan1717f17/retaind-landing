@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Navbar } from "@/components/landing/navbar";
 import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { Hero } from "@/components/landing/hero";
@@ -20,16 +20,29 @@ import { Pricing } from "@/components/landing/pricing";
 import { Faq } from "@/components/landing/faq";
 import { Portals } from "@/components/landing/portals";
 import { Footer } from "@/components/landing/footer";
-import { ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
 import type { Audience } from "@/components/landing/types";
 
 export function LandingPage() {
   const [selectedAudience, setSelectedAudience] = useState<Audience>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const gatedRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!selectedAudience) return;
+      if (!selectedAudience || !gatedRef.current) return;
+
+      // Soft entrance so the newly-mounted block eases in rather than snapping.
+      const mm = gsap.matchMedia();
+      mm.add(NO_REDUCED_MOTION, () => {
+        gsap.from(gatedRef.current, {
+          opacity: 0,
+          y: 24,
+          duration: 0.55,
+          ease: EASE.out,
+        });
+      });
+
       // Newly-mounted (or swapped) sections changed document height/positions;
       // recompute all triggers on the next frame after layout settles.
       const id = requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -65,7 +78,7 @@ export function LandingPage() {
 
       {/* Mid-block: entire section only visible once an audience is selected */}
       {selectedAudience && (
-        <>
+        <div ref={gatedRef}>
           {/* Features grid — adapts content by audience, no self-gating */}
           <FeaturesGrid selectedAudience={selectedAudience} />
 
@@ -107,7 +120,7 @@ export function LandingPage() {
 
           {/* Portals — always visible when audience selected */}
           <Portals />
-        </>
+        </div>
       )}
 
       {/* Footer — always visible */}
