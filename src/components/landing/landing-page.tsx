@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Navbar } from "@/components/landing/navbar";
+import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { Hero } from "@/components/landing/hero";
 import { FreeAccess } from "@/components/landing/free-access";
 import { FeaturesGrid } from "@/components/landing/features-grid";
@@ -39,6 +40,9 @@ export function LandingPage() {
 
   return (
     <main className="min-h-screen bg-background font-sans overflow-x-hidden">
+      {/* Page scroll-progress indicator */}
+      <ScrollProgress />
+
       {/* Navbar — always visible */}
       <Navbar
         mobileMenuOpen={mobileMenuOpen}

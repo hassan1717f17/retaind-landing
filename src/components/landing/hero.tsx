@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { Briefcase, Building2 } from "lucide-react";
+import { Briefcase, Building2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { gsap, useGSAP, DUR, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
@@ -11,6 +11,11 @@ interface HeroProps {
   selectedAudience: Audience;
   onSelectAudience: (a: Audience) => void;
 }
+
+const HEADLINE_LINES = [
+  "Hiring the wrong person is expensive.",
+  "Hiring the right person changes everything.",
+];
 
 export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
   const root = useRef<HTMLElement>(null);
@@ -25,13 +30,19 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
       const mm = gsap.matchMedia();
 
       mm.add(NO_REDUCED_MOTION, () => {
-        // Entrance: one coordinated beat for the hero content, video last.
-        const content = q('[data-hero="content"]');
+        const eyebrow = q('[data-hero="eyebrow"]');
+        const words = q("[data-hero-word]");
+        const rest = q('[data-hero="rest"]');
         const video = q('[data-hero="video"]');
-        gsap.set([content, video], { opacity: 0, y: 30 });
+
+        gsap.set(eyebrow, { opacity: 0, y: 12 });
+        gsap.set(words, { opacity: 0, yPercent: 45 });
+        gsap.set([rest, video], { opacity: 0, y: 30 });
 
         const tl = gsap.timeline({ defaults: { ease: EASE.out } });
-        tl.to(content, { opacity: 1, y: 0, duration: DUR.base })
+        tl.to(eyebrow, { opacity: 1, y: 0, duration: 0.4 })
+          .to(words, { opacity: 1, yPercent: 0, duration: 0.5, stagger: 0.035 }, "-=0.1")
+          .to(rest, { opacity: 1, y: 0, duration: DUR.base }, "-=0.2")
           .to(video, { opacity: 1, y: 0, duration: DUR.slow }, "-=0.3");
 
         // Parallax: background drifts slower than scroll for depth.
@@ -61,19 +72,38 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
         data-hero="bg"
       />
       <div className="container mx-auto px-4 text-center relative z-10">
-        <div data-hero="content">
-          {/* 1. Primary Headline (WHY-Led) */}
-          <h1
-            className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-[1.12rem]"
-            data-testid="text-hero-title"
-          >
-            Hiring the wrong person is expensive.
-            <br />
-            <span className="text-foreground">
-              Hiring the right person changes everything.
-            </span>
-          </h1>
+        {/* Eyebrow */}
+        <div
+          className="flex justify-center mb-6"
+          data-hero="eyebrow"
+        >
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 backdrop-blur-sm px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <Sparkles className="w-3.5 h-3.5" />
+            AI-Powered Hiring Intelligence
+          </span>
+        </div>
 
+        {/* 1. Primary Headline (WHY-Led) — word-stagger reveal */}
+        <h1
+          className="text-4xl md:text-6xl font-bold text-foreground leading-[1.08] mb-[1.12rem]"
+          data-testid="text-hero-title"
+        >
+          {HEADLINE_LINES.map((line, li) => (
+            <span key={li} className="block">
+              {line.split(" ").map((word, wi) => (
+                <span
+                  key={`${li}-${wi}`}
+                  data-hero-word
+                  className="inline-block will-change-transform"
+                >
+                  {word}&nbsp;
+                </span>
+              ))}
+            </span>
+          ))}
+        </h1>
+
+        <div data-hero="rest">
           {/* 2. Sub-Headline (Outcome-Focused) — post-it image */}
           <div
             className="flex justify-center mb-[1.96rem] max-w-5xl mx-auto"
@@ -107,7 +137,10 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
           {/* 3. Audience Segmentation Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-14">
             {/* Agency Card */}
-            <Card className="p-8 text-left" data-testid="card-hero-agency">
+            <Card
+              className="p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30"
+              data-testid="card-hero-agency"
+            >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
                   <Briefcase className="w-5 h-5 text-foreground" />
@@ -121,7 +154,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
               <Button
                 size="lg"
                 variant="default"
-                className="w-full rounded-full"
+                className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
                 onClick={() => {
                   onSelectAudience("agency");
                   scrollToFeatures();
@@ -133,7 +166,10 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
             </Card>
 
             {/* In-House Card */}
-            <Card className="p-8 text-left" data-testid="card-hero-inhouse">
+            <Card
+              className="p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30"
+              data-testid="card-hero-inhouse"
+            >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
                   <Building2 className="w-5 h-5 text-foreground" />
@@ -147,7 +183,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
               <Button
                 size="lg"
                 variant="default"
-                className="w-full rounded-full"
+                className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
                 onClick={() => {
                   onSelectAudience("inhouse");
                   scrollToFeatures();
@@ -186,7 +222,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
           data-testid="video-placeholder"
           data-hero="video"
         >
-          <div className="relative">
+          <div className="relative group">
             <img
               src="/assets/download_1770376003675.png"
               alt="End-to-end recruitment workflow"
@@ -195,7 +231,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <div
-                className="w-16 h-16 rounded-full bg-background/90 shadow-lg flex items-center justify-center"
+                className="w-16 h-16 rounded-full bg-background/90 shadow-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                 data-testid="button-play-video"
               >
                 {/* Play triangle — monochrome (foreground glyph, not red) */}
@@ -214,7 +250,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
               onSelectAudience("agency");
               scrollToFeatures();
             }}
-            className="rounded-full gap-2"
+            className="rounded-full gap-2 transition-transform hover:scale-[1.02] active:scale-95"
             data-testid="button-audience-agency"
           >
             <Briefcase className="w-5 h-5" />
@@ -227,7 +263,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
               onSelectAudience("inhouse");
               scrollToFeatures();
             }}
-            className="rounded-full gap-2"
+            className="rounded-full gap-2 transition-transform hover:scale-[1.02] active:scale-95"
             data-testid="button-audience-inhouse"
           >
             <Building2 className="w-5 h-5" />
