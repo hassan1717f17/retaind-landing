@@ -3,6 +3,17 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Section, SectionBadge } from "@/components/landing/section";
 import type { Audience } from "@/components/landing/types";
+import { useCountUp } from "@/components/landing/use-count-up";
+
+function Stat({ count, suffix }: { count: number; suffix: string }) {
+  const ref = useCountUp();
+  return <span ref={ref} data-count-to={count} data-count-suffix={suffix}>{count}{suffix}</span>;
+}
+
+function StatInline() {
+  const ref = useCountUp();
+  return <span ref={ref} data-count-to={80} data-count-suffix="%">80%</span>;
+}
 
 export function BadHires({ selectedAudience }: { selectedAudience: Audience }) {
   const show = selectedAudience === "inhouse";
@@ -22,19 +33,22 @@ export function BadHires({ selectedAudience }: { selectedAudience: Audience }) {
                 <SectionBadge>The Problem</SectionBadge>
                 <h2 className="text-4xl font-bold mb-6" data-testid="text-section-bad-hires-title">The Cost of Bad Hires</h2>
                 <p className="text-lg text-muted-foreground mb-8" data-testid="text-section-bad-hires-desc">
-                  80% of employees who leave in their first year cite behavioral and cultural misalignment as the primary reason.
+                  <StatInline /> of employees who leave in their first year cite behavioral and cultural misalignment as the primary reason.
                 </p>
 
                 <div className="space-y-6 mb-8">
                   {[
-                    { title: "3x Salary", desc: "Average cost of a bad hire including recruitment, training, and lost productivity" },
-                    { title: "6 Months", desc: "Time wasted before a poor hire typically leaves or is let go" },
-                    { title: "Team Impact", desc: "Morale and productivity suffer when cultural fit is wrong" }
+                    { count: 3, suffix: "x", unit: "Salary", desc: "Average cost of a bad hire including recruitment, training, and lost productivity" },
+                    { count: 6, suffix: "", unit: "Months", desc: "Time wasted before a poor hire typically leaves or is let go" },
+                    { count: null, suffix: "", unit: "Team Impact", desc: "Morale and productivity suffer when cultural fit is wrong" },
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-4 p-4 rounded-xl bg-muted border" data-testid={`card-bad-hire-item-${idx}`}>
                       <div className="w-2 h-2 rounded-full bg-muted-foreground mt-2 shrink-0" />
                       <div>
-                        <h4 className="font-bold text-lg text-foreground" data-testid={`text-bad-hire-title-${idx}`}>{item.title}</h4>
+                        <h4 className="font-bold text-lg text-foreground" data-testid={`text-bad-hire-title-${idx}`}>
+                          {item.count !== null ? <Stat count={item.count} suffix={item.suffix} /> : null}
+                          {item.count !== null ? " " : ""}{item.unit}
+                        </h4>
                         <p className="text-muted-foreground text-sm">{item.desc}</p>
                       </div>
                     </div>
