@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import { Briefcase, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { gsap, useGSAP, DUR, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
 import type { Audience } from "./types";
 
 interface HeroProps {
@@ -12,24 +13,55 @@ interface HeroProps {
 }
 
 export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
+  const root = useRef<HTMLElement>(null);
+
   const scrollToFeatures = () => {
     document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(root);
+      const mm = gsap.matchMedia();
+
+      mm.add(NO_REDUCED_MOTION, () => {
+        // Entrance: one coordinated beat for the hero content, video last.
+        const content = q('[data-hero="content"]');
+        const video = q('[data-hero="video"]');
+        gsap.set([content, video], { opacity: 0, y: 30 });
+
+        const tl = gsap.timeline({ defaults: { ease: EASE.out } });
+        tl.to(content, { opacity: 1, y: 0, duration: DUR.base })
+          .to(video, { opacity: 1, y: 0, duration: DUR.slow }, "-=0.3");
+
+        // Parallax: background drifts slower than scroll for depth.
+        const bg = q('[data-hero="bg"]');
+        gsap.to(bg, {
+          yPercent: 18,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+    },
+    { scope: root }
+  );
+
   return (
-    <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden">
+    <section ref={root} className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden">
       {/* Hero background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
         style={{ backgroundImage: `url(/assets/image_1770373559578.png)` }}
         data-testid="img-hero-background"
+        data-hero="bg"
       />
       <div className="container mx-auto px-4 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div data-hero="content">
           {/* 1. Primary Headline (WHY-Led) */}
           <h1
             className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-[1.12rem]"
@@ -146,15 +178,13 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
           >
             Recruiting For Retention
           </p>
-        </motion.div>
+        </div>
 
         {/* Video Placeholder */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+        <div
           className="relative max-w-5xl mx-auto rounded-xl shadow-2xl overflow-hidden border border-border/50 bg-background"
           data-testid="video-placeholder"
+          data-hero="video"
         >
           <div className="relative">
             <img
@@ -173,7 +203,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Second Audience Segmentation beneath video */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto mt-12 mb-4">
