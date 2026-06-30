@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FileText, ClipboardCheck, Check } from "lucide-react";
 import { Section, SectionHeader, SectionBadge } from "@/components/landing/section";
 import type { Audience } from "@/components/landing/types";
-import { gsap, useGSAP, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
+import { gsap, useGSAP, NO_REDUCED_MOTION } from "@/lib/gsap";
 
 export function Journey({ selectedAudience }: { selectedAudience: Audience }) {
   const agencyRoot = useRef<HTMLDivElement>(null);
@@ -21,35 +21,23 @@ export function Journey({ selectedAudience }: { selectedAudience: Audience }) {
 
       const mm = gsap.matchMedia();
 
-      // Desktop: pin the section and scrub the phases + connector in.
-      mm.add("(min-width: 768px) and " + NO_REDUCED_MOTION, () => {
-        gsap.set(cards, { opacity: 0, y: 40 });
+      // Crisp play-once reveal when the section scrolls into view: the
+      // connector line draws left→right, then the phase cards pop in quick
+      // succession. No pin / no scrub — that dragged the reveal across a long
+      // scroll. Reduced-motion users skip this branch and see cards at rest.
+      mm.add(NO_REDUCED_MOTION, () => {
+        gsap.set(cards, { opacity: 0, y: 28 });
         gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
 
         const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: agencyRoot.current,
-            start: "top top",
-            end: "+=120%",
-            pin: true,
-            scrub: 0.5,
-          },
+          scrollTrigger: { trigger: agencyRoot.current, start: "top 72%", once: true },
         });
-        tl.to(line, { scaleX: 1, ease: "none", duration: 1 }, 0)
-          .to(cards, { opacity: 1, y: 0, stagger: 0.5, ease: EASE.out, duration: 1 }, 0);
-      });
-
-      // Mobile / reduced-motion: simple non-pinned reveal.
-      mm.add(`(max-width: 767px), (prefers-reduced-motion: reduce)`, () => {
-        gsap.set([cards, line], { clearProps: "all" });
-        gsap.from(cards, {
-          opacity: 0,
-          y: 24,
-          stagger: 0.12,
-          ease: EASE.out,
-          duration: 0.6,
-          scrollTrigger: { trigger: agencyRoot.current, start: "top 80%", once: true },
-        });
+        tl.to(line, { scaleX: 1, duration: 0.45, ease: "power2.out" })
+          .to(
+            cards,
+            { opacity: 1, y: 0, stagger: 0.12, duration: 0.5, ease: "power3.out" },
+            "-=0.2"
+          );
       });
     },
     { scope: agencyRoot, dependencies: [selectedAudience] }
