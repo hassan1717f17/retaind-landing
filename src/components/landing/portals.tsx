@@ -37,7 +37,7 @@ export function Portals() {
         {portals.map((portal, idx) => (
           <div
             key={idx}
-            className="p-8 rounded-2xl bg-card border border-border shadow-lg hover-elevate text-center"
+            className="p-8 rounded-2xl bg-card border border-border shadow-lg hover-elevate text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
             data-testid={`card-portal-${idx}`}
           >
             <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-6">

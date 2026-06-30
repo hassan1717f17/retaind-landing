@@ -457,3 +457,25 @@ summary {
 .hover-elevate:hover::after, .active-elevate:active::after { background-color: var(--elevate-1); }
 .hover-elevate-2:hover::after, .active-elevate-2:active::after { background-color: var(--elevate-2); }
 .border.hover-elevate::after, .border.active-elevate::after, .border.hover-elevate-2::after, .border.active-elevate-2::after { inset: -1px; }
+
+/* Marquee — continuous horizontal scroll for the logo strip. The track holds
+   two identical copies of the content; translating it -50% loops seamlessly. */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 32s linear infinite;
+}
+.marquee-viewport:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-viewport {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}

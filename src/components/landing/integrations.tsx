@@ -2,10 +2,8 @@
 
 import { Section, SectionHeader, SectionBadge } from "@/components/landing/section";
 import type { Audience } from "@/components/landing/types";
-import { useReveal } from "@/components/landing/use-reveal";
 
 export function Integrations({ selectedAudience }: { selectedAudience: Audience }) {
-  const scope = useReveal();
   return (
     <Section className="bg-background">
       <SectionHeader>
@@ -16,12 +14,18 @@ export function Integrations({ selectedAudience }: { selectedAudience: Audience 
         </p>
       </SectionHeader>
 
-      <div className="flex flex-wrap justify-center gap-8 mb-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500" ref={scope}>
-        {["Bullhorn", "Salesforce", "HubSpot", "Greenhouse", "Workday", "SAP", "Oracle", "Zoho"].map((name) => (
-          <div key={name} className="px-6 py-3 rounded-lg border border-border bg-muted font-bold text-muted-foreground text-lg" data-reveal>
-            {name}
-          </div>
-        ))}
+      <div className="marquee-viewport overflow-hidden mb-16">
+        <div className="marquee-track gap-8 py-1">
+          {[...["Bullhorn", "Salesforce", "HubSpot", "Greenhouse", "Workday", "SAP", "Oracle", "Zoho"], ...["Bullhorn", "Salesforce", "HubSpot", "Greenhouse", "Workday", "SAP", "Oracle", "Zoho"]].map((name, i) => (
+            <div
+              key={`${name}-${i}`}
+              className="shrink-0 px-6 py-3 rounded-lg border border-border bg-muted font-bold text-muted-foreground text-lg opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+              aria-hidden={i >= 8 ? true : undefined}
+            >
+              {name}
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="relative max-w-4xl mx-auto">

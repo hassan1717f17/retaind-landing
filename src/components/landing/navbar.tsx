@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Menu, X, LogIn, ChevronDown, Briefcase, Building2, Users } from "lucide-react";
@@ -31,12 +32,33 @@ export function Navbar({
   selectedAudience,
   onSelectAudience,
 }: NavbarProps) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+    <header
+      className={`fixed top-0 w-full z-50 backdrop-blur-md border-b border-border transition-all duration-300 ${
+        scrolled ? "bg-background/90 shadow-sm" : "bg-background/80"
+      }`}
+    >
+      <div
+        className={`container mx-auto px-4 flex items-center justify-between transition-all duration-300 ${
+          scrolled ? "h-16" : "h-20"
+        }`}
+      >
         {/* Logo / Wordmark */}
         <Link href="/" data-testid="link-logo" className="flex flex-col items-start">
-          <span className="font-bold text-4xl tracking-tight">
+          <span
+            className={`font-bold tracking-tight transition-all duration-300 ${
+              scrolled ? "text-3xl" : "text-4xl"
+            }`}
+          >
             <span className="text-foreground">ret</span>
             <span className="text-foreground font-extrabold">AI</span>
             <span className="text-foreground">nd.ai</span>
@@ -50,7 +72,7 @@ export function Navbar({
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors"
+              className="relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 hover:after:scale-x-100"
               data-testid={`link-nav-${link.name.toLowerCase()}`}
               onClick={() => {
                 if (!selectedAudience) onSelectAudience("agency");

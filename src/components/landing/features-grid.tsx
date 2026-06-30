@@ -102,7 +102,7 @@ export function FeaturesGrid({ selectedAudience }: { selectedAudience: Audience 
       </SectionHeader>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={scope}>
         {features.map((feature, idx) => (
-          <Card key={idx} className="p-6 hover-elevate" data-testid={`card-feature-${idx}`}>
+          <Card key={idx} className="p-6 hover-elevate transition-all duration-300 hover:-translate-y-1 hover:shadow-lg" data-testid={`card-feature-${idx}`}>
             <div data-reveal>
               <div className={`w-11 h-11 rounded-md ${feature.iconBg} flex items-center justify-center mb-5`}>
                 {feature.icon}

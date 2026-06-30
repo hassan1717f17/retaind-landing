@@ -57,6 +57,25 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
             scrub: true,
           },
         });
+
+        // Signature moment: "Recruiting For Retention" expands as it scrolls in.
+        const recruiting = q('[data-testid="text-recruiting-retention"]');
+        gsap.fromTo(
+          recruiting,
+          { scale: 0.92, letterSpacing: "0em", opacity: 0.55 },
+          {
+            scale: 1,
+            letterSpacing: "0.015em",
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: recruiting,
+              start: "top 90%",
+              end: "top 45%",
+              scrub: true,
+            },
+          }
+        );
       });
     },
     { scope: root }
@@ -104,18 +123,6 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
         </h1>
 
         <div data-hero="rest">
-          {/* 2. Sub-Headline (Outcome-Focused) — post-it image */}
-          <div
-            className="flex justify-center mb-[1.96rem] max-w-5xl mx-auto"
-            data-testid="img-hero-postit"
-          >
-            <img
-              src="/assets/image_1773080881842.png"
-              alt="Reduce mis-hire risk by 80%, Improve early ROI &amp; performance, Hire the best talent"
-              className="w-full h-auto object-cover rounded-xl"
-            />
-          </div>
-
           {/* Supporting Value Statement */}
           <p
             className="text-base md:text-lg text-foreground/80 max-w-4xl mx-auto mb-8 leading-relaxed"
@@ -193,6 +200,18 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
                 For In-House Teams
               </Button>
             </Card>
+          </div>
+
+          {/* Sub-Headline (Outcome-Focused) — post-it image, now supporting the CTA */}
+          <div
+            className="flex justify-center mb-12 max-w-4xl mx-auto"
+            data-testid="img-hero-postit"
+          >
+            <img
+              src="/assets/image_1773080881842.png"
+              alt="Reduce mis-hire risk by 80%, Improve early ROI &amp; performance, Hire the best talent"
+              className="w-full h-auto object-cover rounded-xl"
+            />
           </div>
 
           {/* 5. Adoption & Risk-Reduction Statement */}
