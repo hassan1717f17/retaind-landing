@@ -19,7 +19,6 @@ import {
   Award,
   TrendingUp,
   Target,
-  ChevronRight,
   ArrowLeft,
   AlertTriangle,
   Shield,
@@ -382,10 +381,10 @@ export default function InHouseAssessmentResults() {
                 size="lg"
                 variant="secondary"
                 className="gap-2"
+                disabled
                 data-testid="button-inhouse-register"
               >
-                Register For Your Free Retaind Account
-                <ChevronRight className="w-4 h-4" />
+                Coming Soon
               </Button>
             </div>
             <p className="text-background/50 text-sm mt-4">

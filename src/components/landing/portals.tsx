@@ -47,8 +47,8 @@ export function Portals() {
               {portal.title}
             </h3>
             <p className="text-muted-foreground mb-8 text-sm">{portal.desc}</p>
-            <Button className="w-full" variant="outline" data-testid={`button-portal-login-${idx}`}>
-              Login
+            <Button className="w-full" variant="outline" disabled data-testid={`button-portal-login-${idx}`}>
+              Coming Soon
             </Button>
           </div>
         ))}

@@ -3,16 +3,30 @@ import { z } from "zod/v4";
 import { assessmentSubmitSchema } from "@/lib/api-contract";
 import { storage } from "@/lib/storage";
 import { calculateScores, calculateRevenue } from "@/features/assessment/scoring";
+import { toLead } from "@/lib/leads";
 import {
   generateReport,
   generateFallbackReport,
-} from "@/lib/ai/openai";
+} from "@/lib/ai/reports";
 
 export async function POST(req: Request) {
   try {
     const input = assessmentSubmitSchema.parse(await req.json());
 
-    const user = await storage.createAssessmentUser(input.user);
+    // Limit one report per device per assessment type. Fails open: an absent
+    // visitorId (fingerprinting unavailable) skips the check entirely.
+    const visitorId = input.visitorId ?? null;
+    if (visitorId && (await storage.findAssessmentUserByVisitorId(visitorId))) {
+      return NextResponse.json(
+        {
+          message: "You've already generated a report. Sign up to access more.",
+          code: "ALREADY_SUBMITTED",
+        },
+        { status: 409 }
+      );
+    }
+
+    const user = await storage.createAssessmentUser(input.user, visitorId);
 
     const scores = calculateScores(input.responses);
     const revenue = calculateRevenue(input.responses, scores);
@@ -46,6 +60,14 @@ export async function POST(req: Request) {
       userId: user.id,
       reportText,
     });
+
+    // High-intent sales lead → Admin Control Centre. Non-fatal: a failure here
+    // must not break the user's assessment result.
+    try {
+      await storage.createLead(toLead(input.user, "agency_assessment"));
+    } catch (leadError) {
+      console.error("Lead capture failed:", leadError);
+    }
 
     return NextResponse.json(
       {

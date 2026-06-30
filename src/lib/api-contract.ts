@@ -12,6 +12,12 @@ export const newsletterSubscribeSchema = insertSubscriberSchema.extend({
 
 export type NewsletterSubscribeInput = z.infer<typeof newsletterSubscribeSchema>;
 
+// Optional device identity (open-source FingerprintJS visitorId) used to limit
+// report generation per device. Absent when fingerprinting is unavailable (fail open).
+const fingerprintFields = {
+  visitorId: z.string().optional(),
+};
+
 export const assessmentSubmitSchema = z.object({
   user: insertAssessmentUserSchema,
   responses: z.array(
@@ -20,6 +26,7 @@ export const assessmentSubmitSchema = z.object({
       responseValue: z.string(),
     })
   ),
+  ...fingerprintFields,
 });
 
 export type AssessmentSubmitInput = z.infer<typeof assessmentSubmitSchema>;
@@ -32,6 +39,7 @@ export const inhouseAssessmentSubmitSchema = z.object({
       responseValue: z.string(),
     })
   ),
+  ...fingerprintFields,
 });
 
 export type InhouseAssessmentSubmitInput = z.infer<

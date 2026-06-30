@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { submitAssessment } from "@/lib/client-api";
+import { submitAssessment, ApiError } from "@/lib/client-api";
+import { getVisitor } from "@/lib/fingerprint";
 import { toast } from "sonner";
 import {
   ChevronLeft,
@@ -17,6 +18,7 @@ import {
   CheckCircle2,
   Loader2,
   ClipboardCheck,
+  Lock,
 } from "lucide-react";
 import { agencyQuestions } from "@/features/assessment/agency-questions";
 
@@ -25,6 +27,7 @@ export default function Assessment() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [leadInfo, setLeadInfo] = useState({ name: "", company: "", email: "" });
   const [isPending, setIsPending] = useState(false);
+  const [blocked, setBlocked] = useState(false);
   const router = useRouter();
 
   const visibleQuestions = agencyQuestions.filter((q) => {
@@ -85,13 +88,19 @@ export default function Assessment() {
         questionId,
         responseValue,
       }));
+      const visitor = await getVisitor();
       const data = await submitAssessment({
         user: leadInfo,
         responses,
+        visitorId: visitor?.visitorId,
       });
       sessionStorage.setItem("assessmentResults", JSON.stringify(data));
       router.push("/assessment/results");
-    } catch {
+    } catch (err) {
+      if (err instanceof ApiError && err.code === "ALREADY_SUBMITTED") {
+        setBlocked(true);
+        return;
+      }
       toast.error("Something went wrong. Please try again.");
       setIsPending(false);
     }
@@ -125,6 +134,28 @@ export default function Assessment() {
     const idx = sections.indexOf(currentQuestion.section);
     return idx >= 0 ? `Section ${idx + 1} of 5` : "";
   };
+
+  if (blocked) {
+    return (
+      <div className="min-h-screen bg-muted flex items-center justify-center px-4">
+        <Card className="max-w-md w-full p-8 text-center space-y-4" data-testid="card-already-submitted">
+          <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
+            <Lock className="w-7 h-7 text-primary" />
+          </div>
+          <h1 className="text-2xl font-bold text-foreground">
+            You&apos;ve already generated a report
+          </h1>
+          <p className="text-muted-foreground">
+            It looks like you&apos;ve already used the free assessment on this device.
+            Sign up for a free Retaind account to access your reports and more.
+          </p>
+          <Button className="w-full" disabled data-testid="button-blocked-signup">
+            Coming Soon
+          </Button>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-muted">

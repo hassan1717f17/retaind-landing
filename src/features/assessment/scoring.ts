@@ -1,4 +1,4 @@
-import type { AgencyScores, Revenue, InhouseScores, QuestionResponse } from "@/lib/ai/openai";
+import type { AgencyScores, Revenue, InhouseScores, QuestionResponse } from "@/lib/ai/reports";
 
 export function calculateScores(responses: QuestionResponse[]): AgencyScores {
   const responseMap = new Map<string, string>();

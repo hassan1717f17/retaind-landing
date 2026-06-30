@@ -27,7 +27,6 @@ import {
   Award,
   TrendingUp,
   Target,
-  ChevronRight,
   ArrowLeft,
 } from "lucide-react";
 import type { AssessmentResult } from "@/lib/client-api";
@@ -121,12 +120,17 @@ function RevenueCalculator({
   const [campaigns, setCampaigns] = useState(18);
   const [avgFee, setAvgFee] = useState(15000);
 
+  // Interactive "what-if" projection driven by the sliders below — independent
+  // of the scenario comparison chart.
   const projectedRevenue = campaigns * avgFee;
 
+  // Scenario comparison — all three bars are server-computed estimates derived
+  // from the user's answers. (The "Scaled Retained" bar must use the server's
+  // scaledRevenueEstimate, NOT the slider's projectedRevenue.)
   const chartData = [
     { name: "Current Model", value: revenue.currentRevenueEstimate },
     { name: "Hybrid Retained", value: revenue.hybridRevenueEstimate },
-    { name: "Scaled Retained", value: projectedRevenue },
+    { name: "Scaled Retained", value: revenue.scaledRevenueEstimate },
   ];
 
   // Monochrome shades using opacity on foreground
@@ -549,10 +553,10 @@ export default function AssessmentResults() {
                 size="lg"
                 variant="secondary"
                 className="gap-2"
+                disabled
                 data-testid="button-register"
               >
-                Register For Your Free Retaind Recruiter Account
-                <ChevronRight className="w-4 h-4" />
+                Coming Soon
               </Button>
             </div>
           </Card>

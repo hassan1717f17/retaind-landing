@@ -1,8 +1,8 @@
-import OpenAI from "openai";
+import { AIClient } from "./client";
 
-let _client: OpenAI | null = null;
-function client(): OpenAI {
-  if (!_client) _client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY ?? "sk-dummy" });
+let _client: AIClient | null = null;
+function client(): AIClient {
+  if (!_client) _client = new AIClient();
   return _client;
 }
 
@@ -106,14 +106,13 @@ TONE: Professional, supportive, insightful. Educate, diagnose, encourage, provid
 
 Format the report in clean markdown with clear headings. Keep it concise but thorough - approximately 800-1200 words.`;
 
-  const response = await client().chat.completions.create({
-    model: "gpt-4o",
-    messages: [{ role: "user", content: prompt }],
-    max_tokens: 3000,
+  const response = await client().complete({
+    prompt,
+    maxTokens: 3000,
     temperature: 0.7,
   });
 
-  return response.choices[0]?.message?.content || "Report generation failed. Please try again.";
+  return response.text || "Report generation failed. Please try again.";
 }
 
 export async function generateInhouseReport(
@@ -199,14 +198,13 @@ Include this disclaimer at the end: "These insights are strategic estimates base
 
 Format the report in clean markdown with clear headings. Keep it concise but thorough - approximately 800-1200 words.`;
 
-  const response = await client().chat.completions.create({
-    model: "gpt-4o",
-    messages: [{ role: "user", content: prompt }],
-    max_tokens: 3000,
+  const response = await client().complete({
+    prompt,
+    maxTokens: 3000,
     temperature: 0.7,
   });
 
-  return response.choices[0]?.message?.content || "Report generation failed. Please try again.";
+  return response.text || "Report generation failed. Please try again.";
 }
 
 export function generateInhouseFallbackReport(name: string, scores: InhouseScores): string {

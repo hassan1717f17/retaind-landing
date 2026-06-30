@@ -59,8 +59,8 @@ export function Navbar({
               {link.name}
             </a>
           ))}
-          <Button variant="default" data-testid="button-get-started-nav">
-            Get Started
+          <Button variant="default" disabled data-testid="button-get-started-nav">
+            Coming Soon
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -71,17 +71,20 @@ export function Navbar({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" data-testid="dropdown-login-menu">
-              <DropdownMenuItem data-testid="dropdown-item-agency">
+              <DropdownMenuItem disabled data-testid="dropdown-item-agency">
                 <Briefcase className="w-4 h-4 mr-2" />
                 Agency
+                <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
               </DropdownMenuItem>
-              <DropdownMenuItem data-testid="dropdown-item-inhouse">
+              <DropdownMenuItem disabled data-testid="dropdown-item-inhouse">
                 <Building2 className="w-4 h-4 mr-2" />
                 In-House
+                <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
               </DropdownMenuItem>
-              <DropdownMenuItem data-testid="dropdown-item-candidate">
+              <DropdownMenuItem disabled data-testid="dropdown-item-candidate">
                 <Users className="w-4 h-4 mr-2" />
                 Candidate
+                <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -119,8 +122,8 @@ export function Navbar({
                 {link.name}
               </a>
             ))}
-            <Button className="w-full" variant="default" data-testid="button-get-started-mobile">
-              Get Started
+            <Button className="w-full" variant="default" disabled data-testid="button-get-started-mobile">
+              Coming Soon
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -131,17 +134,20 @@ export function Navbar({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="center" className="w-full" data-testid="dropdown-login-menu-mobile">
-                <DropdownMenuItem data-testid="dropdown-item-agency-mobile">
+                <DropdownMenuItem disabled data-testid="dropdown-item-agency-mobile">
                   <Briefcase className="w-4 h-4 mr-2" />
                   Agency
+                  <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem data-testid="dropdown-item-inhouse-mobile">
+                <DropdownMenuItem disabled data-testid="dropdown-item-inhouse-mobile">
                   <Building2 className="w-4 h-4 mr-2" />
                   In-House
+                  <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem data-testid="dropdown-item-candidate-mobile">
+                <DropdownMenuItem disabled data-testid="dropdown-item-candidate-mobile">
                   <Users className="w-4 h-4 mr-2" />
                   Candidate
+                  <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { db } from "./db/client";
 import {
   newsletterSubscribers,
+  leads,
   assessmentUsers,
   assessmentResponses,
   assessmentScores,
@@ -25,6 +26,7 @@ import {
   type InhouseAssessmentUser,
   type InhouseAssessmentScore,
   type InhouseAssessmentReport,
+  type InsertLead,
 } from "./db/schema";
 
 export const storage = {
@@ -33,10 +35,31 @@ export const storage = {
     await db.insert(newsletterSubscribers).values(subscriber).onConflictDoNothing();
   },
 
-  async createAssessmentUser(user: InsertAssessmentUser): Promise<AssessmentUser> {
-    if (!db) return { id: 0, ...user, createdAt: new Date() } as AssessmentUser;
-    const [created] = await db.insert(assessmentUsers).values(user).returning();
+  async createLead(lead: InsertLead): Promise<void> {
+    if (!db) return;
+    await db.insert(leads).values(lead);
+  },
+
+  async createAssessmentUser(
+    user: InsertAssessmentUser,
+    visitorId?: string | null,
+  ): Promise<AssessmentUser> {
+    if (!db) return { id: 0, ...user, visitorId: visitorId ?? null, createdAt: new Date() } as AssessmentUser;
+    const [created] = await db
+      .insert(assessmentUsers)
+      .values({ ...user, visitorId: visitorId ?? null })
+      .returning();
     return created;
+  },
+
+  async findAssessmentUserByVisitorId(visitorId: string): Promise<{ id: number } | undefined> {
+    if (!db) return undefined;
+    const [row] = await db
+      .select({ id: assessmentUsers.id })
+      .from(assessmentUsers)
+      .where(eq(assessmentUsers.visitorId, visitorId))
+      .limit(1);
+    return row;
   },
 
   async createAssessmentResponses(responses: InsertAssessmentResponse[]): Promise<void> {
@@ -75,10 +98,26 @@ export const storage = {
     return report;
   },
 
-  async createInhouseAssessmentUser(user: InsertInhouseAssessmentUser): Promise<InhouseAssessmentUser> {
-    if (!db) return { id: 0, ...user, jobTitle: user.jobTitle ?? null, createdAt: new Date() } as InhouseAssessmentUser;
-    const [created] = await db.insert(inhouseAssessmentUsers).values(user).returning();
+  async createInhouseAssessmentUser(
+    user: InsertInhouseAssessmentUser,
+    visitorId?: string | null,
+  ): Promise<InhouseAssessmentUser> {
+    if (!db) return { id: 0, ...user, jobTitle: user.jobTitle ?? null, visitorId: visitorId ?? null, createdAt: new Date() } as InhouseAssessmentUser;
+    const [created] = await db
+      .insert(inhouseAssessmentUsers)
+      .values({ ...user, visitorId: visitorId ?? null })
+      .returning();
     return created;
+  },
+
+  async findInhouseAssessmentUserByVisitorId(visitorId: string): Promise<{ id: number } | undefined> {
+    if (!db) return undefined;
+    const [row] = await db
+      .select({ id: inhouseAssessmentUsers.id })
+      .from(inhouseAssessmentUsers)
+      .where(eq(inhouseAssessmentUsers.visitorId, visitorId))
+      .limit(1);
+    return row;
   },
 
   async createInhouseAssessmentResponses(responses: InsertInhouseAssessmentResponse[]): Promise<void> {

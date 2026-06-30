@@ -35,28 +35,36 @@ Both apps share one Postgres database: `postgresql://postgres:password@localhost
 
 | Decision | Choice |
 |---|---|
-| `lead` table ownership | **This landing app creates it now** from the friend's exact schema; landing inserts, friend reads. Single owner of the live table. |
+| Where migrations live | **In the `retaind` repo** (`D:\Work\Retained\retaind`). Its CI/CD is the only pipeline that applies migrations to the real DB, so all DDL for the shared DB goes there. The landing app owns no migrations. |
+| `lead` table | Created by the retaind migration from the friend's exact schema; landing inserts, admin app reads. |
 | Source values | Two: `agency_assessment`, `inhouse_assessment`. |
 | Duplicate submissions | **One lead per submission, no dedup.** |
-| Migration mechanism | Idempotent `CREATE TABLE IF NOT EXISTS` SQL, run by a `db:migrate` script. **Not** `drizzle-kit push`. |
+| Migration mechanism | Hand-authored idempotent `CREATE TABLE IF NOT EXISTS` SQL file in `retaind/drizzle/`, registered in `meta/_journal.json`, applied by retaind's `scripts/migrate.mjs` (drizzle `migrate()`). Matches retaind's existing convention. **Not** `drizzle-kit generate`/`push`. |
 
-### Why not `drizzle-kit push`
+### Why migrations live in retaind (not here)
 
-`retaind_dev` already holds ~35 tables from the main `retaind` app. `drizzle-kit push`
-diffs the schema in this repo against the live DB; tables present in the DB but absent
-from this repo's schema (i.e. all of the friend's tables) would be flagged for
-**deletion**. That is unacceptable on a shared DB. An additive `CREATE TABLE IF NOT
-EXISTS` migration only ever adds tables and never inspects or drops the friend's.
+The landing app and main `retaind` app share one Postgres DB; only retaind's CI/CD
+applies migrations to the real (production) DB. retaind maintains its migrations as
+hand-written numbered SQL files (`drizzle/NNNN_*.sql`) registered in
+`drizzle/meta/_journal.json` and applied via drizzle's `migrate()` — it does **not**
+rely on `drizzle-kit generate` (its `meta/` snapshots are stale). `drizzle-kit push`
+from the landing app is also unacceptable: it would diff against the live DB and flag
+all of retaind's tables for deletion. So the migration is a hand-authored idempotent
+SQL file added to retaind's chain: `retaind/drizzle/0066_landing_assessment_leads.sql`.
+
+The landing app keeps `src/lib/db/schema.ts` only for query typing (its `storage`
+layer queries these tables); it defines no migrations.
 
 ## Architecture
 
-### Tables created (10)
+### Tables created (10) — by `retaind/drizzle/0066_landing_assessment_leads.sql`
 
-Landing-owned (existing Drizzle definitions in `src/lib/db/schema.ts`):
 `newsletter_subscribers`, `assessment_users`, `assessment_responses`,
 `assessment_scores`, `assessment_reports`, `inhouse_assessment_users`,
 `inhouse_assessment_responses`, `inhouse_assessment_scores`,
-`inhouse_assessment_reports`.
+`inhouse_assessment_reports`, `lead`.
+
+The landing app's `src/lib/db/schema.ts` mirrors these for ORM/query typing.
 
 Shared `lead` table — created from the friend's exact schema:
 
@@ -127,9 +135,13 @@ receives their report and scores. `if (!db) return` keeps no-DB mode working.
 
 ## Coordination (for the friend / main retaind app)
 
-1. The `lead` table now physically exists in `retaind_dev`, created by the landing app.
-   Do **not** add a second migration that recreates or drops it — the landing app owns
-   the live table definition.
+The migration `retaind/drizzle/0066_landing_assessment_leads.sql` (+ its
+`meta/_journal.json` entry, idx 88) was added but **not committed** — review and commit
+it on your side, then CI/CD applies it to the real DB.
+
+1. The `0066` migration creates the `lead` table (and the marketing/assessment tables).
+   Do **not** also create a `lead` table in a separate migration — `0066` is the single
+   creator. Build your `lead` Drizzle model / ORM layer against it.
 2. Add `agency_assessment` and `inhouse_assessment` to the `LeadSource` union, the
    source/status filter UI, and label/colour maps — otherwise assessment leads render
    with an unstyled source tag.

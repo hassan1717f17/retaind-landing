@@ -20,13 +20,18 @@ any row, and the UI shows a "you've already generated this — sign up to contin
 
 | Decision | Choice |
 |---|---|
-| Device identity | Fingerprint Pro `visitorId` (more reliable than raw IP). |
+| Device identity | Open-source FingerprintJS `visitorId` (free, client-side; more reliable than raw IP). |
 | Limit scope | One report per assessment **type** per device (1 agency + 1 in-house). |
 | Storage / enforcement | `visitor_id` column on our `assessment_users` + `inhouse_assessment_users` tables; checked server-side. Friend's `lead` table untouched. |
-| Server-side verification | Verify `requestId` → authoritative `visitorId` via Fingerprint Server API when `FINGERPRINT_SECRET_KEY` is set; otherwise trust the client `visitorId`. |
-| Fallback | **Fail open** — no/failed fingerprint → allow the submission (logged). |
+| Server-side verification | None — open-source FingerprintJS is client-side only; the route trusts the client-sent `visitorId`. (Consistent with fail-open + the threat model below.) |
+| Fallback | **Fail open** — no/absent fingerprint → allow the submission (logged). |
 | Signup link | `NEXT_PUBLIC_SIGNUP_URL` env var (default `#`). |
 | Migration home | retaind repo (its CI/CD owns the real DB), hand-authored idempotent SQL + journal entry. |
+
+**Note:** originally scoped for Fingerprint **Pro** (with `requestId` + secret-key server
+verification); switched to the **free open-source** library to avoid the paid account.
+Trade-off: lower re-identification accuracy and no tamper-proof server verification —
+acceptable given we fail open and exclude request-tampering from scope.
 
 ## Threat model
 
@@ -39,50 +44,44 @@ a hard security boundary.
 
 ### Client
 
-- `src/lib/fingerprint.ts` — `getVisitor(): Promise<{ visitorId: string; requestId: string } | null>`.
-  Lazily loads `@fingerprintjs/fingerprintjs-pro` with `NEXT_PUBLIC_FINGERPRINT_API_KEY`
-  and `NEXT_PUBLIC_FINGERPRINT_REGION` (default `us`), calls `.get()`. Returns `null` on
-  any error or missing key (fail open). The loaded agent is cached across calls.
+- `src/lib/fingerprint.ts` — `getVisitor(): Promise<{ visitorId: string } | null>`.
+  Lazily loads `@fingerprintjs/fingerprintjs` (open-source, no key) and calls `.get()`.
+  Returns `null` on any error (fail open). The loaded agent is cached across calls.
 - Assessment pages (`/assessment`, `/inhouse-assessment`) call `getVisitor()` before
-  submit and include `visitorId` + `requestId` in the payload.
-- `client-api.ts` throws a typed error carrying `code` on a non-OK response; pages detect
-  `ALREADY_SUBMITTED` and render the signup message + CTA (`NEXT_PUBLIC_SIGNUP_URL`)
+  submit and include `visitorId` in the payload.
+- `client-api.ts` throws a typed `ApiError` carrying `code` on a non-OK response; pages
+  detect `ALREADY_SUBMITTED` and render the signup message + CTA (`NEXT_PUBLIC_SIGNUP_URL`)
   instead of the generic error toast.
 
 ### Server
 
-- `src/lib/fingerprint-server.ts` — `resolveVisitorId({ requestId, visitorId }): Promise<string | null>`.
-  If `FINGERPRINT_SECRET_KEY` is set and a `requestId` is provided, call the Fingerprint
-  Server API (`https://<region>.api.fpjs.io/events/{requestId}` with `Auth-API-Key`) and
-  return the authoritative `products.identification.data.visitorId`. Otherwise return the
-  client `visitorId`. Returns `null` on any error / missing inputs (fail open).
-- **api-contract**: both submit schemas gain optional `visitorId?: string`,
-  `requestId?: string`.
+- No server-side fingerprint verification (open-source library is client-side only); the
+  route uses `input.visitorId` directly.
+- **api-contract**: both submit schemas gain optional `visitorId?: string`.
 - **storage**:
   - `findAssessmentUserByVisitorId(visitorId): Promise<{ id: number } | undefined>`
   - `findInhouseAssessmentUserByVisitorId(visitorId)`
   - `createAssessmentUser` / `createInhouseAssessmentUser` persist `visitorId` (nullable).
 - **submit routes** (`/api/assessment/submit`, `/api/inhouse-assessment/submit`):
-  1. `const id = await resolveVisitorId(input)`.
-  2. If `id` and an existing user row for that type has it → return
+  1. `const visitorId = input.visitorId ?? null`.
+  2. If `visitorId` and an existing user row for that type has it → return
      `409 { message, code: "ALREADY_SUBMITTED" }`. No report, no rows written.
-  3. Else proceed as today, storing `visitor_id = id` on the user row.
+  3. Else proceed as today, storing `visitor_id = visitorId` on the user row.
 
 ### Data flow
 
 ```
-client: getVisitor() → { visitorId, requestId } | null
-  → POST /api/<type>/submit { user, responses, visitorId?, requestId? }
-server: resolveVisitorId() → id | null
-  if id && findUserByVisitorId(id) → 409 ALREADY_SUBMITTED   (UI → signup message)
-  else create user (visitor_id=id) → scores → Bedrock report → report → lead → 201
+client: getVisitor() → { visitorId } | null
+  → POST /api/<type>/submit { user, responses, visitorId? }
+server: visitorId = input.visitorId ?? null
+  if visitorId && findUserByVisitorId(visitorId) → 409 ALREADY_SUBMITTED   (UI → signup message)
+  else create user (visitor_id=visitorId) → scores → Bedrock report → report → lead → 201
 ```
 
 ### Failure handling
 
-Every fingerprint path fails open: missing keys, network errors, ad-blockers, or a `null`
-id all let the submission through (logged via `console.warn`). The limit only applies when
-a usable id is resolved.
+Fails open: an ad-blocker/error on the client yields no `visitorId`, and the server skips
+the check. The limit only applies when a `visitorId` is present.
 
 ## Schema change (retaind migration)
 
@@ -99,14 +98,13 @@ CREATE INDEX IF NOT EXISTS "inhouse_assessment_users_visitor_id_idx" ON "inhouse
 Landing's `src/lib/db/schema.ts` adds `visitorId: text("visitor_id")` to both user tables
 for ORM typing.
 
-## Env vars (all optional; feature degrades gracefully)
+## Env vars
 
 | Var | Purpose | Default |
 |---|---|---|
-| `NEXT_PUBLIC_FINGERPRINT_API_KEY` | client public key | unset → fail open |
-| `NEXT_PUBLIC_FINGERPRINT_REGION` | `us` / `eu` / `ap` | `us` |
-| `FINGERPRINT_SECRET_KEY` | server verification | unset → trust client id |
 | `NEXT_PUBLIC_SIGNUP_URL` | repeat-user CTA target | `#` |
+
+The fingerprint library needs no key/region/secret (open-source, client-side).
 
 ## Testing
 
