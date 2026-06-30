@@ -1,9 +1,9 @@
 "use client";
-import { motion } from "framer-motion";
 import { Share2, FileText, UploadCloud, Wand2, Target, Video, FileBarChart, ClipboardCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Section, SectionHeader } from "@/components/landing/section";
 import type { Audience } from "@/components/landing/types";
+import { useReveal } from "@/components/landing/use-reveal";
 
 const agencyFeatures = [
   {
@@ -85,6 +85,7 @@ const inhouseFeatures = [
 
 export function FeaturesGrid({ selectedAudience }: { selectedAudience: Audience }) {
   const features = selectedAudience === "inhouse" ? inhouseFeatures : agencyFeatures;
+  const scope = useReveal();
 
   return (
     <Section className="bg-background pt-0">
@@ -99,21 +100,16 @@ export function FeaturesGrid({ selectedAudience }: { selectedAudience: Audience 
           }
         </p>
       </SectionHeader>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={scope}>
         {features.map((feature, idx) => (
           <Card key={idx} className="p-6 hover-elevate" data-testid={`card-feature-${idx}`}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-            >
+            <div data-reveal>
               <div className={`w-11 h-11 rounded-md ${feature.iconBg} flex items-center justify-center mb-5`}>
                 {feature.icon}
               </div>
               <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
-            </motion.div>
+            </div>
           </Card>
         ))}
       </div>
