@@ -19,11 +19,23 @@ import { Pricing } from "@/components/landing/pricing";
 import { Faq } from "@/components/landing/faq";
 import { Portals } from "@/components/landing/portals";
 import { Footer } from "@/components/landing/footer";
+import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import type { Audience } from "@/components/landing/types";
 
 export function LandingPage() {
   const [selectedAudience, setSelectedAudience] = useState<Audience>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useGSAP(
+    () => {
+      if (!selectedAudience) return;
+      // Newly-mounted (or swapped) sections changed document height/positions;
+      // recompute all triggers on the next frame after layout settles.
+      const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+      return () => cancelAnimationFrame(id);
+    },
+    { dependencies: [selectedAudience] }
+  );
 
   return (
     <main className="min-h-screen bg-background font-sans overflow-x-hidden">
