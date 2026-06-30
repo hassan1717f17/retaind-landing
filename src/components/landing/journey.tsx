@@ -1,10 +1,57 @@
 "use client";
+import { useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, ClipboardCheck, Check } from "lucide-react";
 import { Section, SectionHeader, SectionBadge } from "@/components/landing/section";
 import type { Audience } from "@/components/landing/types";
+import { gsap, useGSAP, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
 
 export function Journey({ selectedAudience }: { selectedAudience: Audience }) {
+  const agencyRoot = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(agencyRoot);
+      const cards = q("[data-journey-card]");
+      const line = q("[data-journey-line]");
+      if (!cards.length) return;
+
+      const mm = gsap.matchMedia();
+
+      // Desktop: pin the section and scrub the phases + connector in.
+      mm.add("(min-width: 768px) and " + NO_REDUCED_MOTION, () => {
+        gsap.set(cards, { opacity: 0, y: 40 });
+        gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: agencyRoot.current,
+            start: "top top",
+            end: "+=120%",
+            pin: true,
+            scrub: 0.5,
+          },
+        });
+        tl.to(line, { scaleX: 1, ease: "none", duration: 1 }, 0)
+          .to(cards, { opacity: 1, y: 0, stagger: 0.5, ease: EASE.out, duration: 1 }, 0);
+      });
+
+      // Mobile / reduced-motion: simple non-pinned reveal.
+      mm.add(`(max-width: 767px), (prefers-reduced-motion: reduce)`, () => {
+        gsap.set([cards, line], { clearProps: "all" });
+        gsap.from(cards, {
+          opacity: 0,
+          y: 24,
+          stagger: 0.12,
+          ease: EASE.out,
+          duration: 0.6,
+          scrollTrigger: { trigger: agencyRoot.current, start: "top 80%", once: true },
+        });
+      });
+    },
+    { scope: agencyRoot, dependencies: [selectedAudience] }
+  );
+
   return (
     <>
       {/* Three-Phase Journey - Agency Focus */}
@@ -25,53 +72,52 @@ export function Journey({ selectedAudience }: { selectedAudience: Audience }) {
                 </p>
               </SectionHeader>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 relative">
-                <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-border z-0" />
+              <div ref={agencyRoot} data-journey="agency">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 relative">
+                  <div data-journey-line className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-border z-0" />
 
-                {[
-                  {
-                    step: "01",
-                    title: "Lead Generation",
-                    desc: "Generate qualified leads with intelligent marketing automation across Email and LinkedIn.",
-                    points: ["Client prospecting", "Business case presentation", "Retained placement pitch", "Generate proposals that close deals"]
-                  },
-                  {
-                    step: "02",
-                    title: "Campaign Creation",
-                    desc: "Upload job-spec and let our AI Agent generate compelling job adverts that attract top talent.",
-                    points: ["Compelling copy creation", "Campaign brochure design", "Job advert posting", "Talent attraction"]
-                  },
-                  {
-                    step: "03",
-                    title: "Applicant Assessment",
-                    desc: "Automate benchmarking, interviews, and reporting with AI-powered insights and intelligent video profiling.",
-                    points: ["Automated benchmarking", "AI-powered interviews", "Intelligent video profiling", "Detailed reporting, assessment and analysis"]
-                  }
-                ].map((phase, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="relative z-10 bg-card p-8 rounded-2xl shadow-sm border border-border hover-elevate"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                    data-testid={`card-phase-${idx}`}
-                  >
-                    <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground text-2xl font-bold flex items-center justify-center mb-6 shadow-lg">
-                      {phase.step}
+                  {[
+                    {
+                      step: "01",
+                      title: "Lead Generation",
+                      desc: "Generate qualified leads with intelligent marketing automation across Email and LinkedIn.",
+                      points: ["Client prospecting", "Business case presentation", "Retained placement pitch", "Generate proposals that close deals"]
+                    },
+                    {
+                      step: "02",
+                      title: "Campaign Creation",
+                      desc: "Upload job-spec and let our AI Agent generate compelling job adverts that attract top talent.",
+                      points: ["Compelling copy creation", "Campaign brochure design", "Job advert posting", "Talent attraction"]
+                    },
+                    {
+                      step: "03",
+                      title: "Applicant Assessment",
+                      desc: "Automate benchmarking, interviews, and reporting with AI-powered insights and intelligent video profiling.",
+                      points: ["Automated benchmarking", "AI-powered interviews", "Intelligent video profiling", "Detailed reporting, assessment and analysis"]
+                    }
+                  ].map((phase, idx) => (
+                    <div
+                      key={idx}
+                      data-journey-card
+                      className="relative z-10 bg-card p-8 rounded-2xl shadow-sm border border-border hover-elevate"
+                      data-testid={`card-phase-${idx}`}
+                    >
+                      <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground text-2xl font-bold flex items-center justify-center mb-6 shadow-lg">
+                        {phase.step}
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4">{phase.title}</h3>
+                      <p className="text-muted-foreground mb-6 min-h-[5rem]">{phase.desc}</p>
+                      <ul className="space-y-3">
+                        {phase.points.map((point, pIdx) => (
+                          <li key={pIdx} className="flex items-center gap-3 text-sm font-medium text-foreground">
+                            <div className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">{phase.title}</h3>
-                    <p className="text-muted-foreground mb-6 min-h-[5rem]">{phase.desc}</p>
-                    <ul className="space-y-3">
-                      {phase.points.map((point, pIdx) => (
-                        <li key={pIdx} className="flex items-center gap-3 text-sm font-medium text-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
               </div>
             </Section>
           </motion.div>
