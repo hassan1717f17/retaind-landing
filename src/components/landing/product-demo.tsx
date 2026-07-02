@@ -5,7 +5,7 @@ import { useReveal } from "@/components/landing/use-reveal";
 import type { Audience } from "@/components/landing/types";
 
 const PRODUCT_DEMO_SRC =
-  "https://player.vimeo.com/video/1206376141?title=0&byline=0&portrait=0";
+  "https://player.vimeo.com/video/1203458165?title=0&byline=0&portrait=0";
 const AGENCY_DEMO_SRC =
   "https://player.vimeo.com/video/1206377853?title=0&byline=0&portrait=0";
 
