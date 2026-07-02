@@ -5,6 +5,7 @@ import { Navbar } from "@/components/landing/navbar";
 import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { Hero } from "@/components/landing/hero";
 import { ProductDemo } from "@/components/landing/product-demo";
+import { AgencyDemo } from "@/components/landing/agency-demo";
 import { CalculatorBanner } from "@/components/landing/calculator-banner";
 import { FreeAccess } from "@/components/landing/free-access";
 import { FeaturesGrid } from "@/components/landing/features-grid";
@@ -101,6 +102,9 @@ export function LandingPage() {
         onSelectAudience={chooseAudience}
       />
 
+      {/* Product demo — always visible, right under the hero selection cards */}
+      <ProductDemo />
+
       {/* Bad-hire calculator CTA banner — always visible, links to the tool */}
       <CalculatorBanner />
 
@@ -113,8 +117,8 @@ export function LandingPage() {
       {/* Mid-block: entire section only visible once an audience is selected */}
       {selectedAudience && (
         <div ref={gatedRef} data-audience={selectedAudience}>
-          {/* Product demo — after selection; agency also gets the agency demo beside it */}
-          <ProductDemo selectedAudience={selectedAudience} />
+          {/* Agency demo — self-gates: agency only, single centered video */}
+          <AgencyDemo selectedAudience={selectedAudience} />
 
           {/* Features grid — adapts content by audience, no self-gating */}
           <FeaturesGrid selectedAudience={selectedAudience} />

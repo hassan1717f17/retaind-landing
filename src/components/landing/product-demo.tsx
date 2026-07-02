@@ -1,53 +1,76 @@
 "use client";
 
+import { useState } from "react";
+import { Play } from "lucide-react";
 import { Section, SectionHeader, SectionBadge } from "@/components/landing/section";
 import { useReveal } from "@/components/landing/use-reveal";
-import type { Audience } from "@/components/landing/types";
 
 const PRODUCT_DEMO_SRC =
   "https://player.vimeo.com/video/1203458165?title=0&byline=0&portrait=0";
-const AGENCY_DEMO_SRC =
-  "https://player.vimeo.com/video/1206377853?title=0&byline=0&portrait=0";
+const PRODUCT_DEMO_POSTER = "/assets/product-demo-poster.jpg";
 
-function VideoFrame({
+/**
+ * Shared framed 16:9 Vimeo embed. With a `poster`, shows a click-to-play
+ * thumbnail first and only loads the (autoplaying) iframe on click.
+ */
+export function DemoVideoFrame({
   src,
   title,
-  label,
   testId,
+  poster,
 }: {
   src: string;
   title: string;
-  label?: string;
   testId: string;
+  poster?: string;
 }) {
+  const [playing, setPlaying] = useState(false);
+  const iframeSrc = playing
+    ? `${src}${src.includes("?") ? "&" : "?"}autoplay=1`
+    : src;
+
   return (
-    <div data-reveal>
-      {label && (
-        <p className="text-sm font-semibold text-muted-foreground mb-3 text-center">
-          {label}
-        </p>
-      )}
-      <div
-        className="relative rounded-xl shadow-2xl overflow-hidden border border-border/50 bg-background"
-        data-testid={testId}
-      >
-        <div className="relative w-full aspect-video bg-black">
+    <div
+      className="relative rounded-xl shadow-2xl overflow-hidden border border-border/50 bg-background"
+      data-testid={testId}
+    >
+      <div className="relative w-full aspect-video bg-black">
+        {poster && !playing ? (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="group absolute inset-0 w-full h-full"
+            aria-label={`Play ${title}`}
+            data-testid={`${testId}-play`}
+          >
+            <img
+              src={poster}
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute inset-0 bg-black/5 transition-colors group-hover:bg-black/15" />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full bg-background/90 shadow-xl transition-transform group-hover:scale-110">
+                <Play className="ml-1 h-7 w-7 md:h-8 md:w-8 fill-foreground text-foreground" />
+              </span>
+            </span>
+          </button>
+        ) : (
           <iframe
-            src={src}
+            src={iframeSrc}
             className="absolute inset-0 w-full h-full"
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
             title={title}
           />
-        </div>
+        )}
       </div>
     </div>
   );
 }
 
-export function ProductDemo({ selectedAudience }: { selectedAudience: Audience }) {
+export function ProductDemo() {
   const scope = useReveal<HTMLDivElement>();
-  const showAgencyDemo = selectedAudience === "agency";
 
   return (
     <div ref={scope}>
@@ -58,36 +81,19 @@ export function ProductDemo({ selectedAudience }: { selectedAudience: Audience }
             See Retaind in action
           </h2>
           <p className="text-lg text-muted-foreground" data-reveal>
-            {showAgencyDemo
-              ? "A tour of the platform, plus a walkthrough built for agency recruiters."
-              : "A quick walkthrough of the platform — from role brief to evidence-based, behaviourally-benchmarked shortlist."}
+            A quick walkthrough of the platform — from role brief to evidence-based,
+            behaviourally-benchmarked shortlist.
           </p>
         </SectionHeader>
 
-        {showAgencyDemo ? (
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <VideoFrame
-              src={PRODUCT_DEMO_SRC}
-              title="Retaind product demo"
-              label="Platform demo"
-              testId="product-demo-video"
-            />
-            <VideoFrame
-              src={AGENCY_DEMO_SRC}
-              title="Retaind agency demo"
-              label="For agency recruiters"
-              testId="agency-demo-video"
-            />
-          </div>
-        ) : (
-          <div className="max-w-5xl mx-auto">
-            <VideoFrame
-              src={PRODUCT_DEMO_SRC}
-              title="Retaind product demo"
-              testId="product-demo-video"
-            />
-          </div>
-        )}
+        <div data-reveal className="max-w-5xl mx-auto">
+          <DemoVideoFrame
+            src={PRODUCT_DEMO_SRC}
+            title="Retaind product demo"
+            testId="product-demo-video"
+            poster={PRODUCT_DEMO_POSTER}
+          />
+        </div>
       </Section>
     </div>
   );
