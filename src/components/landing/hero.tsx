@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { Briefcase, Building2, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Briefcase, Building2, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { gsap, useGSAP, DUR, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
 import type { Audience } from "./types";
@@ -20,6 +20,7 @@ const HEADLINE_LINES = [
 
 export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
   const root = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useGSAP(
     () => {
@@ -175,21 +176,67 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
           </p>
         </div>
 
+        {/* Prompt that invites a choice */}
+        <div className="max-w-4xl mx-auto mt-14 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+            Get started
+          </p>
+          <h3 className="mt-2 text-2xl md:text-3xl font-bold">
+            Which best describes you?
+          </h3>
+          <p className="mt-2 text-muted-foreground">
+            Pick one to unlock a walkthrough tailored to how you hire.
+          </p>
+        </div>
+
         {/* Audience Segmentation Cards beneath video */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-8 mb-4">
           {/* Agency Card */}
+          <motion.div
+            animate={
+              reduceMotion || selectedAudience === "agency"
+                ? { y: 0 }
+                : { y: [0, -8, 0] }
+            }
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            className="will-change-transform"
+          >
           <Card
             data-audience="agency"
+            role="button"
+            tabIndex={0}
+            onClick={() => onSelectAudience("agency")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onSelectAudience("agency");
+              }
+            }}
             className={cn(
-              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-audience/40",
-              selectedAudience === "agency" &&
-                "border-audience ring-2 ring-audience shadow-xl -translate-y-1.5"
+              "group relative cursor-pointer overflow-hidden p-8 text-left shadow-lg transition-all duration-300",
+              "hover:-translate-y-1.5 hover:shadow-2xl hover:border-audience",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-audience focus-visible:ring-offset-2",
+              selectedAudience === "agency"
+                ? "border-audience ring-2 ring-audience shadow-2xl -translate-y-1.5"
+                : "border-border"
             )}
             data-testid="card-hero-agency"
           >
+            {/* accent bar that sweeps in on hover / select */}
+            <span
+              className={cn(
+                "pointer-events-none absolute inset-x-0 top-0 h-1 origin-left bg-audience transition-transform duration-300",
+                selectedAudience === "agency"
+                  ? "scale-x-100"
+                  : "scale-x-0 group-hover:scale-x-100"
+              )}
+            />
+            {/* soft corner glow */}
+            <span className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-audience/10 blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                <Briefcase className="w-5 h-5 text-foreground" />
+              <div className="w-12 h-12 rounded-2xl bg-audience-soft text-audience flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                <Briefcase className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold">Agency Recruiters</h3>
             </div>
@@ -197,30 +244,67 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
               Win more retained campaigns. Deliver stronger shortlists. Build
               long-term client trust.
             </p>
-            <Button
-              size="lg"
-              variant="default"
-              className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
-              onClick={() => onSelectAudience("agency")}
+            <span
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-audience px-6 py-3 font-semibold text-audience-foreground shadow-lg shadow-audience/30 transition-transform duration-300 group-hover:scale-[1.02]"
               data-testid="button-hero-agency"
             >
               For Agency Recruiters
-            </Button>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
           </Card>
+          </motion.div>
 
           {/* In-House Card */}
+          <motion.div
+            animate={
+              reduceMotion || selectedAudience === "inhouse"
+                ? { y: 0 }
+                : { y: [0, -8, 0] }
+            }
+            transition={{
+              duration: 3.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.9,
+            }}
+            className="will-change-transform"
+          >
           <Card
             data-audience="inhouse"
+            role="button"
+            tabIndex={0}
+            onClick={() => onSelectAudience("inhouse")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onSelectAudience("inhouse");
+              }
+            }}
             className={cn(
-              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-audience/40",
-              selectedAudience === "inhouse" &&
-                "border-audience ring-2 ring-audience shadow-xl -translate-y-1.5"
+              "group relative cursor-pointer overflow-hidden p-8 text-left shadow-lg transition-all duration-300",
+              "hover:-translate-y-1.5 hover:shadow-2xl hover:border-audience",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-audience focus-visible:ring-offset-2",
+              selectedAudience === "inhouse"
+                ? "border-audience ring-2 ring-audience shadow-2xl -translate-y-1.5"
+                : "border-border"
             )}
             data-testid="card-hero-inhouse"
           >
+            {/* accent bar that sweeps in on hover / select */}
+            <span
+              className={cn(
+                "pointer-events-none absolute inset-x-0 top-0 h-1 origin-left bg-audience transition-transform duration-300",
+                selectedAudience === "inhouse"
+                  ? "scale-x-100"
+                  : "scale-x-0 group-hover:scale-x-100"
+              )}
+            />
+            {/* soft corner glow */}
+            <span className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-audience/10 blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-foreground" />
+              <div className="w-12 h-12 rounded-2xl bg-audience-soft text-audience flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                <Building2 className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold">In-House Recruitment Teams</h3>
             </div>
@@ -228,16 +312,15 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
               Make better hiring decisions with evidence, not instinct - and
               reduce the risk of costly mis-hires.
             </p>
-            <Button
-              size="lg"
-              variant="default"
-              className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
-              onClick={() => onSelectAudience("inhouse")}
+            <span
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-audience px-6 py-3 font-semibold text-audience-foreground shadow-lg shadow-audience/30 transition-transform duration-300 group-hover:scale-[1.02]"
               data-testid="button-hero-inhouse"
             >
               For In-House Teams
-            </Button>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
           </Card>
+          </motion.div>
         </div>
       </div>
     </section>
