@@ -105,7 +105,7 @@ export function Navbar({
           <Button asChild variant="default" data-testid="button-get-started-nav">
             <a href={APP_URL}>Get Started</a>
           </Button>
-          <DropdownMenu>
+          <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="gap-2" data-testid="button-login-nav">
                 <LogIn className="w-4 h-4" />
@@ -114,20 +114,23 @@ export function Navbar({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" data-testid="dropdown-login-menu">
-              <DropdownMenuItem disabled data-testid="dropdown-item-agency">
-                <Briefcase className="w-4 h-4 mr-2" />
-                Agency
-                <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
+              <DropdownMenuItem asChild data-testid="dropdown-item-agency">
+                <a href={APP_URL}>
+                  <Briefcase className="w-4 h-4 mr-2" />
+                  Agency
+                </a>
               </DropdownMenuItem>
-              <DropdownMenuItem disabled data-testid="dropdown-item-inhouse">
-                <Building2 className="w-4 h-4 mr-2" />
-                In-House
-                <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
+              <DropdownMenuItem asChild data-testid="dropdown-item-inhouse">
+                <a href={APP_URL}>
+                  <Building2 className="w-4 h-4 mr-2" />
+                  In-House
+                </a>
               </DropdownMenuItem>
-              <DropdownMenuItem disabled data-testid="dropdown-item-candidate">
-                <Users className="w-4 h-4 mr-2" />
-                Candidate
-                <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
+              <DropdownMenuItem asChild data-testid="dropdown-item-candidate">
+                <a href={APP_URL}>
+                  <Users className="w-4 h-4 mr-2" />
+                  Candidate
+                </a>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -184,7 +187,7 @@ export function Navbar({
             <Button asChild className="w-full" variant="default" data-testid="button-get-started-mobile">
               <a href={APP_URL}>Get Started</a>
             </Button>
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="w-full gap-2" data-testid="button-login-mobile">
                   <LogIn className="w-4 h-4" />
@@ -193,20 +196,23 @@ export function Navbar({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="center" className="w-full" data-testid="dropdown-login-menu-mobile">
-                <DropdownMenuItem disabled data-testid="dropdown-item-agency-mobile">
-                  <Briefcase className="w-4 h-4 mr-2" />
-                  Agency
-                  <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
+                <DropdownMenuItem asChild data-testid="dropdown-item-agency-mobile">
+                  <a href={APP_URL}>
+                    <Briefcase className="w-4 h-4 mr-2" />
+                    Agency
+                  </a>
                 </DropdownMenuItem>
-                <DropdownMenuItem disabled data-testid="dropdown-item-inhouse-mobile">
-                  <Building2 className="w-4 h-4 mr-2" />
-                  In-House
-                  <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
+                <DropdownMenuItem asChild data-testid="dropdown-item-inhouse-mobile">
+                  <a href={APP_URL}>
+                    <Building2 className="w-4 h-4 mr-2" />
+                    In-House
+                  </a>
                 </DropdownMenuItem>
-                <DropdownMenuItem disabled data-testid="dropdown-item-candidate-mobile">
-                  <Users className="w-4 h-4 mr-2" />
-                  Candidate
-                  <span className="ml-auto text-xs text-muted-foreground">Coming soon</span>
+                <DropdownMenuItem asChild data-testid="dropdown-item-candidate-mobile">
+                  <a href={APP_URL}>
+                    <Users className="w-4 h-4 mr-2" />
+                    Candidate
+                  </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
