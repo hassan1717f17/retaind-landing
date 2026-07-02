@@ -13,7 +13,7 @@ export function FairAssessment({ selectedAudience }: { selectedAudience: Audienc
           Fair &amp; Unbiased
         </div>
         <p data-reveal className="text-xl leading-relaxed text-background/80 mb-6" data-testid="text-fair-assessment-1">
-          The <span className="text-background">ret</span><span className="font-extrabold">AI</span><span className="text-background">nd</span> platform does not inform recruiters who to hire or not to hire. We simply use established assessments and psychology to identify positive correlations and potential areas of conflict within each candidate, for the recruiter to examine further.
+          The <span className="text-background">Retaind</span> platform does not inform recruiters who to hire or not to hire. We simply use established assessments and psychology to identify positive correlations and potential areas of conflict within each candidate, for the recruiter to examine further.
         </p>
         <p data-reveal className="text-xl leading-relaxed text-background/80" data-testid="text-fair-assessment-2">
           All candidates are assessed using exactly the same methodology and process, so that a fairer, non-bias evaluation is applied to each and every applicant.

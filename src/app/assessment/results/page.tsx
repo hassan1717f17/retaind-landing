@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { APP_URL } from "@/lib/app-url";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import {
@@ -550,13 +551,13 @@ export default function AssessmentResults() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
+                asChild
                 size="lg"
                 variant="secondary"
                 className="gap-2"
-                disabled
                 data-testid="button-register"
               >
-                Coming Soon
+                <a href={APP_URL}>Get Started</a>
               </Button>
             </div>
           </Card>

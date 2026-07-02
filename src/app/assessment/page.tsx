@@ -4,6 +4,8 @@ import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { BackButton } from "@/components/back-button";
+import { APP_URL } from "@/lib/app-url";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
@@ -149,8 +151,8 @@ export default function Assessment() {
             It looks like you&apos;ve already used the free assessment on this device.
             Sign up for a free Retaind account to access your reports and more.
           </p>
-          <Button className="w-full" disabled data-testid="button-blocked-signup">
-            Coming Soon
+          <Button asChild className="w-full" data-testid="button-blocked-signup">
+            <a href={APP_URL}>Get Started</a>
           </Button>
         </Card>
       </div>
@@ -160,6 +162,7 @@ export default function Assessment() {
   return (
     <div className="min-h-screen bg-muted">
       <div className="max-w-3xl mx-auto px-4 py-8">
+        <BackButton className="mb-6" />
         <div className="text-center mb-8">
           <h1
             className="text-3xl md:text-4xl font-bold text-foreground mb-2"

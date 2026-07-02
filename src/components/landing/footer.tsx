@@ -41,7 +41,7 @@ export function Footer({ selectedAudience }: Props) {
               : "Ready to Transform Your Recruitment?"}
           </h2>
           <p className="text-lg text-background/70 mb-8">
-            Free registration &amp; Set-Up. Agency Recruiters - only pay when you secure a retained campaign.
+            Free registration &amp; Set-Up.
           </p>
           <Button size="lg" variant="secondary" className="rounded-full" data-testid="button-start-trial-footer">
             Secure My Free Account
@@ -55,9 +55,7 @@ export function Footer({ selectedAudience }: Props) {
 
         <div className="border-t border-background/20 pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="font-heading font-bold text-2xl tracking-tight">
-            <span className="text-background">ret</span>
-            <span className="text-background font-extrabold">AI</span>
-            <span className="text-background">nd.ai</span>
+            <span className="text-background">Retaind</span>
           </div>
 
           <form onSubmit={handleSubscribe} className="flex gap-2 w-full max-w-sm">

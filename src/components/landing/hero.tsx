@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Briefcase, Building2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { gsap, useGSAP, DUR, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
 import type { Audience } from "./types";
 
@@ -19,10 +20,6 @@ const HEADLINE_LINES = [
 
 export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
   const root = useRef<HTMLElement>(null);
-
-  const scrollToFeatures = () => {
-    document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   useGSAP(
     () => {
@@ -129,9 +126,7 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
             data-testid="text-hero-value"
           >
             Built around proven hiring-for-retention methodology,{" "}
-            <span className="text-foreground font-semibold">ret</span>
-            <span className="text-foreground font-extrabold">AI</span>
-            <span className="text-foreground font-semibold">nd.ai</span>{" "}
+            <span className="text-foreground font-semibold">Retaind</span>{" "}
             combines purpose-built AI agents,
             <br className="hidden md:inline" />
             behavioural evaluation, and structured workflows to turn a complex
@@ -141,101 +136,16 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
             easily adopt.
           </p>
 
-          {/* 3. Audience Segmentation Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-14">
-            {/* Agency Card */}
-            <Card
-              className="p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30"
-              data-testid="card-hero-agency"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                  <Briefcase className="w-5 h-5 text-foreground" />
-                </div>
-                <h3 className="text-xl font-bold">Agency Recruiters</h3>
-              </div>
-              <p className="text-muted-foreground mb-6">
-                Win more retained campaigns. Deliver stronger shortlists. Build
-                long-term client trust.
-              </p>
-              <Button
-                size="lg"
-                variant="default"
-                className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
-                onClick={() => {
-                  onSelectAudience("agency");
-                  scrollToFeatures();
-                }}
-                data-testid="button-hero-agency"
-              >
-                For Agency Recruiters
-              </Button>
-            </Card>
-
-            {/* In-House Card */}
-            <Card
-              className="p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30"
-              data-testid="card-hero-inhouse"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                  <Building2 className="w-5 h-5 text-foreground" />
-                </div>
-                <h3 className="text-xl font-bold">In-House Recruitment Teams</h3>
-              </div>
-              <p className="text-muted-foreground mb-6">
-                Make better hiring decisions with evidence, not instinct - and
-                reduce the risk of costly mis-hires.
-              </p>
-              <Button
-                size="lg"
-                variant="default"
-                className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
-                onClick={() => {
-                  onSelectAudience("inhouse");
-                  scrollToFeatures();
-                }}
-                data-testid="button-hero-inhouse"
-              >
-                For In-House Teams
-              </Button>
-            </Card>
-          </div>
-
-          {/* Sub-Headline (Outcome-Focused) — post-it image, now supporting the CTA */}
-          <div
-            className="flex justify-center mb-12 max-w-4xl mx-auto"
-            data-testid="img-hero-postit"
-          >
-            <img
-              src="/assets/image_1773080881842.png"
-              alt="Reduce mis-hire risk by 80%, Improve early ROI &amp; performance, Hire the best talent"
-              className="w-full h-auto object-cover rounded-xl"
-            />
-          </div>
-
-          {/* 5. Adoption & Risk-Reduction Statement */}
-          <div
-            className="text-sm text-muted-foreground/70 max-w-2xl mx-auto mb-16"
-            data-testid="text-hero-plugin"
-          >
-            <p className="mb-1">No system changes required.</p>
-            <p>
-              Works autonomously or seamlessly alongside your existing CRM or
-              ATS as a smart plug-in.
-            </p>
-          </div>
-
-          {/* Recruiting For Retention */}
+          {/* Recruiting For Retention — title now sits on top of the video */}
           <p
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground text-center mb-16"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground text-center mb-10"
             data-testid="text-recruiting-retention"
           >
             Recruiting For Retention
           </p>
         </div>
 
-        {/* Video Placeholder */}
+        {/* Video Placeholder — moved up into the former image slot */}
         <div
           className="relative max-w-5xl mx-auto rounded-xl shadow-2xl overflow-hidden border border-border/50 bg-background"
           data-testid="video-placeholder"
@@ -253,34 +163,79 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
           </div>
         </div>
 
-        {/* Second Audience Segmentation beneath video */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto mt-12 mb-4">
-          <Button
-            size="lg"
-            variant={selectedAudience === "agency" ? "default" : "outline"}
-            onClick={() => {
-              onSelectAudience("agency");
-              scrollToFeatures();
-            }}
-            className="rounded-full gap-2 transition-transform hover:scale-[1.02] active:scale-95"
-            data-testid="button-audience-agency"
+        {/* Adoption & Risk-Reduction Statement — image sub-text, now below the video */}
+        <div
+          className="text-sm text-muted-foreground/70 max-w-2xl mx-auto mt-8"
+          data-testid="text-hero-plugin"
+        >
+          <p className="mb-1">No system changes required.</p>
+          <p>
+            Works autonomously or seamlessly alongside your existing CRM or
+            ATS as a smart plug-in.
+          </p>
+        </div>
+
+        {/* Audience Segmentation Cards beneath video */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12 mb-4">
+          {/* Agency Card */}
+          <Card
+            className={cn(
+              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30",
+              selectedAudience === "agency" &&
+                "border-foreground ring-2 ring-foreground shadow-xl -translate-y-1.5"
+            )}
+            data-testid="card-hero-agency"
           >
-            <Briefcase className="w-5 h-5" />
-            Agency Recruiter
-          </Button>
-          <Button
-            size="lg"
-            variant={selectedAudience === "inhouse" ? "default" : "outline"}
-            onClick={() => {
-              onSelectAudience("inhouse");
-              scrollToFeatures();
-            }}
-            className="rounded-full gap-2 transition-transform hover:scale-[1.02] active:scale-95"
-            data-testid="button-audience-inhouse"
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+                <Briefcase className="w-5 h-5 text-foreground" />
+              </div>
+              <h3 className="text-xl font-bold">Agency Recruiters</h3>
+            </div>
+            <p className="text-muted-foreground mb-6">
+              Win more retained campaigns. Deliver stronger shortlists. Build
+              long-term client trust.
+            </p>
+            <Button
+              size="lg"
+              variant="default"
+              className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
+              onClick={() => onSelectAudience("agency")}
+              data-testid="button-hero-agency"
+            >
+              For Agency Recruiters
+            </Button>
+          </Card>
+
+          {/* In-House Card */}
+          <Card
+            className={cn(
+              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30",
+              selectedAudience === "inhouse" &&
+                "border-foreground ring-2 ring-foreground shadow-xl -translate-y-1.5"
+            )}
+            data-testid="card-hero-inhouse"
           >
-            <Building2 className="w-5 h-5" />
-            In-House Team
-          </Button>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+                <Building2 className="w-5 h-5 text-foreground" />
+              </div>
+              <h3 className="text-xl font-bold">In-House Recruitment Teams</h3>
+            </div>
+            <p className="text-muted-foreground mb-6">
+              Make better hiring decisions with evidence, not instinct - and
+              reduce the risk of costly mis-hires.
+            </p>
+            <Button
+              size="lg"
+              variant="default"
+              className="w-full rounded-full transition-transform hover:scale-[1.02] active:scale-95"
+              onClick={() => onSelectAudience("inhouse")}
+              data-testid="button-hero-inhouse"
+            >
+              For In-House Teams
+            </Button>
+          </Card>
         </div>
       </div>
     </section>

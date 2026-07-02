@@ -164,7 +164,7 @@ export function Pricing({ selectedAudience }: Props) {
   const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("monthly");
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence initial={false} mode="wait">
       {(selectedAudience === "agency" || selectedAudience === null) && (
         <motion.div
           key="agency-pricing"
@@ -172,24 +172,24 @@ export function Pricing({ selectedAudience }: Props) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Section id="pricing" className="bg-foreground text-background">
-            <SectionHeader className="text-background">
+          <Section id="pricing">
+            <SectionHeader>
               <SectionBadge>Pricing</SectionBadge>
-              <h2 className="text-4xl mb-6 text-background">Flexible Pricing Options</h2>
-              <p className="text-lg text-background/70">
+              <h2 className="text-4xl mb-6">Flexible Pricing Options</h2>
+              <p className="text-lg text-muted-foreground">
                 Choose the services that fit your recruitment needs
               </p>
             </SectionHeader>
 
             {/* Pricing Toggle */}
             <div className="flex justify-center mb-12">
-              <div className="inline-flex bg-background/10 rounded-full p-1" data-testid="toggle-pricing-type">
+              <div className="inline-flex bg-muted rounded-full p-1" data-testid="toggle-pricing-type">
                 <button
                   onClick={() => setAgencyPricingTab("retaind")}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
                     agencyPricingTab === "retaind"
                       ? "bg-primary text-primary-foreground shadow-lg"
-                      : "text-muted-foreground hover:text-background"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                   data-testid="button-pricing-retaind"
                 >
@@ -200,7 +200,7 @@ export function Pricing({ selectedAudience }: Props) {
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
                     agencyPricingTab === "marketing"
                       ? "bg-primary text-primary-foreground shadow-lg"
-                      : "text-muted-foreground hover:text-background"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                   data-testid="button-pricing-marketing"
                 >
@@ -211,30 +211,28 @@ export function Pricing({ selectedAudience }: Props) {
 
             {/* Retaind Pricing */}
             {agencyPricingTab === "retaind" && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 items-stretch">
                 {agencyRetaindPlans.map((plan, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                    className={`relative p-8 rounded-2xl border ${
+                    initial={false}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`relative flex flex-col p-8 rounded-2xl bg-card text-card-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                       plan.subscription
-                        ? "bg-secondary text-card-foreground ring-2 ring-primary transform scale-105"
-                        : "bg-card text-card-foreground"
+                        ? "border-2 border-foreground shadow-xl lg:scale-[1.02]"
+                        : "border border-border shadow-sm"
                     }`}
                     data-testid={`card-pricing-retaind-${idx}`}
                   >
                     {plan.subscription && (
                       <div className="flex justify-center mb-4 -mt-2">
-                        <div className="inline-flex bg-background/10 rounded-full p-0.5" data-testid="toggle-billing-agency">
+                        <div className="inline-flex bg-foreground/10 rounded-full p-0.5" data-testid="toggle-billing-agency">
                           <button
                             onClick={() => setBillingPeriod("monthly")}
                             className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                               billingPeriod === "monthly"
-                                ? "bg-background text-foreground shadow"
-                                : "text-background/70"
+                                ? "bg-foreground text-background shadow"
+                                : "text-card-foreground/60"
                             }`}
                             data-testid="button-billing-monthly"
                           >
@@ -244,8 +242,8 @@ export function Pricing({ selectedAudience }: Props) {
                             onClick={() => setBillingPeriod("annual")}
                             className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                               billingPeriod === "annual"
-                                ? "bg-background text-foreground shadow"
-                                : "text-background/70"
+                                ? "bg-foreground text-background shadow"
+                                : "text-card-foreground/60"
                             }`}
                             data-testid="button-billing-annual"
                           >
@@ -263,7 +261,7 @@ export function Pricing({ selectedAudience }: Props) {
                             : plan.monthlyPrice
                           : plan.price}
                       </span>
-                      <span className="text-background/70">
+                      <span className="text-card-foreground/60">
                         /{plan.subscription
                           ? billingPeriod === "annual"
                             ? plan.annualPeriod
@@ -272,7 +270,7 @@ export function Pricing({ selectedAudience }: Props) {
                         + VAT
                       </span>
                     </div>
-                    <ul className="space-y-4 mb-8">
+                    <ul className="space-y-4 mb-8 flex-1">
                       {plan.features.map((f, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm">
                           <Check className="w-4 h-4 mt-1 shrink-0 text-foreground opacity-70" />
@@ -281,8 +279,9 @@ export function Pricing({ selectedAudience }: Props) {
                       ))}
                     </ul>
                     <Button
-                      variant={plan.subscription ? "secondary" : "ghost"}
-                      className="w-full"
+                      variant="default"
+                      size="lg"
+                      className="w-full rounded-full"
                       data-testid={`button-pricing-retaind-${idx}`}
                     >
                       Get Started
@@ -294,19 +293,13 @@ export function Pricing({ selectedAudience }: Props) {
 
             {/* Marketing Pricing */}
             {agencyPricingTab === "marketing" && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 items-stretch">
                 {agencyMarketingPlans.map((plan, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                    className={`relative p-8 rounded-2xl border ${
-                      plan.highlight
-                        ? "bg-secondary text-card-foreground ring-2 ring-primary transform scale-105"
-                        : "bg-card text-card-foreground"
-                    }`}
+                    initial={false}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="relative flex flex-col p-8 rounded-2xl bg-card text-card-foreground border border-border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     data-testid={`card-pricing-marketing-${idx}`}
                   >
                     {plan.highlight && (
@@ -317,9 +310,9 @@ export function Pricing({ selectedAudience }: Props) {
                     <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                     <div className="flex items-baseline gap-1 mb-6">
                       <span className="text-4xl font-bold">{plan.price}</span>
-                      <span className="text-background/70">/{plan.period} + VAT</span>
+                      <span className="text-card-foreground/60">/{plan.period} + VAT</span>
                     </div>
-                    <ul className="space-y-4 mb-8">
+                    <ul className="space-y-4 mb-8 flex-1">
                       {plan.features.map((f, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm">
                           <Check className="w-4 h-4 mt-1 shrink-0 text-foreground opacity-70" />
@@ -328,8 +321,9 @@ export function Pricing({ selectedAudience }: Props) {
                       ))}
                     </ul>
                     <Button
-                      variant={plan.highlight ? "secondary" : "ghost"}
-                      className="w-full"
+                      variant="default"
+                      size="lg"
+                      className="w-full rounded-full"
                       data-testid={`button-pricing-marketing-${idx}`}
                     >
                       Get Started
@@ -339,7 +333,7 @@ export function Pricing({ selectedAudience }: Props) {
               </div>
             )}
 
-            <p className="text-center text-background/60 italic mt-12" data-testid="text-custom-packages-agency">
+            <p className="text-center text-muted-foreground italic mt-12" data-testid="text-custom-packages-agency">
               Need something different? Contact us for custom packages
             </p>
           </Section>
@@ -353,38 +347,36 @@ export function Pricing({ selectedAudience }: Props) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Section id="pricing" className="bg-foreground text-background">
-            <SectionHeader className="text-background">
+          <Section id="pricing">
+            <SectionHeader>
               <SectionBadge>Pricing</SectionBadge>
-              <h2 className="text-4xl mb-6 text-background">Simple, Transparent Pricing</h2>
-              <p className="text-lg text-background/70">
+              <h2 className="text-4xl mb-6">Simple, Transparent Pricing</h2>
+              <p className="text-lg text-muted-foreground">
                 Pay only for the campaigns you run. No hidden fees.
               </p>
             </SectionHeader>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 items-stretch">
               {inhousePlans.map((plan, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`relative p-8 rounded-2xl border ${
+                  initial={false}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`relative flex flex-col p-8 rounded-2xl bg-card text-card-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                     plan.subscription
-                      ? "bg-secondary text-card-foreground ring-2 ring-primary transform scale-105"
-                      : "bg-card text-card-foreground"
+                      ? "border-2 border-foreground shadow-xl lg:scale-[1.02]"
+                      : "border border-border shadow-sm"
                   }`}
                 >
                   {plan.subscription && (
                     <div className="flex justify-center mb-4 -mt-2">
-                      <div className="inline-flex bg-background/10 rounded-full p-0.5" data-testid="toggle-billing-inhouse">
+                      <div className="inline-flex bg-foreground/10 rounded-full p-0.5" data-testid="toggle-billing-inhouse">
                         <button
                           onClick={() => setBillingPeriod("monthly")}
                           className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                             billingPeriod === "monthly"
-                              ? "bg-background text-foreground shadow"
-                              : "text-background/70"
+                              ? "bg-foreground text-background shadow"
+                              : "text-card-foreground/60"
                           }`}
                         >
                           Monthly
@@ -393,8 +385,8 @@ export function Pricing({ selectedAudience }: Props) {
                           onClick={() => setBillingPeriod("annual")}
                           className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                             billingPeriod === "annual"
-                              ? "bg-background text-foreground shadow"
-                              : "text-background/70"
+                              ? "bg-foreground text-background shadow"
+                              : "text-card-foreground/60"
                           }`}
                         >
                           Annual
@@ -411,7 +403,7 @@ export function Pricing({ selectedAudience }: Props) {
                           : plan.monthlyPrice
                         : plan.price}
                     </span>
-                    <span className="text-background/70">
+                    <span className="text-card-foreground/60">
                       /{plan.subscription
                         ? billingPeriod === "annual"
                           ? plan.annualPeriod
@@ -420,7 +412,7 @@ export function Pricing({ selectedAudience }: Props) {
                       + VAT
                     </span>
                   </div>
-                  <ul className="space-y-4 mb-8">
+                  <ul className="space-y-4 mb-8 flex-1">
                     {plan.features.map((f, i) => (
                       <li key={i} className="flex items-start gap-3 text-sm">
                         <Check className="w-4 h-4 mt-1 shrink-0 text-foreground opacity-70" />
@@ -429,8 +421,9 @@ export function Pricing({ selectedAudience }: Props) {
                     ))}
                   </ul>
                   <Button
-                    variant={plan.subscription ? "secondary" : "ghost"}
-                    className="w-full"
+                    variant="default"
+                    size="lg"
+                    className="w-full rounded-full"
                     data-testid={`button-pricing-inhouse-${idx}`}
                   >
                     Get Started
@@ -439,7 +432,7 @@ export function Pricing({ selectedAudience }: Props) {
               ))}
             </div>
 
-            <p className="text-center text-background/60 italic mt-12" data-testid="text-custom-packages-inhouse">
+            <p className="text-center text-muted-foreground italic mt-12" data-testid="text-custom-packages-inhouse">
               Need something different? Contact us for custom packages
             </p>
           </Section>

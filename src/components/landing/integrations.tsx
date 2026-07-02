@@ -53,9 +53,7 @@ export function Integrations({ selectedAudience }: { selectedAudience: Audience 
         className="text-center text-muted-foreground italic mt-8 max-w-2xl mx-auto"
         data-testid="text-integration-strapline"
       >
-        <span className="text-foreground">ret</span>
-        <span className="text-foreground font-extrabold">AI</span>
-        <span className="text-foreground">nd</span> is designed to operate autonomously. However, integrations to CRM and ATS systems are available to users under subscription.
+        <span className="text-foreground">Retaind</span> is designed to operate autonomously. However, integrations to CRM and ATS systems are available to users under subscription.
       </p>
     </Section>
   );

@@ -38,11 +38,7 @@ export function AssessmentFooter() {
   return (
     <footer className="py-8 bg-foreground text-center">
       <div className="max-w-7xl mx-auto px-4">
-        <img
-          src="/assets/Retaind_Logo_with_strapline_1769251859256.png"
-          alt="Retaind.ai"
-          className="h-6 mx-auto mb-4 brightness-200"
-        />
+        <div className="font-bold tracking-tight text-2xl text-background mb-4">Retaind</div>
         <div className="flex items-center justify-center gap-6 text-sm text-background/50">
           <Link href="/privacy" className="hover:text-background transition-colors">
             Privacy

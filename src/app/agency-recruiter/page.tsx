@@ -15,6 +15,7 @@ import {
   Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BackButton } from "@/components/back-button";
 import { FloatingBubble, AssessmentFooter } from "@/features/assessment/assessment-landing-shared";
 
 export default function AgencyRecruiterPage() {
@@ -23,15 +24,12 @@ export default function AgencyRecruiterPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/">
-              <img
-                src="/assets/Retaind_Logo_with_strapline_1769251859256.png"
-                alt="Retaind.ai"
-                className="h-8 cursor-pointer"
-                data-testid="img-agency-landing-logo"
-              />
+            <Link href="/" className="flex flex-col items-start" data-testid="link-agency-landing-logo">
+              <span className="font-bold tracking-tight text-2xl text-foreground">Retaind</span>
+              <span className="text-xs text-muted-foreground italic -mt-1">Recruiting for Retention</span>
             </Link>
             <div className="flex items-center gap-3">
+              <BackButton />
               <Link href="/choose-assessment">
                 <Button variant="ghost" className="text-sm" data-testid="link-agency-landing-paths">
                   All Assessments

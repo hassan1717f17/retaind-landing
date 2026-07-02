@@ -1,0 +1,1 @@
+export { BadHireCalculatorIsland } from "./BadHireCalculatorIsland";

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Menu, X, LogIn, ChevronDown, Briefcase, Building2, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { APP_URL } from "@/lib/app-url";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,14 +17,18 @@ import type { Audience } from "./types";
 const navLinks = [
   { name: "Features", href: "#features" },
   { name: "Journey", href: "#journey" },
-  { name: "Pricing", href: "#pricing" },
+  { name: "Bad Hire Calculator", href: "/bad-hire-calculator" },
+  { name: "Pricing", href: "/pricing" },
 ];
 
 interface NavbarProps {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (v: boolean) => void;
   selectedAudience: Audience;
+  /** Explicit audience choice (org toggle) — scrolls to the first section. */
   onSelectAudience: (a: Audience) => void;
+  /** Ensure an audience exists (nav links) without forcing a scroll. */
+  onEnsureAudience: (a: Audience) => void;
 }
 
 export function Navbar({
@@ -31,6 +36,7 @@ export function Navbar({
   setMobileMenuOpen,
   selectedAudience,
   onSelectAudience,
+  onEnsureAudience,
 }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -59,9 +65,7 @@ export function Navbar({
               scrolled ? "text-3xl" : "text-4xl"
             }`}
           >
-            <span className="text-foreground">ret</span>
-            <span className="text-foreground font-extrabold">AI</span>
-            <span className="text-foreground">nd.ai</span>
+            <span className="text-foreground">Retaind</span>
           </span>
           <span className="text-sm text-muted-foreground italic -mt-1">Recruiting for Retention</span>
         </Link>
@@ -75,14 +79,31 @@ export function Navbar({
               className="relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 hover:after:scale-x-100"
               data-testid={`link-nav-${link.name.toLowerCase()}`}
               onClick={() => {
-                if (!selectedAudience) onSelectAudience("agency");
+                if (!selectedAudience) onEnsureAudience("agency");
               }}
             >
               {link.name}
             </a>
           ))}
-          <Button variant="default" disabled data-testid="button-get-started-nav">
-            Coming Soon
+          {selectedAudience && (
+            <button
+              onClick={() =>
+                onSelectAudience(selectedAudience === "agency" ? "inhouse" : "agency")
+              }
+              className="inline-flex items-center gap-2 rounded-full border border-foreground/40 bg-muted/60 px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+              title="Switch audience"
+              data-testid="nav-audience-indicator"
+            >
+              {selectedAudience === "agency" ? (
+                <Briefcase className="w-4 h-4" />
+              ) : (
+                <Building2 className="w-4 h-4" />
+              )}
+              {selectedAudience === "agency" ? "Agency Recruiter" : "In-House Team"}
+            </button>
+          )}
+          <Button asChild variant="default" data-testid="button-get-started-nav">
+            <a href={APP_URL}>Get Started</a>
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -137,15 +158,31 @@ export function Navbar({
                 className="text-lg font-medium text-primary"
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (!selectedAudience) onSelectAudience("agency");
+                  if (!selectedAudience) onEnsureAudience("agency");
                 }}
                 data-testid={`link-mobile-nav-${link.name.toLowerCase()}`}
               >
                 {link.name}
               </a>
             ))}
-            <Button className="w-full" variant="default" disabled data-testid="button-get-started-mobile">
-              Coming Soon
+            {selectedAudience && (
+              <button
+                onClick={() =>
+                  onSelectAudience(selectedAudience === "agency" ? "inhouse" : "agency")
+                }
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/40 bg-muted/60 px-3 py-2 text-base font-medium text-foreground transition-colors hover:bg-muted"
+                data-testid="nav-audience-indicator-mobile"
+              >
+                {selectedAudience === "agency" ? (
+                  <Briefcase className="w-4 h-4" />
+                ) : (
+                  <Building2 className="w-4 h-4" />
+                )}
+                Viewing as {selectedAudience === "agency" ? "Agency Recruiter" : "In-House Team"}
+              </button>
+            )}
+            <Button asChild className="w-full" variant="default" data-testid="button-get-started-mobile">
+              <a href={APP_URL}>Get Started</a>
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

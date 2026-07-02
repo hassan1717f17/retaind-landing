@@ -8,12 +8,16 @@ import { Button } from "@/components/ui/button";
 import type { Audience } from "@/components/landing/types";
 
 const pitchSlides = [
-  "/assets/slide-01-Dgf1gO2D_1770377956305.png",
-  "/assets/slide-02-0NoTvoI__1770377964205.png",
-  "/assets/slide-03-DIDIfwar_1770377968920.png",
-  "/assets/slide-04-DTz0hrNg_1770377974683.png",
-  "/assets/slide-05-DdNF7ut1_1770377984235.png",
-  "/assets/slide-06-DKE0pVIg_1770377995355.png",
+  "/assets/pitch-slide-01.jpg",
+  "/assets/pitch-slide-02.jpg",
+  "/assets/pitch-slide-03.jpg",
+  "/assets/pitch-slide-04.jpg",
+  "/assets/pitch-slide-05.jpg",
+  "/assets/pitch-slide-06.jpg",
+  "/assets/pitch-slide-07.jpg",
+  "/assets/pitch-slide-08.jpg",
+  "/assets/pitch-slide-09.jpg",
+  "/assets/pitch-slide-10.jpg",
 ];
 
 export function SalesCollateral({ selectedAudience }: { selectedAudience: Audience }) {

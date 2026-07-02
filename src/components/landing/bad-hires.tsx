@@ -56,7 +56,7 @@ export function BadHires({ selectedAudience }: { selectedAudience: Audience }) {
                 </div>
 
                 <div className="p-6 rounded-xl bg-secondary border" data-testid="card-solution-callout">
-                  <h4 className="font-bold text-lg text-foreground mb-2" data-testid="text-solution-title">The ret<span className="font-extrabold">AI</span>nd Solution</h4>
+                  <h4 className="font-bold text-lg text-foreground mb-2" data-testid="text-solution-title">The Retaind Solution</h4>
                   <p className="text-muted-foreground text-sm" data-testid="text-solution-desc">
                     Behavioral benchmarking aligns stakeholders before you hire. Candidate assessments reveal fit and conflict areas before you commit.
                   </p>

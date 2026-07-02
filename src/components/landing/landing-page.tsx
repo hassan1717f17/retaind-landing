@@ -1,14 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Navbar } from "@/components/landing/navbar";
 import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { Hero } from "@/components/landing/hero";
+import { ProductDemo } from "@/components/landing/product-demo";
 import { FreeAccess } from "@/components/landing/free-access";
 import { FeaturesGrid } from "@/components/landing/features-grid";
 import { AssessmentCta } from "@/components/landing/assessment-cta";
 import { Journey } from "@/components/landing/journey";
 import { SalesMarketing } from "@/components/landing/sales-marketing";
+import { AgencyDemo } from "@/components/landing/agency-demo";
 import { BadHires } from "@/components/landing/bad-hires";
 import { SalesCollateral } from "@/components/landing/sales-collateral";
 import { AiMaterials } from "@/components/landing/ai-materials";
@@ -16,9 +18,7 @@ import { Benchmarking } from "@/components/landing/benchmarking";
 import { VideoInterviews } from "@/components/landing/video-interviews";
 import { FairAssessment } from "@/components/landing/fair-assessment";
 import { Integrations } from "@/components/landing/integrations";
-import { Pricing } from "@/components/landing/pricing";
 import { Faq } from "@/components/landing/faq";
-import { Portals } from "@/components/landing/portals";
 import { Footer } from "@/components/landing/footer";
 import { gsap, ScrollTrigger, useGSAP, EASE, NO_REDUCED_MOTION } from "@/lib/gsap";
 import type { Audience } from "@/components/landing/types";
@@ -27,6 +27,15 @@ export function LandingPage() {
   const [selectedAudience, setSelectedAudience] = useState<Audience>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const gatedRef = useRef<HTMLDivElement>(null);
+  // Set when the user *chooses* an audience (cards / org toggle) so the effect
+  // below scrolls to the first section — but not when a nav link just ensures
+  // an audience exists so its own anchor scroll can run.
+  const pendingScrollRef = useRef(false);
+
+  const chooseAudience = useCallback((a: Audience) => {
+    pendingScrollRef.current = true;
+    setSelectedAudience(a);
+  }, []);
 
   useGSAP(
     () => {
@@ -51,6 +60,27 @@ export function LandingPage() {
     { dependencies: [selectedAudience] }
   );
 
+  // After an explicit audience choice, once the gated block has mounted and
+  // laid out, smooth-scroll to the first section so the choice has an obvious
+  // effect. Deferred by two frames so #features is measured at its final
+  // position (not its pre-mount position).
+  useEffect(() => {
+    if (!selectedAudience || !pendingScrollRef.current) return;
+    pendingScrollRef.current = false;
+    let inner = 0;
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => {
+        document
+          .getElementById("features")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+    return () => {
+      cancelAnimationFrame(outer);
+      cancelAnimationFrame(inner);
+    };
+  }, [selectedAudience]);
+
   return (
     <main className="min-h-screen bg-background font-sans overflow-x-hidden">
       {/* Page scroll-progress indicator */}
@@ -61,14 +91,18 @@ export function LandingPage() {
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         selectedAudience={selectedAudience}
-        onSelectAudience={setSelectedAudience}
+        onSelectAudience={chooseAudience}
+        onEnsureAudience={setSelectedAudience}
       />
 
       {/* Hero — always visible */}
       <Hero
         selectedAudience={selectedAudience}
-        onSelectAudience={setSelectedAudience}
+        onSelectAudience={chooseAudience}
       />
+
+      {/* Product demo — always visible so every visitor sees the app in action */}
+      <ProductDemo />
 
       {/* Scroll anchor for "features" nav links */}
       <div id="features" />
@@ -91,6 +125,9 @@ export function LandingPage() {
           {/* Sales & Marketing Engine — self-gates: agency only */}
           <SalesMarketing selectedAudience={selectedAudience} />
 
+          {/* Agency product demo — self-gates: agency only */}
+          <AgencyDemo selectedAudience={selectedAudience} />
+
           {/* Cost of Bad Hires — self-gates: inhouse only */}
           <BadHires selectedAudience={selectedAudience} />
 
@@ -112,14 +149,8 @@ export function LandingPage() {
           {/* CRM & ATS Integrations — always visible when audience selected */}
           <Integrations selectedAudience={selectedAudience} />
 
-          {/* Pricing — self-gates: agency pricing or inhouse pricing */}
-          <Pricing selectedAudience={selectedAudience} />
-
           {/* FAQ — adapts questions by audience, always visible when selected */}
           <Faq selectedAudience={selectedAudience} />
-
-          {/* Portals — always visible when audience selected */}
-          <Portals />
         </div>
       )}
 
