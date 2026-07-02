@@ -5,6 +5,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SIGNUP_URL } from "@/lib/app-url";
 import { subscribeNewsletter } from "@/lib/client-api";
 import type { Audience } from "@/components/landing/types";
 
@@ -43,8 +44,8 @@ export function Footer({ selectedAudience }: Props) {
           <p className="text-lg text-background/70 mb-8">
             Free registration &amp; Set-Up.
           </p>
-          <Button size="lg" variant="secondary" className="rounded-full" data-testid="button-start-trial-footer">
-            Secure My Free Account
+          <Button asChild size="lg" variant="secondary" className="rounded-full" data-testid="button-start-trial-footer">
+            <a href={SIGNUP_URL}>Secure My Free Account</a>
           </Button>
           <p className="mt-6 text-sm text-background/70">
             {selectedAudience === "inhouse"
@@ -85,9 +86,9 @@ export function Footer({ selectedAudience }: Props) {
             <Link href="/terms" className="transition-colors" data-testid="link-footer-terms">
               Terms
             </Link>
-            <a href="#" className="transition-colors" data-testid="link-footer-contact">
+            <Link href="/contact" className="transition-colors" data-testid="link-footer-contact">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       </div>

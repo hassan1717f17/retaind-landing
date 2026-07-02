@@ -13,5 +13,5 @@ export function SectionHeader({ className, children }: { className?: string; chi
 }
 
 export function SectionBadge({ children }: { children: React.ReactNode }) {
-  return <span className="inline-block px-3 py-1 mb-4 rounded-full bg-muted text-muted-foreground text-sm font-semibold tracking-wide uppercase">{children}</span>;
+  return <span className="inline-block px-3 py-1 mb-4 rounded-full bg-audience-soft text-audience text-sm font-semibold tracking-wide uppercase">{children}</span>;
 }

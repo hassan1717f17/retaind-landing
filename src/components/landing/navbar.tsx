@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Menu, X, LogIn, ChevronDown, Briefcase, Building2, Users } from "lucide-react";
+import { Menu, X, LogIn, ChevronDown, Briefcase, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { APP_URL } from "@/lib/app-url";
+import { APP_URL, SIGNIN_URL } from "@/lib/app-url";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,6 @@ import type { Audience } from "./types";
 const navLinks = [
   { name: "Features", href: "#features" },
   { name: "Journey", href: "#journey" },
-  { name: "Bad Hire Calculator", href: "/bad-hire-calculator" },
   { name: "Pricing", href: "/pricing" },
 ];
 
@@ -59,7 +58,19 @@ export function Navbar({
         }`}
       >
         {/* Logo / Wordmark */}
-        <Link href="/" data-testid="link-logo" className="flex flex-col items-start">
+        <Link
+          href="/"
+          data-testid="link-logo"
+          className="flex flex-col items-start"
+          onClick={(e) => {
+            // Already on the landing page → Next treats "/" as a no-op, so
+            // scroll to top ourselves instead of doing nothing.
+            if (window.location.pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <span
             className={`font-bold tracking-tight transition-all duration-300 ${
               scrolled ? "text-3xl" : "text-4xl"
@@ -79,7 +90,8 @@ export function Navbar({
               className="relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 hover:after:scale-x-100"
               data-testid={`link-nav-${link.name.toLowerCase()}`}
               onClick={() => {
-                if (!selectedAudience) onEnsureAudience("agency");
+                if (link.href.startsWith("#") && !selectedAudience)
+                  onEnsureAudience("agency");
               }}
             >
               {link.name}
@@ -90,8 +102,9 @@ export function Navbar({
               onClick={() =>
                 onSelectAudience(selectedAudience === "agency" ? "inhouse" : "agency")
               }
-              className="inline-flex items-center gap-2 rounded-full border border-foreground/40 bg-muted/60 px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+              className="inline-flex items-center gap-2 rounded-full border border-audience/40 bg-audience-soft px-3 py-1.5 text-sm font-medium text-audience transition-opacity hover:opacity-80"
               title="Switch audience"
+              data-audience={selectedAudience}
               data-testid="nav-audience-indicator"
             >
               {selectedAudience === "agency" ? (
@@ -115,21 +128,15 @@ export function Navbar({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" data-testid="dropdown-login-menu">
               <DropdownMenuItem asChild data-testid="dropdown-item-agency">
-                <a href={APP_URL}>
+                <a href={SIGNIN_URL}>
                   <Briefcase className="w-4 h-4 mr-2" />
                   Agency
                 </a>
               </DropdownMenuItem>
               <DropdownMenuItem asChild data-testid="dropdown-item-inhouse">
-                <a href={APP_URL}>
+                <a href={SIGNIN_URL}>
                   <Building2 className="w-4 h-4 mr-2" />
                   In-House
-                </a>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild data-testid="dropdown-item-candidate">
-                <a href={APP_URL}>
-                  <Users className="w-4 h-4 mr-2" />
-                  Candidate
                 </a>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -161,7 +168,8 @@ export function Navbar({
                 className="text-lg font-medium text-primary"
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (!selectedAudience) onEnsureAudience("agency");
+                  if (link.href.startsWith("#") && !selectedAudience)
+                    onEnsureAudience("agency");
                 }}
                 data-testid={`link-mobile-nav-${link.name.toLowerCase()}`}
               >
@@ -173,7 +181,8 @@ export function Navbar({
                 onClick={() =>
                   onSelectAudience(selectedAudience === "agency" ? "inhouse" : "agency")
                 }
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/40 bg-muted/60 px-3 py-2 text-base font-medium text-foreground transition-colors hover:bg-muted"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-audience/40 bg-audience-soft px-3 py-2 text-base font-medium text-audience transition-opacity hover:opacity-80"
+                data-audience={selectedAudience}
                 data-testid="nav-audience-indicator-mobile"
               >
                 {selectedAudience === "agency" ? (
@@ -197,21 +206,15 @@ export function Navbar({
               </DropdownMenuTrigger>
               <DropdownMenuContent align="center" className="w-full" data-testid="dropdown-login-menu-mobile">
                 <DropdownMenuItem asChild data-testid="dropdown-item-agency-mobile">
-                  <a href={APP_URL}>
+                  <a href={SIGNIN_URL}>
                     <Briefcase className="w-4 h-4 mr-2" />
                     Agency
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild data-testid="dropdown-item-inhouse-mobile">
-                  <a href={APP_URL}>
+                  <a href={SIGNIN_URL}>
                     <Building2 className="w-4 h-4 mr-2" />
                     In-House
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild data-testid="dropdown-item-candidate-mobile">
-                  <a href={APP_URL}>
-                    <Users className="w-4 h-4 mr-2" />
-                    Candidate
                   </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>

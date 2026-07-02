@@ -18,11 +18,11 @@ export default function PricingPage() {
   const [orgType, setOrgType] = useState<OrgType>("agency");
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-muted/30" data-audience={orgType}>
       {/* Header band — back link + org-type toggle */}
       <section className="pt-10 pb-2">
         <div className="container mx-auto px-4">
-          <BackButton />
+          <BackButton href="/" />
         </div>
         <div className="container mx-auto px-4 mt-10 flex flex-col items-center gap-4">
           <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">
@@ -40,7 +40,7 @@ export default function PricingPage() {
                 className={cn(
                   "inline-flex items-center gap-2 px-6 py-2 rounded-full text-sm font-semibold transition-all",
                   orgType === key
-                    ? "bg-primary text-primary-foreground shadow-lg"
+                    ? "bg-audience text-audience-foreground shadow-lg"
                     : "text-muted-foreground hover:text-foreground"
                 )}
                 role="tab"

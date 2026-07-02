@@ -20,7 +20,7 @@ import { FloatingBubble, AssessmentFooter } from "@/features/assessment/assessme
 
 export default function AgencyRecruiterPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" data-audience="agency">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -59,7 +59,7 @@ export default function AgencyRecruiterPage() {
               transition={{ duration: 0.6 }}
             >
               <span
-                className="inline-flex items-center gap-2 px-4 py-1.5 bg-background/10 border border-background/20 rounded-full text-sm text-background mb-6"
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-audience/20 border border-audience/40 rounded-full text-sm text-audience mb-6"
                 data-testid="badge-agency-landing"
               >
                 <TrendingUp className="w-4 h-4" />
@@ -86,8 +86,7 @@ export default function AgencyRecruiterPage() {
                 <Link href="/assessment">
                   <Button
                     size="lg"
-                    variant="secondary"
-                    className="text-base font-semibold px-8 shadow-xl"
+                    className="text-base font-semibold px-8 shadow-xl bg-audience text-audience-foreground hover:opacity-90"
                     data-testid="button-agency-landing-hero-cta"
                   >
                     Start Your Free Assessment
@@ -310,7 +309,7 @@ export default function AgencyRecruiterPage() {
             <Link href="/assessment">
               <Button
                 size="lg"
-                className="text-base font-semibold px-10 shadow-lg"
+                className="text-base font-semibold px-10 shadow-lg bg-audience text-audience-foreground hover:opacity-90"
                 data-testid="button-agency-landing-bottom-cta"
               >
                 Start Your Free Assessment

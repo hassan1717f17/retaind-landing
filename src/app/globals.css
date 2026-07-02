@@ -76,6 +76,10 @@
   --color-accent-destructive-bg: var(--accent-destructive-bg);
   --color-accent-destructive-fg: var(--accent-destructive-fg);
   --color-accent-destructive-solid: var(--accent-destructive-solid);
+  /* Audience accent — flips blue (agency) / green (inhouse) via [data-audience] */
+  --color-audience: var(--audience);
+  --color-audience-foreground: var(--audience-foreground);
+  --color-audience-soft: var(--audience-soft);
   --color-accent-neutral-bg: var(--accent-neutral-bg);
   --color-accent-neutral-fg: var(--accent-neutral-fg);
   --color-priority-high: var(--priority-high);
@@ -189,6 +193,10 @@
   --accent-destructive-solid: oklch(0.60 0.25 25);
   --accent-neutral-bg: oklch(0.96 0.005 0);
   --accent-neutral-fg: oklch(0.40 0.01 0);
+  /* Audience accent — neutral fallback; [data-audience] switches to blue/green */
+  --audience: var(--muted-foreground);
+  --audience-foreground: oklch(0.985 0 0);
+  --audience-soft: var(--muted);
   /* Priority level foregrounds (badges, dots). critical re-uses --destructive. */
   --priority-high: oklch(0.70 0.17 80);
   --priority-medium: oklch(0.60 0.20 240);
@@ -445,6 +453,28 @@ button:not(:disabled),
 label[for],
 summary {
   cursor: pointer;
+}
+
+/* Audience accent — Agency = blue, In-House = green. Set data-audience on a
+   wrapper to tint the *-audience utilities within it. Neutral fallback lives
+   in :root so un-themed usage keeps the monochrome look. */
+[data-audience="agency"] {
+  --audience: oklch(0.55 0.20 260);
+  --audience-foreground: oklch(0.985 0 0);
+  --audience-soft: oklch(0.95 0.035 260);
+}
+[data-audience="inhouse"] {
+  --audience: oklch(0.60 0.14 163);
+  --audience-foreground: oklch(0.985 0 0);
+  --audience-soft: oklch(0.95 0.04 163);
+}
+.dark [data-audience="agency"] {
+  --audience: oklch(0.70 0.16 260);
+  --audience-soft: oklch(0.28 0.07 260);
+}
+.dark [data-audience="inhouse"] {
+  --audience: oklch(0.72 0.15 163);
+  --audience-soft: oklch(0.27 0.06 163);
 }
 
 /* Elevate system — subtle monochrome hover/active overlay (ported from the source template). */

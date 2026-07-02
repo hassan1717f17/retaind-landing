@@ -179,10 +179,11 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12 mb-4">
           {/* Agency Card */}
           <Card
+            data-audience="agency"
             className={cn(
-              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30",
+              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-audience/40",
               selectedAudience === "agency" &&
-                "border-foreground ring-2 ring-foreground shadow-xl -translate-y-1.5"
+                "border-audience ring-2 ring-audience shadow-xl -translate-y-1.5"
             )}
             data-testid="card-hero-agency"
           >
@@ -209,10 +210,11 @@ export function Hero({ selectedAudience, onSelectAudience }: HeroProps) {
 
           {/* In-House Card */}
           <Card
+            data-audience="inhouse"
             className={cn(
-              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/30",
+              "p-8 text-left transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-audience/40",
               selectedAudience === "inhouse" &&
-                "border-foreground ring-2 ring-foreground shadow-xl -translate-y-1.5"
+                "border-audience ring-2 ring-audience shadow-xl -translate-y-1.5"
             )}
             data-testid="card-hero-inhouse"
           >

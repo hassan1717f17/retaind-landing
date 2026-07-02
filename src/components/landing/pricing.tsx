@@ -188,7 +188,7 @@ export function Pricing({ selectedAudience }: Props) {
                   onClick={() => setAgencyPricingTab("retaind")}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
                     agencyPricingTab === "retaind"
-                      ? "bg-primary text-primary-foreground shadow-lg"
+                      ? "bg-audience text-audience-foreground shadow-lg"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                   data-testid="button-pricing-retaind"
@@ -199,7 +199,7 @@ export function Pricing({ selectedAudience }: Props) {
                   onClick={() => setAgencyPricingTab("marketing")}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
                     agencyPricingTab === "marketing"
-                      ? "bg-primary text-primary-foreground shadow-lg"
+                      ? "bg-audience text-audience-foreground shadow-lg"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                   data-testid="button-pricing-marketing"
@@ -219,7 +219,7 @@ export function Pricing({ selectedAudience }: Props) {
                     animate={{ opacity: 1, y: 0 }}
                     className={`relative flex flex-col p-8 rounded-2xl bg-card text-card-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                       plan.subscription
-                        ? "border-2 border-foreground shadow-xl lg:scale-[1.02]"
+                        ? "border-2 border-audience shadow-xl lg:scale-[1.02]"
                         : "border border-border shadow-sm"
                     }`}
                     data-testid={`card-pricing-retaind-${idx}`}
@@ -231,7 +231,7 @@ export function Pricing({ selectedAudience }: Props) {
                             onClick={() => setBillingPeriod("monthly")}
                             className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                               billingPeriod === "monthly"
-                                ? "bg-foreground text-background shadow"
+                                ? "bg-audience text-audience-foreground shadow"
                                 : "text-card-foreground/60"
                             }`}
                             data-testid="button-billing-monthly"
@@ -242,7 +242,7 @@ export function Pricing({ selectedAudience }: Props) {
                             onClick={() => setBillingPeriod("annual")}
                             className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                               billingPeriod === "annual"
-                                ? "bg-foreground text-background shadow"
+                                ? "bg-audience text-audience-foreground shadow"
                                 : "text-card-foreground/60"
                             }`}
                             data-testid="button-billing-annual"
@@ -281,7 +281,7 @@ export function Pricing({ selectedAudience }: Props) {
                     <Button
                       variant="default"
                       size="lg"
-                      className="w-full rounded-full"
+                      className="w-full rounded-full bg-audience text-audience-foreground hover:opacity-90"
                       data-testid={`button-pricing-retaind-${idx}`}
                     >
                       Get Started
@@ -323,7 +323,7 @@ export function Pricing({ selectedAudience }: Props) {
                     <Button
                       variant="default"
                       size="lg"
-                      className="w-full rounded-full"
+                      className="w-full rounded-full bg-audience text-audience-foreground hover:opacity-90"
                       data-testid={`button-pricing-marketing-${idx}`}
                     >
                       Get Started
@@ -364,7 +364,7 @@ export function Pricing({ selectedAudience }: Props) {
                   animate={{ opacity: 1, y: 0 }}
                   className={`relative flex flex-col p-8 rounded-2xl bg-card text-card-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                     plan.subscription
-                      ? "border-2 border-foreground shadow-xl lg:scale-[1.02]"
+                      ? "border-2 border-audience shadow-xl lg:scale-[1.02]"
                       : "border border-border shadow-sm"
                   }`}
                 >
@@ -375,7 +375,7 @@ export function Pricing({ selectedAudience }: Props) {
                           onClick={() => setBillingPeriod("monthly")}
                           className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                             billingPeriod === "monthly"
-                              ? "bg-foreground text-background shadow"
+                              ? "bg-audience text-audience-foreground shadow"
                               : "text-card-foreground/60"
                           }`}
                         >
@@ -385,7 +385,7 @@ export function Pricing({ selectedAudience }: Props) {
                           onClick={() => setBillingPeriod("annual")}
                           className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                             billingPeriod === "annual"
-                              ? "bg-foreground text-background shadow"
+                              ? "bg-audience text-audience-foreground shadow"
                               : "text-card-foreground/60"
                           }`}
                         >
@@ -423,7 +423,7 @@ export function Pricing({ selectedAudience }: Props) {
                   <Button
                     variant="default"
                     size="lg"
-                    className="w-full rounded-full"
+                    className="w-full rounded-full bg-audience text-audience-foreground hover:opacity-90"
                     data-testid={`button-pricing-inhouse-${idx}`}
                   >
                     Get Started

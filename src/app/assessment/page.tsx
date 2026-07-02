@@ -160,7 +160,7 @@ export default function Assessment() {
   }
 
   return (
-    <div className="min-h-screen bg-muted">
+    <div className="min-h-screen bg-muted" data-audience="agency">
       <div className="max-w-3xl mx-auto px-4 py-8">
         <BackButton className="mb-6" />
         <div className="text-center mb-8">
@@ -187,7 +187,7 @@ export default function Assessment() {
               {isLeadCapture ? "Enter your details" : getSectionNumber()}
             </span>
           </div>
-          <Progress value={progress} className="h-2" data-testid="progress-assessment" />
+          <Progress value={progress} className="h-2" indicatorClassName="bg-audience" data-testid="progress-assessment" />
         </div>
 
         <AnimatePresence mode="wait">
@@ -286,8 +286,8 @@ export default function Assessment() {
                           onClick={() => setAnswer(currentQuestion.id, option)}
                           className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
                             answers[currentQuestion.id] === option
-                              ? "border-foreground bg-foreground text-background"
-                              : "border-border hover:border-foreground/50 hover:bg-muted"
+                              ? "border-audience bg-audience text-audience-foreground"
+                              : "border-border hover:border-audience/50 hover:bg-muted"
                           }`}
                           data-testid={`option-${currentQuestion.id}-${option
                             .substring(0, 20)
@@ -330,8 +330,8 @@ export default function Assessment() {
                             }
                             className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
                               selected
-                                ? "border-foreground bg-foreground text-background"
-                                : "border-border hover:border-foreground/50 hover:bg-muted"
+                                ? "border-audience bg-audience text-audience-foreground"
+                                : "border-border hover:border-audience/50 hover:bg-muted"
                             }`}
                             data-testid={`option-multi-${currentQuestion.id}-${option
                               .substring(0, 20)
@@ -381,8 +381,8 @@ export default function Assessment() {
                             }
                             className={`w-12 h-12 rounded-lg border-2 font-semibold transition-all ${
                               answers[currentQuestion.id] === String(num)
-                                ? "border-foreground bg-foreground text-background"
-                                : "border-border hover:border-foreground/50 hover:bg-muted"
+                                ? "border-audience bg-audience text-audience-foreground"
+                                : "border-border hover:border-audience/50 hover:bg-muted"
                             }`}
                             data-testid={`scale-${currentQuestion.id}-${num}`}
                           >
@@ -410,8 +410,8 @@ export default function Assessment() {
                           onClick={() => setAnswer(currentQuestion.id, option)}
                           className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
                             answers[currentQuestion.id] === option
-                              ? "border-foreground bg-foreground text-background"
-                              : "border-border hover:border-foreground/50 hover:bg-muted"
+                              ? "border-audience bg-audience text-audience-foreground"
+                              : "border-border hover:border-audience/50 hover:bg-muted"
                           }`}
                           data-testid={`scenario-${currentQuestion.id}-${idx}`}
                         >
@@ -455,7 +455,7 @@ export default function Assessment() {
           <Button
             onClick={handleNext}
             disabled={!canProceed() || isPending}
-            className="gap-2"
+            className="gap-2 bg-audience text-audience-foreground hover:opacity-90"
             data-testid="button-next"
           >
             {isPending ? (

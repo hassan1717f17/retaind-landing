@@ -7,3 +7,9 @@
  */
 export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL ?? "https://dev.retaind.ai";
+
+/** Sign-in page on the product app (used by the navbar Login links). */
+export const SIGNIN_URL = `${APP_URL}/signin`;
+
+/** Sign-up page on the product app (used by account-creation CTAs). */
+export const SIGNUP_URL = `${APP_URL}/signup`;
